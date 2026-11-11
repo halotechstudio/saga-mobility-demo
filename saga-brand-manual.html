@@ -1,995 +1,895 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>html,body{margin:0;height:100%}</style></head><body>
 <title>SAGA Brand Manual</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Zen+Kaku+Gothic+New:wght@400;500&family=Noto+Sans+Telugu:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/fonts/local.css">
 <style>
-/* Layout: sticky chapter rail + one reading column; full-bleed bands for renders. Single dark world by choice — the brand lives on void black. */
+/* A4 document: fixed 210 × 297 mm pages, one type family (Inter Tight) plus JetBrains Mono for labels only.
+   Light pages carry reading; dark pages carry the brand moments. Same tokens as the apps. */
 :root{
-  --void:#05060A; --carbon:#0B0E16; --graphite:#141A28; --line:rgba(201,206,216,.13); --line-2:rgba(201,206,216,.24);
-  --blue:#092EC9; --ion:#4D8DFF; --plasma:#7FE6FF; --titanium:#C9CED8; --text:#EEF1F7; --mute:#8C94A8; --dim:#5B6378; --red:#FF3B5C; --ok:#62F0C1;
-  --f-display:"Inter Tight",system-ui,sans-serif; --f-ui:"Inter Tight",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --f-mono:"JetBrains Mono",ui-monospace,Consolas,monospace; --f-jp:"Zen Kaku Gothic New",sans-serif; --f-te:"Noto Sans Telugu",sans-serif;
-  --glide:cubic-bezier(.22,1,.36,1); --lock:cubic-bezier(.7,0,.2,1);
-  color-scheme:dark;
+  --desk:#D9DCE2;
+  --ink:#0A0D18; --ink2:#454B59; --ink3:#7A8090; --mute:#A3A8B4; --line:#E1E4EA; --paper:#F4F5F7; --card:#FFFFFF;
+  --night:#07080C; --night2:#11141C; --nline:rgba(255,255,255,.1); --ntext:#F2F4F8; --ntext2:rgba(242,244,248,.66); --ntext3:rgba(242,244,248,.42);
+  --blue:#092EC9; --blue2:#2449F0; --cyan:#33C6F0; --green:#0E8F5B; --red:#C8243C;
+  --f:"Inter Tight",system-ui,-apple-system,"Segoe UI",sans-serif; --m:"JetBrains Mono",ui-monospace,Consolas,monospace; --te:"Noto Sans Telugu","Inter Tight",sans-serif;
+  color-scheme:light;
 }
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--desk:#030406}}
+:root[data-theme="dark"]{--desk:#030406}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--void);color:var(--text);font-family:var(--f-ui);font-size:15.5px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-img{max-width:100%;display:block}
-a{color:var(--plasma)}
-:focus-visible{outline:2px solid var(--plasma);outline-offset:3px;border-radius:6px}
-.wrap{display:grid;grid-template-columns:220px minmax(0,1fr);gap:56px;max-width:1240px;margin:0 auto;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
-.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 28px);align-self:start;padding-block:28px;max-height:100vh;overflow:auto;scrollbar-width:none}
-.toc a{display:flex;gap:10px;padding:5px 0;color:var(--mute);text-decoration:none;font-size:13px;transition:color .3s}
-.toc a i{font-style:normal;font-family:var(--f-mono);font-size:10px;color:var(--dim);width:20px;padding-top:3px}
-.toc a:hover,.toc a.on{color:var(--text)}
-.toc a.on i{color:var(--plasma)}
-main{min-width:0;padding-block:28px 120px}
-section{padding-top:96px}
-.eyebrow{font-family:var(--f-mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--plasma)}
-h1,h2,h3{font-family:var(--f-display);font-weight:500;letter-spacing:-.035em;text-wrap:balance;margin:0}
-h2{font-size:clamp(28px,4vw,42px);line-height:1.1;margin-top:12px}
-h3{font-size:19px;line-height:1.3;margin-top:40px}
-p{max-width:66ch;margin:14px 0 0;color:#C3C9D6}
-.lead{font-size:18px;color:#DCE1EA;max-width:60ch}
-.small{font-size:13px;color:var(--mute)}
-.mono{font-family:var(--f-mono)}
-.num{font-variant-numeric:tabular-nums}
-.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:24px}
-.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:24px}
-.card{border:1px solid var(--line);border-radius:20px;padding:22px;background:linear-gradient(160deg,rgba(255,255,255,.045),rgba(255,255,255,.01))}
-.card h4{margin:0;font-family:var(--f-display);font-weight:400;font-size:16px}
-.card p{font-size:14px;margin-top:8px}
-.label{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--mute)}
-table{width:100%;border-collapse:collapse;font-size:14px}
-th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
-th{font-family:var(--f-mono);font-weight:400;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
-td{color:#C9CFDB}
-.tablewrap{overflow-x:auto;margin-top:22px;border:1px solid var(--line);border-radius:18px}
-.bleed{position:relative;margin-top:28px;border-radius:26px;overflow:hidden;background:#000;border:1px solid var(--line)}
-.bleed img{width:100%;height:auto}
-.bleed figcaption{position:absolute;left:20px;bottom:16px;font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;color:var(--titanium)}
-ul.clean{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:10px;max-width:70ch}
-ul.clean li{position:relative;padding-left:22px;color:#C3C9D6}
-ul.clean li::before{content:"";position:absolute;left:0;top:.7em;width:8px;height:2px;background:var(--plasma);box-shadow:0 0 8px var(--plasma)}
-.do{border-color:rgba(98,240,193,.35)}.dont{border-color:rgba(255,59,92,.35)}
-.do .label{color:var(--ok)}.dont .label{color:var(--red)}
-.quote{font-family:var(--f-display);font-weight:300;font-size:clamp(22px,3vw,30px);line-height:1.3;color:#fff;max-width:28ch;margin-top:24px}
-
-/* personality, notifications, personas */
-.spec{display:grid;grid-template-columns:150px minmax(0,1fr) 150px;gap:16px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);font-size:13.5px;color:#C9CFDB}
-.spec span:last-child{text-align:right}
-.spec .track{position:relative;height:4px;border-radius:4px;background:var(--line-2)}
-.spec .track i{position:absolute;top:50%;width:14px;height:14px;border-radius:50%;background:var(--plasma);transform:translate(-50%,-50%);box-shadow:0 0 12px var(--plasma)}
-.notifs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:22px}
-.notif{border:1px solid var(--line);border-radius:18px;padding:14px 16px;background:rgba(255,255,255,.045)}
-.notif .app{display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;color:var(--mute)}
-.notif .app i{width:18px;height:18px;border-radius:5px;background:var(--blue);display:inline-block}
-.notif b{display:block;margin-top:8px;font-weight:600;color:#fff;font-size:15px}
-.notif p{margin-top:4px;font-size:13.5px}
-.notif .te{font-family:var(--f-te);color:var(--titanium);font-size:13px;margin-top:8px}
-.notif .when{margin-top:10px;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;color:var(--plasma)}
-.persona .who{display:flex;align-items:center;gap:14px}
-.persona .av{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--blue),#2449F0);font-weight:600;color:#fff;flex:none}
-.persona h4{font-size:18px}
-.persona dl{display:grid;grid-template-columns:104px minmax(0,1fr);gap:8px 14px;margin:16px 0 0;font-size:13.5px}
-.persona dt{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);padding-top:3px}
-.persona dd{margin:0;color:#C9CFDB}
-.persona .say{margin-top:14px;padding:12px 14px;border-radius:14px;background:rgba(9,46,201,.22);color:#fff;font-size:14px}
-.house{display:grid;gap:12px;margin-top:22px}
-.house .roof{border:1px solid rgba(127,230,255,.35);border-radius:20px;padding:22px;text-align:center;background:linear-gradient(160deg,rgba(9,46,201,.35),rgba(9,46,201,.08))}
-.house .roof b{display:block;font-family:var(--f-display);font-weight:500;font-size:30px;letter-spacing:-.03em;color:#fff}
-.house .cols{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
-@media (max-width:760px){.spec{grid-template-columns:1fr 1fr}.spec .track{grid-column:1 / -1;grid-row:2}.notifs,.house .cols{grid-template-columns:1fr}.persona dl{grid-template-columns:1fr}}
-
+html,body{margin:0}
+body{background:var(--desk);font-family:var(--f);color:var(--ink);-webkit-font-smoothing:antialiased;font-size:9.5pt;line-height:1.55}
+.doc{display:flex;flex-direction:column;align-items:center;gap:24px;padding:24px 0 48px;zoom:var(--z,1)}
+.page{position:relative;width:210mm;height:297mm;padding:15mm 16mm 16mm;background:var(--paper);overflow:hidden;display:flex;flex-direction:column;box-shadow:0 10px 40px rgba(0,0,0,.18)}
+.page.dark{background:radial-gradient(120% 70% at 85% 0%,#121C45 0%,#0A0D1A 35%,#07080C 65%);color:var(--ntext)}
+.run{display:flex;justify-content:space-between;align-items:center;font-family:var(--m);font-size:6.8pt;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3)}
+.dark .run{color:var(--ntext3)}
+.run b{font-weight:500;color:var(--ink)}.dark .run b{color:var(--ntext)}
+.foot{margin-top:auto;padding-top:8mm;display:flex;justify-content:space-between;font-family:var(--m);font-size:6.5pt;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.dark .foot{color:var(--ntext3)}
+.body{margin-top:11mm;display:flex;flex-direction:column;min-height:0}
+.eb{display:flex;align-items:center;gap:7px;font-family:var(--m);font-size:7pt;letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
+.eb::before{content:"";width:5px;height:5px;border-radius:50%;background:currentColor}
+.dark .eb{color:var(--cyan)}
+h1,h2,h3,h4{margin:0;font-weight:400;letter-spacing:-.02em}
+h2{font-size:24pt;line-height:1.12;margin-top:4mm;max-width:150mm;text-wrap:balance}
+h2 span{color:var(--mute)}.dark h2 span{color:var(--ntext3)}
+h3{font-size:12pt;font-weight:500;letter-spacing:-.01em;margin-top:7mm}
+h4{font-size:10.5pt;font-weight:500;letter-spacing:-.01em}
+p{margin:3mm 0 0;color:var(--ink2);max-width:150mm}
+.dark p{color:var(--ntext2)}
+.lede{font-size:10.5pt;line-height:1.5}
+.g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3.2mm;margin-top:6mm}
+.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3.2mm;margin-top:6mm}
+.g4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:3.2mm;margin-top:6mm}
+.c{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:4.2mm 4.4mm}
+.dark .c{background:rgba(255,255,255,.045);border-color:var(--nline)}
+.c p{font-size:8.5pt;line-height:1.5;margin-top:1.6mm}
+.c .lb{font-family:var(--m);font-size:6.5pt;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:2mm}
+.dark .c .lb{color:var(--ntext3)}
+.n{display:inline-grid;place-items:center;width:6mm;height:6mm;border-radius:50%;background:var(--ink);color:#fff;font-family:var(--m);font-size:6.5pt;margin-bottom:3mm}
+.dark .n{background:var(--cyan);color:var(--night)}
+.c.ink{background:var(--night);border-color:var(--night);color:var(--ntext)}
+.c.ink p{color:var(--ntext2)}.c.ink .lb{color:var(--cyan)}
+.c.blue{background:var(--blue);border-color:var(--blue);color:#fff}
+.c.blue p{color:rgba(255,255,255,.82)}.c.blue .lb{color:rgba(255,255,255,.7)}
+.stat b{display:block;font-size:20pt;font-weight:400;letter-spacing:-.02em;line-height:1}
+.stat b small{font-family:var(--m);font-size:7pt;letter-spacing:.08em;color:var(--ink3);margin-left:1.5mm}
+.dark .stat b small{color:var(--ntext3)}
+table{width:100%;border-collapse:collapse;font-size:8.3pt;margin-top:6mm;background:var(--card);border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+.dark table{background:rgba(255,255,255,.04);border-color:var(--nline)}
+th,td{text-align:left;padding:2.4mm 3.2mm;vertical-align:top;border-bottom:1px solid var(--line)}
+.dark th,.dark td{border-color:var(--nline)}
+tr:last-child td{border-bottom:0}
+th{font-family:var(--m);font-weight:400;font-size:6.5pt;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);background:#FAFBFC}
+.dark th{background:transparent;color:var(--ntext3)}
+td{color:var(--ink2)}.dark td{color:var(--ntext2)}
+td b{color:var(--ink);font-weight:500}.dark td b{color:var(--ntext)}
+td.te,.te{font-family:var(--te)}
+ul.l{list-style:none;margin:2mm 0 0;padding:0;display:grid;gap:1.6mm;font-size:8.5pt;color:var(--ink2)}
+.dark ul.l{color:var(--ntext2)}
+ul.l li{position:relative;padding-left:4mm;line-height:1.45}
+ul.l li::before{content:"";position:absolute;left:0;top:.62em;width:2.2mm;height:1px;background:var(--blue)}
+.dark ul.l li::before{background:var(--cyan)}
+.do{border-top:2px solid var(--green)}.dont{border-top:2px solid var(--red)}
+.say{margin-top:3mm;padding:2.6mm 3.2mm;border-radius:9px;background:#EEF1FB;color:var(--blue);font-size:8.5pt}
+.mono{font-family:var(--m)}
 /* cover */
-.cover{position:relative;margin-top:8px;border-radius:30px;overflow:hidden;border:1px solid var(--line);background:#000}
-.cover img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:50% 30%;mix-blend-mode:screen;animation:breathe 9s ease-in-out infinite}
-@keyframes breathe{50%{transform:scale(1.03);filter:brightness(1.12)}}
-.cover .inner{position:absolute;inset:auto 0 0;padding:32px;background:linear-gradient(0deg,rgba(5,6,10,.95),transparent)}
-.cover svg.wm{width:min(340px,70%);height:auto}
-.cover .meta{display:flex;gap:18px;flex-wrap:wrap;margin-top:16px;font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;color:var(--titanium)}
+.cover{padding:0}
+.cover .art{position:absolute;left:0;right:0;bottom:14mm;height:150mm;background:url(assets/car3_front_dark.webp) 55% 100%/contain no-repeat}
 
-/* logo */
-.logo-stage{display:grid;grid-template-columns:1.1fr 1fr;gap:16px;margin-top:26px}
-.panel{border-radius:22px;border:1px solid var(--line);padding:28px;display:grid;place-items:center;min-height:260px;position:relative;overflow:hidden}
-.panel .label{position:absolute;left:18px;top:14px}
-.panel.light{background:#EEF1F7;color:#05060A}
-.panel.light .label{color:#5B6378}
-.panel.blue{background:var(--blue)}
-.lockups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:16px}
-.misuse{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:20px}
-.misuse div{border:1px solid rgba(255,59,92,.3);border-radius:16px;padding:18px 12px 12px;display:grid;justify-items:center;gap:10px;text-align:center;font-size:12px;color:var(--mute)}
-.misuse svg{width:56px;height:56px}
-
-/* colour */
-.swatches{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:24px}
-.sw{border-radius:20px;overflow:hidden;border:1px solid var(--line)}
-.sw .c{height:120px;position:relative}
-.sw .t{padding:12px 14px}
-.sw b{display:block;font-weight:500}
-.sw span{font-family:var(--f-mono);font-size:11px;color:var(--mute)}
-.ratio{display:flex;height:22px;border-radius:99px;overflow:hidden;margin-top:24px;border:1px solid var(--line)}
-.ratio i{display:block}
-.trail{height:90px;border-radius:20px;margin-top:16px;background:linear-gradient(90deg,#05060A 0%,#092EC9 45%,#4D8DFF 70%,#7FE6FF 92%,#FFFFFF 100%);position:relative;overflow:hidden}
-.trail::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);width:30%;animation:sweep 3.5s var(--glide) infinite}
-@keyframes sweep{from{transform:translateX(-100%)}to{transform:translateX(400%)}}
-
-/* type */
-.spec{border-top:1px solid var(--line);padding:22px 0;display:grid;grid-template-columns:200px minmax(0,1fr);gap:20px;align-items:baseline}
-.spec .sample{min-width:0;overflow-wrap:anywhere}
-
-/* glass demo */
-.glassdemo{position:relative;border-radius:26px;overflow:hidden;margin-top:24px;border:1px solid var(--line);background:#000}
-.glassdemo img{width:100%;height:380px;object-fit:cover;mix-blend-mode:screen}
-.glassdemo .layers{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:26px;align-items:end}
-.gl{border-radius:22px;padding:18px;min-height:150px;display:flex;flex-direction:column;justify-content:flex-end;border:1px solid rgba(255,255,255,.11);box-shadow:inset 0 1px 0 rgba(255,255,255,.16)}
-.gl.veil{background:rgba(255,255,255,.04);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-color:rgba(255,255,255,.08)}
-.gl.pane{background:linear-gradient(150deg,rgba(255,255,255,.085),rgba(255,255,255,.018) 55%,rgba(77,141,255,.05));backdrop-filter:blur(22px) saturate(170%);-webkit-backdrop-filter:blur(22px) saturate(170%)}
-.gl.slab{background:linear-gradient(150deg,rgba(35,72,255,.4),rgba(11,14,22,.6) 60%);border-color:rgba(127,230,255,.3);backdrop-filter:blur(26px) saturate(170%);-webkit-backdrop-filter:blur(26px) saturate(170%)}
-.gl b{font-family:var(--f-display);font-weight:400}
-.gl span{font-family:var(--f-mono);font-size:10.5px;color:#B9C4DA}
-
-/* 3D library */
-.lib{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:24px}
-.lib figure{margin:0;border-radius:20px;overflow:hidden;border:1px solid var(--line);background:#000}
-.lib img{aspect-ratio:1;object-fit:cover;width:100%;mix-blend-mode:screen;transition:transform 1.2s var(--glide)}
-.lib figure:hover img{transform:scale(1.06)}
-.lib figcaption{padding:12px 14px;border-top:1px solid var(--line)}
-.lib figcaption b{display:block;font-weight:500;font-size:14px}
-.lib figcaption span{font-size:12.5px;color:var(--mute)}
-
-/* motion demo */
-.motion{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:24px}
-.mo{border:1px solid var(--line);border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:10px}
-.mo .stage{height:90px;border-radius:14px;background:rgba(255,255,255,.03);position:relative;overflow:hidden}
-.mo .dot{position:absolute;top:50%;left:12px;width:16px;height:16px;margin-top:-8px;border-radius:50%;background:var(--plasma);box-shadow:0 0 14px var(--plasma)}
-.mo.glide .dot{animation:m-glide 2.4s var(--glide) infinite alternate}
-.mo.lock .dot{animation:m-lock 2.4s var(--lock) infinite alternate}
-@keyframes m-glide{to{left:calc(100% - 28px)}}
-@keyframes m-lock{to{left:calc(100% - 28px)}}
-.mo.glow .dot{left:50%;margin-left:-8px;animation:m-glow 2.4s ease-in-out infinite}
-@keyframes m-glow{50%{box-shadow:0 0 0 14px rgba(127,230,255,.0),0 0 40px 10px var(--plasma);transform:scale(1.3)}}
-.mo.anticipate .bars{position:absolute;inset:16px;display:flex;gap:6px;align-items:flex-end}
-.mo.anticipate .bars i{flex:1;background:linear-gradient(var(--plasma),var(--blue));border-radius:4px;animation:m-rise 2.4s var(--glide) infinite;transform-origin:bottom}
-.mo.anticipate .bars i:nth-child(2){animation-delay:.07s}.mo.anticipate .bars i:nth-child(3){animation-delay:.14s}.mo.anticipate .bars i:nth-child(4){animation-delay:.21s}
-@keyframes m-rise{0%{transform:scaleY(.1);opacity:.2}40%,100%{transform:scaleY(1);opacity:1}}
-.mo b{font-family:var(--f-display);font-weight:400}
-.mo code{font-family:var(--f-mono);font-size:11px;color:var(--plasma)}
-
-/* modules */
-.module{margin-top:28px;border:1px solid var(--line);border-radius:26px;overflow:hidden;display:grid;grid-template-columns:260px minmax(0,1fr)}
-.module .vis{background:#000;position:relative;min-height:240px}
-.module .vis img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;mix-blend-mode:screen}
-.module .body{padding:24px 26px}
-.module .body h4{margin:6px 0 0;font-family:var(--f-display);font-weight:400;font-size:22px}
-.flow{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
-.flow span{font-size:12px;padding:6px 10px;border-radius:99px;border:1px solid var(--line-2);color:#C9CFDB}
-.flow span:not(:last-child)::after{content:" →";color:var(--dim)}
-.module dl{display:grid;grid-template-columns:120px minmax(0,1fr);gap:8px 16px;margin:16px 0 0;font-size:14px}
-.module dt{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);padding-top:3px}
-.module dd{margin:0;color:#C9CFDB}
-.formula{font-family:var(--f-mono);font-size:12.5px;color:#B9C4DA;padding:12px 14px;border-radius:14px;border:1px dashed rgba(127,230,255,.3);background:rgba(35,72,255,.08);margin-top:14px;overflow-wrap:anywhere}
-.formula b{color:var(--plasma);font-weight:500}
-
-/* applications */
-.apps{display:grid;grid-template-columns:1.4fr 1fr;gap:16px;margin-top:24px}
-.billboard{position:relative;border-radius:22px;overflow:hidden;background:#000;border:1px solid var(--line);min-height:300px}
-.billboard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;mix-blend-mode:screen;opacity:.95}
-.billboard .copy{position:relative;padding:28px;display:flex;flex-direction:column;justify-content:space-between;height:100%;min-height:300px;background:linear-gradient(90deg,rgba(5,6,10,.9),transparent 70%)}
-.billboard .copy b{font-family:var(--f-display);font-weight:400;font-size:clamp(24px,3vw,34px);line-height:1.1;max-width:12ch}
-.icons{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:center;justify-items:center;padding:24px;border-radius:22px;border:1px solid var(--line)}
-.appicon{width:84px;height:84px;border-radius:22px;background:radial-gradient(circle at 50% 30%,#101a4a,#05060A 70%);display:grid;place-items:center;box-shadow:0 0 0 1px rgba(127,230,255,.25),0 10px 40px rgba(35,72,255,.45)}
-.appicon.b{background:linear-gradient(160deg,#3B5BFF,#1530C8)}
-.appicon.w{background:#EEF1F7}
-.livery{margin-top:16px;border-radius:22px;border:1px solid var(--line);overflow:hidden;display:grid;grid-template-columns:1.4fr 1fr}
-.livery .img{background:#000}
-.livery img{width:100%;height:100%;object-fit:cover;mix-blend-mode:screen}
-.livery .spec2{padding:22px}
-
-.roadmap{display:grid;gap:12px;margin-top:24px}
-.phase{display:grid;grid-template-columns:150px minmax(0,1fr);gap:20px;border-top:1px solid var(--line);padding-top:16px}
-.phase b{font-family:var(--f-display);font-weight:400;font-size:16px}
-
-@media (max-width:980px){
-  .wrap{grid-template-columns:1fr;gap:0}
-  .toc{display:none}
-  .module{grid-template-columns:1fr}.module .vis{min-height:200px}
-  .logo-stage,.apps,.livery{grid-template-columns:1fr}
-  .lib,.grid3{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .motion,.swatches{grid-template-columns:repeat(2,minmax(0,1fr))}
+.cover .in{position:relative;z-index:1;height:100%;padding:15mm 16mm 16mm;display:flex;flex-direction:column}
+.cover h1{font-size:44pt;line-height:1.02;letter-spacing:-.03em;margin-top:14mm;max-width:150mm}
+.cover h1 span{color:var(--ntext3)}
+.tags{display:flex;gap:2mm;flex-wrap:wrap;margin-top:6mm}
+.tags span{font-family:var(--m);font-size:6.8pt;letter-spacing:.08em;text-transform:uppercase;padding:1.6mm 3mm;border-radius:99px;border:1px solid var(--nline);color:var(--ntext2)}
+/* contents */
+.toc{margin-top:8mm;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 8mm}
+.toc a{display:grid;grid-template-columns:12mm minmax(0,1fr) auto;gap:2mm;padding:2.6mm 0;border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink);font-size:9pt}
+.toc a i{font-style:normal;font-family:var(--m);font-size:7pt;color:var(--ink3);padding-top:.6mm}
+.toc a em{font-style:normal;font-family:var(--m);font-size:7pt;color:var(--ink3)}
+/* house */
+.roof{margin-top:6mm;padding:7mm;border-radius:14px;background:var(--night);color:var(--ntext);text-align:center}
+.roof b{display:block;font-weight:400;font-size:26pt;letter-spacing:-.025em}
+.roof p{color:var(--ntext2);margin:2mm auto 0;max-width:120mm}
+/* trait spectrum */
+.spec{display:grid;grid-template-columns:30mm minmax(0,1fr) 30mm;gap:4mm;align-items:center;padding:2.4mm 0;border-bottom:1px solid var(--nline);font-size:8.5pt;color:var(--ntext2)}
+.spec span:last-child{text-align:right}
+.spec .tr{position:relative;height:1.4px;background:var(--nline)}
+.spec .tr i{position:absolute;top:50%;width:3.2mm;height:3.2mm;border-radius:50%;background:var(--cyan);transform:translate(-50%,-50%);box-shadow:0 0 10px var(--cyan)}
+/* notifications */
+.nt{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:3.6mm 4mm}
+.nt .ap{display:flex;align-items:center;gap:2mm;font-family:var(--m);font-size:6.3pt;letter-spacing:.08em;color:var(--ink3)}
+.nt .ap i{width:4mm;height:4mm;border-radius:1.2mm;background:var(--blue)}
+.nt b{display:block;margin-top:2mm;font-weight:500;font-size:9.5pt}
+.nt p{font-size:8.3pt;margin-top:1mm}
+.nt .te{font-size:8pt;color:var(--ink3);margin-top:1.6mm}
+.nt .w{margin-top:2mm;font-family:var(--m);font-size:6.3pt;letter-spacing:.08em;color:var(--blue)}
+.nt.sos{border-color:rgba(200,36,60,.4)}.nt.sos .ap i{background:var(--red)}.nt.sos .w{color:var(--red)}
+/* personas */
+.pe{display:flex;flex-direction:column}
+.pe .who{display:flex;gap:3mm;align-items:center}
+.pe .av{width:9mm;height:9mm;border-radius:50%;display:grid;place-items:center;background:var(--blue);color:#fff;font-size:8pt;font-weight:500;flex:none}
+.pe .who span{display:block;font-family:var(--m);font-size:6.3pt;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);margin-top:.6mm}
+.pe dl{display:grid;grid-template-columns:19mm minmax(0,1fr);gap:1.4mm 3mm;margin:3mm 0 0;font-size:8pt;line-height:1.45}
+.pe dt{font-family:var(--m);font-size:6.2pt;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);padding-top:.5mm}
+.pe dd{margin:0;color:var(--ink2)}
+/* logo, colour, type */
+.mark{display:grid;place-items:center;border-radius:14px;min-height:62mm;position:relative}
+.mark .lb{position:absolute;left:4mm;top:3.4mm}
+.sw{border-radius:12px;overflow:hidden;border:1px solid var(--line);background:var(--card)}
+.sw .cl{height:22mm}
+.sw .t{padding:2.6mm 3.2mm}
+.sw .t b{display:block;font-weight:500;font-size:9pt}
+.sw .t span{font-family:var(--m);font-size:6.8pt;color:var(--ink3)}
+.ratio{display:flex;height:6mm;border-radius:99px;overflow:hidden;margin-top:6mm;border:1px solid var(--line)}
+.ts{display:grid;grid-template-columns:34mm minmax(0,1fr);gap:4mm;align-items:baseline;padding:3mm 0;border-bottom:1px solid var(--line)}
+.ts .lb{font-family:var(--m);font-size:6.5pt;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3)}
+/* imagery */
+.shot{border-radius:12px;overflow:hidden;background:#000;border:1px solid var(--nline)}
+.shot img{display:block;width:100%;height:100%;object-fit:cover}
+.phone{border-radius:7mm;padding:1.4mm;background:#000;box-shadow:0 0 0 1px rgba(255,255,255,.12)}
+.phone .sc{aspect-ratio:392/846;overflow:hidden;border-radius:5.8mm}.phone img{display:block;width:127.55%;max-width:none}
+.cap{font-family:var(--m);font-size:6.3pt;letter-spacing:.08em;text-transform:uppercase;color:var(--ntext3);text-align:center;margin-top:2.4mm}
+.render{border-radius:12px;background:#ECEEF2;display:grid;place-items:center;overflow:hidden}
+.render img{width:100%;display:block}
+.noprint{}
+@media print{
+  @page{size:A4;margin:0}
+  body{background:none;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .doc{display:block;padding:0;gap:0;zoom:1!important}
+  .page{box-shadow:none;break-after:page}
+  .noprint{display:none!important}
 }
-@media (max-width:600px){
-  body{font-size:15px}
-  .wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-  .grid2,.grid3,.lib,.lockups{grid-template-columns:1fr}
-  .misuse{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .spec{grid-template-columns:1fr;gap:8px}
-  .glassdemo .layers{grid-template-columns:1fr;align-content:end}
-  .glassdemo img{height:560px}
-  .module dl,.phase{grid-template-columns:1fr}
-  .cover .inner{padding:20px}
-  section{padding-top:72px}
-}
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
-@media print{@page{size:A4;margin:0}.noprint{display:none!important}main{padding:12mm 12mm 0!important}*{animation:none!important;transition:none!important}.cover img{mix-blend-mode:normal!important}.cover .inner{position:static!important;background:#05060A!important}html,body{background:var(--void)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}.wrap{display:block;max-width:none;padding:0}.toc{display:none}main{padding:0}section{padding-top:0;break-before:page}main>section:first-child,main>header+section{break-before:auto}.card,figure,img,svg,table,.swatch{break-inside:avoid}h2,h3{break-after:avoid}a{text-decoration:none}}
+@media screen and (max-width:860px){.doc{padding:12px 0 32px;gap:12px}}
 </style>
 
-<div class="wrap">
-  <nav class="toc" aria-label="Chapters" id="toc">
-    <svg viewBox="-8 -10 404 92" width="92" aria-label="SAGA" style="margin-bottom:22px"><g fill="none" stroke="#F2F4F8" stroke-width="11"><path d="M72 0 H18 A18 18 0 0 0 18 36 H54 A18 18 0 0 1 54 72 H0"/><path d="M100 72 L140 0 L180 72"/><path d="M280 0 H226 A18 18 0 0 0 208 18 V54 A18 18 0 0 0 226 72 H262 A18 18 0 0 0 280 54 V38 H246"/><path d="M308 72 L348 0 L388 72"/></g></svg>
-    <a href="#v4"><i>v4</i>What changed</a>
-    <a href="#v3"><i>v3</i>v3 notes</a>
-    <a href="#diagnosis"><i>01</i>Diagnosis</a>
-    <a href="#positioning"><i>02</i>Positioning</a>
-    <a href="#standout"><i>2.1</i>How we stand out</a>
-    <a href="#messaging"><i>2.2</i>Clear messaging</a>
-    <a href="#direction"><i>2.3</i>Where we're headed</a>
-    <a href="#personas"><i>2.4</i>Audiences &amp; personas</a>
-    <a href="#architecture"><i>03</i>Brand architecture</a>
-    <a href="#voice"><i>04</i>Personality</a>
-    <a href="#tone"><i>4.1</i>Voice &amp; tone</a>
-    <a href="#ethics"><i>4.2</i>Tech with a conscience</a>
-    <a href="#notifications"><i>4.3</i>Notifications</a>
-    <a href="#channels"><i>4.4</i>Communication</a>
-    <a href="#usability"><i>05</i>Usable by everyone</a>
-    <a href="#logo"><i>06</i>Logo</a>
-    <a href="#colour"><i>07</i>Colour</a>
-    <a href="#type"><i>08</i>Typography</a>
-    <a href="#glass"><i>09</i>Glass system</a>
-    <a href="#three-d"><i>10</i>3D language</a>
-    <a href="#motion"><i>11</i>Motion</a>
-    <a href="#modules"><i>12</i>Product modules</a>
-    <a href="#pilot"><i>13</i>Pilot app</a>
-    <a href="#ops"><i>14</i>Ops console</a>
-    <a href="#ads"><i>15</i>Advertising</a>
-    <a href="#aura"><i>16</i>AURA rewards</a>
-    <a href="#marketing"><i>17</i>Marketing</a>
-    <a href="#applications"><i>18</i>Applications</a>
-    <a href="#roadmap"><i>19</i>Roadmap</a>
-  </nav>
+<div class="doc" id="doc">
 
-  <main>
-    <header class="cover">
-      <img src="assets/logo.jpg" alt="SAGA monogram rendered as a glass neon tube over a blue light grid">
-      <div class="inner">
-        <div class="eyebrow">Brand &amp; Experience Manual · v4.0</div>
-        <svg class="wm" viewBox="-8 -10 404 92" aria-label="SAGA" style="margin-top:14px"><g fill="none" stroke="#F2F4F8" stroke-width="11"><path d="M72 0 H18 A18 18 0 0 0 18 36 H54 A18 18 0 0 1 54 72 H0"/><path d="M100 72 L140 0 L180 72"/><path d="M280 0 H226 A18 18 0 0 0 208 18 V54 A18 18 0 0 0 226 72 H262 A18 18 0 0 0 280 54 V38 H246"/><path d="M308 72 L348 0 L388 72"/></g></svg>
-        <div class="meta"><span>ARRIVE AHEAD</span><span style="font-family:var(--f-jp)">サーガ · 先回り</span><span style="font-family:var(--f-te)">సాగా</span><span>VISAKHAPATNAM · NOV 2026</span></div>
-      </div>
-    </header>
-    <p class="lead" style="margin-top:28px">This manual sets out how SAGA looks, sounds, moves and makes money. It is the single reference for designers, developers, marketers and the operations team. The interactive app simulation is the working proof of every rule written here.</p>
-    <p class="noprint" style="margin-top:12px"><a href="SAGA-Brand-Manual.pdf" download>Download this manual as a PDF (A4, 49 pages)</a></p>
+<!-- 1 COVER -->
+<section class="page dark cover">
+  <div class="art" role="img" aria-label="The SAGA ONE electric car in a dark studio"></div>
+  <div class="in">
+    <div class="run"><b>SAGA</b><span>Brand &amp; experience manual · v5.0</span></div>
+    <div class="eb" style="margin-top:22mm">Visakhapatnam · November 2026</div>
+    <h1>Arrive ahead. <span>The brand, the voice and the product system.</span></h1>
+    <div class="tags"><span>All-electric</span><span>₹18 per km, no surge</span><span>Salaried pilots</span><span>Telugu · हिंदी · English</span></div>
+    <div style="margin-top:auto" class="run"><span>sagamobility.com</span><span>Prepared by HALO Studio</span></div>
+  </div>
+</section>
 
-    <section id="v4">
-      <div class="eyebrow">What changed in v4</div>
-      <h2>Black and blue heroes, live 3D, a real driver app.</h2>
-      <div class="grid2">
-        <div class="card"><div class="label">Type</div><h4>Inter Tight + JetBrains Mono</h4><p>Inter Tight for every word people read; JetBrains Mono for live data such as ETA, battery, km, plates, codes and CO₂, so numbers read like instrument readouts.</p></div>
-        <div class="card"><div class="label">Colour</div><h4>Black #07080C with SAGA Blue #092EC9</h4><p>Black and blue carry the heroes, the tab bar, the telemetry panels and the HUD. White stays the reading surface, so older riders can still read easily in daylight. Cyan #33C6F0 is reserved for live/tech moments.</p></div>
-        <div class="card"><div class="label">Icons</div><h4>Lucide, one stroke</h4><p>All interface icons come from Lucide 0.344 (2 px stroke) for one consistent, legible set.</p></div>
-        <div class="card"><div class="label">Motion</div><h4>GSAP, purposeful and tech</h4><p>Odometer-style digit rolls, route dash-flow, pin drops, radar lock-on, a receipt that prints, leaf particles and spring presses. Every animation is forced to its end state if frames stall, so screens are never left half-drawn.</p></div>
-        <div class="card"><div class="label">Live 3D</div><h4>Interactive service objects</h4><p>The service cards now hold live Blender objects (blender/saga_modules_glb.py). You can drag them, and they react to the controls: day discs light up, the outstation route extends, the sun moves for each trip, and towers light up per car.</p></div>
-        <div class="card"><div class="label">Operations</div><h4>The driver starts the ride</h4><p>The rider tells the pilot a 4-digit code and the pilot types it in the driver app. The rider's screen moves from On the way to At pickup to Ride started by itself. There is no "start ride" button for customers.</p></div>
-      </div>
-      <p style="margin-top:20px"><b>Driver app simulation:</b> <a href="saga-driver.html">SAGA Pilot</a>. Shift check, assigned job, 3D night navigation, trip-code keypad, live trip with a Secure 360 alert, charging and shift summary.</p>
-      <p style="margin-top:12px"><b>All three apps on one screen:</b> <a href="index.html">SAGA Suite</a>. Rider, driver and ops console side by side and linked live. A booking on the rider phone reaches Ravi's phone, and his acknowledge, arrival, code entry and trip end move the rider's screen and appear in ops.</p>
-      <p style="margin-top:12px"><b>SAGA Saathi, the voice assistant (rider app):</b> a mic button opens a sheet in English, हिंदी or తెలుగు. Riders can book, confirm, track the car, book an airport ride from a PNR, set up daily rides, outstation, day trips and business rides, check green points, call the driver, cancel or send SOS, all by voice. The demo simulates the listening and understanding. In production, speech goes to Gemini (speech-to-text plus function calling) with the same intent list as tools, and it can only call the app's own actions. The driver app has no voice assistant by design.</p>
-    </section>
+<!-- 2 CONTENTS -->
+<section class="page">
+  <div class="run"><b>SAGA · Contents</b><span>02</span></div>
+  <div class="body">
+    <div class="eb">Inside</div>
+    <h2>Everything SAGA says, shows and ships, <span>on one shelf.</span></h2>
+    <p class="lede">This manual is the single reference for designers, developers, marketers, pilots and the operations team. The working apps are the proof of every rule written here.</p>
+    <div class="toc">
+      <a href="#p3"><i>01</i>The brand in brief<em>03</em></a>
+      <a href="#p4"><i>02</i>Positioning<em>04</em></a>
+      <a href="#p5"><i>03</i>How we stand out<em>05</em></a>
+      <a href="#p7"><i>04</i>Clear messaging<em>07</em></a>
+      <a href="#p8"><i>05</i>Where we're headed<em>08</em></a>
+      <a href="#p9"><i>06</i>Audiences &amp; personas<em>09</em></a>
+      <a href="#p12"><i>07</i>Brand architecture<em>12</em></a>
+      <a href="#p13"><i>08</i>Personality<em>13</em></a>
+      <a href="#p14"><i>09</i>Voice &amp; tone<em>14</em></a>
+      <a href="#p16"><i>10</i>Tech with a conscience<em>16</em></a>
+      <a href="#p17"><i>11</i>Notifications<em>17</em></a>
+      <a href="#p19"><i>12</i>Communication<em>19</em></a>
+      <a href="#p20"><i>13</i>Usable by everyone<em>20</em></a>
+      <a href="#p21"><i>14</i>Logo<em>21</em></a>
+      <a href="#p22"><i>15</i>Colour<em>22</em></a>
+      <a href="#p23"><i>16</i>Typography<em>23</em></a>
+      <a href="#p24"><i>17</i>Icons, layout &amp; motion<em>24</em></a>
+      <a href="#p25"><i>18</i>3D &amp; imagery<em>25</em></a>
+      <a href="#p26"><i>19</i>The apps<em>26</em></a>
+      <a href="#p28"><i>20</i>Product modules<em>28</em></a>
+      <a href="#p29"><i>21</i>Rewards &amp; advertising<em>29</em></a>
+      <a href="#p30"><i>22</i>Launch campaign<em>30</em></a>
+      <a href="#p31"><i>23</i>Roadmap &amp; open decisions<em>31</em></a>
+    </div>
+    <p class="noprint" style="margin-top:8mm"><a href="SAGA-Brand-Manual.pdf" download style="color:var(--blue)">Download this manual as a PDF</a></p>
+  </div>
+  <div class="foot"><span>SAGA · Brand &amp; experience manual</span><span>v5.0</span></div>
+</section>
 
-    <section id="v3">
-      <div class="eyebrow">What changed in v3</div>
-      <h2>Light, bold, ride-hailing first, built around the real car.</h2>
-      <div class="bleed" style="background:#EEF1F7"><img src="assets/car3_side.webp" alt="The SAGA ONE as modelled in Blender: compact black electric hatchback with cyan LED lines" style="max-width:860px;margin:0 auto"></div>
-      <div class="grid2">
-        <div class="card"><div class="label">Interface</div><h4>Light theme, one blue</h4><p>The rider app moves to a light, high-contrast interface for older riders. The brand blue is #092EC9, used as bold full-colour heroes (Pilo-style) and for every primary action. Type is Plus Jakarta Sans: 17 px body, 34 px headings, 800 weight for headlines.</p></div>
-        <div class="card"><div class="label">Home</div><h4>A ride first</h4><p>Home opens as a normal ride-hailing screen: a live map with SAGA cars moving nearby, "Where are you going?", and saved places. The other services sit below as swipeable cards with working controls inside: PNR, weekdays, distance slider, trip picker, people stepper.</p></div>
-        <div class="card"><div class="label">Vehicle</div><h4>The real SAGA ONE</h4><p>Remodelled in Blender from the sagamobility.com side profile: a compact 5-door EV hatchback, 4.27 m long, gloss black, with roof sensor pods, a cyan LED window outline and sill line, LED wheel rings, a checkered taxi mark and red vertical tail lights.</p></div>
-        <div class="card"><div class="label">Ride</div><h4>Live 3D route</h4><p>During the ride the app shows a light 3D city. The actual car model (exported as GLB) drives the route ribbon with turning wheels and a sensor pulse, while the HUD shows the next turn, arrival time, speed, battery and CO₂ saved.</p></div>
-        <div class="card"><div class="label">Trust</div><h4>Know your car</h4><p>Before pickup: number plate, colour and lights to look for, battery and range, the lifetime CO₂ this car has saved, features, the pilot, the trip code, and a rotatable 3D model of the car.</p></div>
-        <div class="card"><div class="label">Care</div><h4>SAGA Assist</h4><p>A ride type for older riders and families: the pilot helps with bags and boarding and waits longer. Sample price: +₹30.</p></div>
-      </div>
-    </section>
+<!-- 3 BRIEF -->
+<section class="page" id="p3">
+  <div class="run"><b>SAGA · The brand in brief</b><span>03</span></div>
+  <div class="body">
+    <div class="eb">01 · The brand in brief</div>
+    <h2>A remarkable fleet behind an unremarkable brand. <span>Until now.</span></h2>
+    <p class="lede">SAGA already has the hard parts: an all-electric fleet, company-owned cars, salaried pilots and a flat ₹18 per km fare. What it lacked was a brand that tells anyone this. This system fixes that.</p>
+    <div class="g3">
+      <div class="c stat"><b>₹18<small>PER KM</small></b><p>The same fare at 4 a.m., in the rain and on festival nights.</p></div>
+      <div class="c stat"><b>100%<small>ELECTRIC</small></b><p>Every car is a SAGA ONE. Quiet, clean, checked before every shift.</p></div>
+      <div class="c stat"><b>0<small>SURGE · 0 BIDDING</small></b><p>Rides are assigned to salaried pilots, never auctioned.</p></div>
+    </div>
+    <h3>What we found, and what we changed</h3>
+    <table><thead><tr><th style="width:24%">Touchpoint</th><th>What we found</th><th>What we changed</th></tr></thead><tbody>
+      <tr><td><b>Store listing</b></td><td>Listed by an individual developer, two different app names, cash only.</td><td>One name, SAGA, an organisation account, new screenshots, UPI.</td></tr>
+      <tr><td><b>Website</b></td><td>"Coming soon" while the app is live; two names for the airport.</td><td>Store badges, one airport name: Bhogapuram International (Vizag).</td></tr>
+      <tr><td><b>Product</b></td><td>A generic ride-hailing flow that hid SAGA's advantages.</td><td>Five services built on planning ahead, a driver app and an ops command centre.</td></tr>
+      <tr><td><b>Identity</b></td><td>No logo system, palette, type or voice.</td><td>This manual: one mark, one palette, one type family, one voice.</td></tr>
+      <tr><td><b>Trust</b></td><td>The store declared location and contact data as shared with third parties.</td><td>Audit the SDKs and correct the declaration before launch.</td></tr>
+    </tbody></table>
+  </div>
+  <div class="foot"><span>SAGA · Brand &amp; experience manual</span><span>sagamobility.com</span></div>
+</section>
 
-    <!-- 01 -->
-    <section id="diagnosis">
-      <div class="eyebrow">01 · Diagnosis</div>
-      <h2>A remarkable fleet behind an unremarkable brand.</h2>
-      <p>SAGA has the hard parts already: an all-electric fleet with a distinctive light-line design, company-owned cars, salaried drivers and a low ₹18/km fare. What it lacks is a brand that tells anyone this. A review of the live product found these gaps:</p>
-      <div class="tablewrap"><table>
-        <thead><tr><th>Touchpoint</th><th>What we found</th><th>Fix</th></tr></thead>
-        <tbody>
-          <tr><td>Play Store</td><td>Listed as "Saga Mobility" by an individual developer; the description calls it "Saga Rider". 10+ downloads, no reviews. Cash only for new bookings.</td><td>Move to an organisation developer account and name the app "SAGA". Use new screenshots from this system. Add UPI.</td></tr>
-          <tr><td>Website</td><td>Says the app is "coming soon" with no store links while the Android app is live. Describes the airport as Bhogapuram while the app says Visakhapatnam Airport.</td><td>Add the Play badge and use one name for the airport everywhere: "Bhogapuram International (Vizag)".</td></tr>
-          <tr><td>Product</td><td>A generic ride-hailing flow. Nothing uses SAGA's real advantages: owned fleet, payroll pilots, EV data.</td><td>Five modules built around pre-scheduling and reliability (chapter 11).</td></tr>
-          <tr><td>Identity</td><td>No logo system, palette, type or motion rules. The cars carry the only visual idea.</td><td>Make the car's light-line the root of the identity (chapters 05–10).</td></tr>
-          <tr><td>Data declaration</td><td>Declares precise location, contact details and device IDs as shared with third parties.</td><td>Audit the SDKs. If the data isn't actually shared, correct the declaration. It undermines a brand built on trust.</td></tr>
-        </tbody></table></div>
-    </section>
+<!-- 4 POSITIONING -->
+<section class="page" id="p4">
+  <div class="run"><b>SAGA · Positioning</b><span>04</span></div>
+  <div class="body">
+    <div class="eb">02 · Positioning</div>
+    <h2>Not a cab app. <span>The coast's first predictive, electric mobility company.</span></h2>
+    <p class="lede">Aggregator apps react: you ask, they search, you hope. SAGA plans ahead. Your ticket number, your weekly routine or your company's roster books the ride before you think about it. Owning the cars and employing the pilots is what makes that promise possible, and it is what no aggregator can copy.</p>
+    <div class="c ink" style="margin-top:6mm"><div class="lb">Positioning statement</div><p style="font-size:10.5pt;color:var(--ntext);max-width:none;line-height:1.5">For travellers, families and organisations across Visakhapatnam and its nearby towns, SAGA is the electric mobility company that plans your ride before you need it. Unlike aggregator apps, every SAGA car is company-owned and every pilot is a salaried employee, so pickups are locked, prices are flat and nobody gets stranded.</p></div>
+    <h3>Four brand pillars</h3>
+    <div class="g2">
+      <div class="c"><span class="n">A</span><h4>Anticipation · We move first</h4><p>Ticket-based airport booking, daily rides and shift dispatch. We earn trust by acting early and showing how we worked it out.</p></div>
+      <div class="c"><span class="n">B</span><h4>Pure energy · Every km is electric</h4><p>Riders see the CO₂ they avoided after every ride, and it adds up to free rides.</p></div>
+      <div class="c"><span class="n">C</span><h4>Quiet precision · Calm and exact</h4><p>No hype, no exclamation marks. Times to the minute, fares to the rupee.</p></div>
+      <div class="c"><span class="n">D</span><h4>Coastal pride · Built for Vizag first</h4><p>Eastern Ghats, the Bay of Bengal, Telugu first. Future-facing, and from here.</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>SAGA · Brand &amp; experience manual</span><span>sagamobility.com</span></div>
+</section>
 
-    <!-- 02 -->
-    <section id="positioning">
-      <div class="eyebrow">02 · Positioning</div>
-      <h2>Not a cab app. The region's first predictive, electric mobility company.</h2>
-      <p class="quote">先回り (sakimawari): to get there first, so everything is ready when the other person arrives.</p>
-      <p>This idea from Japanese hospitality sits at the centre of SAGA. Aggregator apps react: you ask, they search, you hope. SAGA anticipates. Your PNR, your weekly routine or your company's shift roster books the ride before you think about it. Owning the fleet and employing the pilots is what makes that promise possible, and no aggregator can copy it.</p>
-      <div class="card" style="margin-top:24px;border-color:rgba(127,230,255,.3)">
-        <div class="label">Positioning statement</div>
-        <p style="font-size:17px;color:#fff;max-width:none">For travellers, families and organisations across Visakhapatnam and its tier 2 and 3 towns, SAGA is the electric mobility company that plans your ride before you need it. Unlike aggregator apps, every SAGA car is company-owned and every pilot is a salaried employee, so pickups are locked, prices are flat and nobody gets stranded.</p>
-      </div>
-      <h3>Brand pillars</h3>
-      <div class="grid2">
-        <div class="card"><div class="label">Anticipation</div><h4>We move first.</h4><p>PNR auto-booking, Loops and shift dispatch. The product earns trust by acting early and showing how it worked things out.</p></div>
-        <div class="card"><div class="label">Pure energy</div><h4>Every km is electric.</h4><p>The light is the brand. AURA turns each kilometre into CO₂ avoided that riders can see and spend.</p></div>
-        <div class="card"><div class="label">Quiet precision</div><h4>Calm, exact, on time.</h4><p>Like a Shinkansen conductor: no hype, no exclamation marks. Times to the minute, fares to the rupee.</p></div>
-        <div class="card"><div class="label">Coastal pride</div><h4>Built for Vizag first.</h4><p>Eastern Ghats, the Bay of Bengal, Telugu first. Future-facing, and from here.</p></div>
-      </div>
-      <h3>Who we serve</h3>
-      <div class="tablewrap"><table>
-        <thead><tr><th>Segment</th><th>Job to be done</th><th>Lead module</th></tr></thead>
-        <tbody>
-          <tr><td>Flyers</td><td>"Get me to Bhogapuram on time at 4 a.m. without worrying tonight."</td><td>Fly</td></tr>
-          <tr><td>Families &amp; students</td><td>"Safe, same-driver school and college runs I can see live."</td><td>Loop + Campus</td></tr>
-          <tr><td>Professionals</td><td>"My office commute at a monthly price I know in advance."</td><td>Loop</td></tr>
-          <tr><td>Explorers</td><td>"Araku in a day, no bargaining, no planning."</td><td>Tales, Voyage</td></tr>
-          <tr><td>Organisations</td><td>"Move 100 people per shift with one invoice and ESG data."</td><td>Business</td></tr>
-        </tbody></table></div>
-    </section>
+<!-- 5 STAND OUT -->
+<section class="page" id="p5">
+  <div class="run"><b>SAGA · How we stand out</b><span>05</span></div>
+  <div class="body">
+    <div class="eb">03 · How we stand out</div>
+    <h2>Everyone sells a ride. <span>We sell certainty.</span></h2>
+    <p class="lede">SAGA does not try to be the cheapest or the nearest. It is the ride you can plan your day around. Each answer below exists because SAGA owns its cars and employs its pilots.</p>
+    <table><thead><tr><th style="width:21%">What people worry about</th><th style="width:22%">Typical cab app</th><th style="width:19%">Auto-rickshaw</th><th>SAGA</th></tr></thead><tbody>
+      <tr><td><b>Will it turn up?</b></td><td>Drivers can reject or cancel</td><td>Bargain at the roadside</td><td><b>Assigned, not auctioned.</b> Salaried pilots can't refuse a job.</td></tr>
+      <tr><td><b>What will it cost?</b></td><td>Surge at peaks and in rain</td><td>Depends on the day</td><td><b>₹18 per km, every hour.</b> No surge, ever.</td></tr>
+      <tr><td><b>Is it safe?</b></td><td>Varies by driver</td><td>No tracking</td><td><b>Secure 360:</b> road camera, alerts reviewed by people, SOS, trip code, live sharing.</td></tr>
+      <tr><td><b>Will I miss my flight?</b></td><td>Book and hope at 4 a.m.</td><td>Not an option</td><td><b>SAGA Fly</b> books from your ticket and moves the pickup if your flight moves.</td></tr>
+      <tr><td><b>Is the car decent?</b></td><td>Any car, any condition</td><td>Open, noisy, hot</td><td><b>One clean, quiet SAGA ONE</b>, checked before every shift.</td></tr>
+      <tr><td><b>Good for the city?</b></td><td>Mostly petrol and diesel</td><td>Mostly CNG and petrol</td><td><b>100% electric</b>, with the CO₂ saved on every receipt.</td></tr>
+      <tr><td><b>Can my parents use it?</b></td><td>Small text, many steps</td><td>Yes, but untracked</td><td><b>Large text, one button per screen, voice in Telugu and Hindi</b>, and SAGA Assist.</td></tr>
+    </tbody></table>
+  </div>
+  <div class="foot"><span>SAGA · Brand &amp; experience manual</span><span>sagamobility.com</span></div>
+</section>
 
-    <!-- 2.1 -->
-    <section id="standout">
-      <div class="eyebrow">2.1 · How we stand out</div>
-      <h2>Everyone sells a ride. We sell certainty.</h2>
-      <p>Cab apps compete on price and the number of cars nearby. Autos compete on being right there. SAGA does not try to be the cheapest or the nearest. It is the ride you can plan your day around. Every feature below exists because SAGA owns its cars and employs its pilots, which no aggregator can copy without rebuilding its business.</p>
-      <div class="tablewrap"><table>
-        <thead><tr><th>What people worry about</th><th>Typical cab app</th><th>Auto-rickshaw</th><th>SAGA</th></tr></thead>
-        <tbody>
-          <tr><td>Will the ride turn up?</td><td>Drivers can reject or cancel</td><td>Bargain at the roadside</td><td><b>Assigned, not auctioned.</b> Salaried pilots cannot refuse a job.</td></tr>
-          <tr><td>What will it cost?</td><td>Surge pricing at peaks and in the rain</td><td>Depends on the day and the driver</td><td><b>₹18 per km, every hour of every day.</b> No surge, ever.</td></tr>
-          <tr><td>Is it safe?</td><td>Varies by driver</td><td>No tracking</td><td><b>Secure 360</b>: road camera, pilot attention alerts reviewed by people, SOS, live trip sharing, trip code.</td></tr>
-          <tr><td>Will I miss my flight?</td><td>Book and hope at 4 a.m.</td><td>Not available</td><td><b>SAGA Fly</b> books from your PNR and moves the pickup if your flight moves.</td></tr>
-          <tr><td>Is the car decent?</td><td>Any car, any condition</td><td>Open, noisy, hot</td><td><b>One clean, quiet, electric SAGA ONE</b>, checked before every shift.</td></tr>
-          <tr><td>Is it good for the city?</td><td>Mostly diesel and petrol</td><td>Mostly CNG and petrol</td><td><b>100% electric.</b> You see the CO₂ you saved after every ride.</td></tr>
-          <tr><td>Can my parents use it?</td><td>Small text, many steps</td><td>Yes, but no tracking</td><td><b>Large text, one button per screen, voice in Telugu and Hindi</b>, and SAGA Assist for help with bags and boarding.</td></tr>
-        </tbody></table></div>
-      <h3>Six features that make the difference</h3>
-      <div class="grid3">
-        <div class="card"><div class="label">01 · SAGA Fly</div><h4>Book from your ticket</h4><p>Type the PNR once. SAGA reads the flight, times the pickup, and moves it if the flight is late.</p></div>
-        <div class="card"><div class="label">02 · Assigned rides</div><h4>No cancellations</h4><p>Dispatch assigns every ride to a salaried pilot. Riders never see "searching for drivers" fail.</p></div>
-        <div class="card"><div class="label">03 · Flat fare</div><h4>₹18 per km, always</h4><p>The fare on the screen before you book is the fare you pay. Rain, festivals and midnight included.</p></div>
-        <div class="card"><div class="label">04 · Secure 360</div><h4>Safety you can see</h4><p>The pilot starts the ride only after your trip code. Alerts are reviewed by a person, never by AI alone.</p></div>
-        <div class="card"><div class="label">05 · SAGA Saathi</div><h4>Book by voice</h4><p>Speak in Telugu, Hindi or English. Built for people who find apps hard, not just people who find typing slow.</p></div>
-        <div class="card"><div class="label">06 · AURA</div><h4>See the good you do</h4><p>Every ride shows the CO₂ you avoided. Green points add up to free rides.</p></div>
-      </div>
-    </section>
+<!-- 6 FEATURES (dark) -->
+<section class="page dark" id="p6">
+  <div class="run"><b>SAGA · How we stand out</b><span>06</span></div>
+  <div class="body">
+    <div class="eb">03 · Six proof points</div>
+    <h2>Six features that make the difference. <span>Each one is hard to copy.</span></h2>
+    <div class="g2" style="margin-top:9mm">
+      <div class="c"><span class="n">01</span><h4>SAGA Fly · Book from your ticket</h4><p>Type the PNR once. SAGA reads the flight, times the pickup and moves it if the flight is late.</p></div>
+      <div class="c"><span class="n">02</span><h4>Assigned rides · No cancellations</h4><p>Dispatch assigns every ride to a salaried pilot. Riders never watch "searching for drivers" fail.</p></div>
+      <div class="c"><span class="n">03</span><h4>Flat fare · ₹18 per km, always</h4><p>The fare on screen before you book is the fare you pay. Rain, festivals and midnight included.</p></div>
+      <div class="c"><span class="n">04</span><h4>Secure 360 · Safety you can see</h4><p>The pilot starts the ride only after your trip code. Alerts are reviewed by a person, never by AI alone.</p></div>
+      <div class="c"><span class="n">05</span><h4>SAGA Saathi · Book by voice</h4><p>Speak in Telugu, Hindi or English. Built for people who find apps hard, not only people in a hurry.</p></div>
+      <div class="c"><span class="n">06</span><h4>Green points · See the good you do</h4><p>Every ride shows the CO₂ you avoided. Points add up to free rides.</p></div>
+    </div>
+    <div class="c" style="margin-top:6mm;background:var(--blue);border-color:var(--blue)"><div class="lb" style="color:rgba(255,255,255,.7)">Why no one else can do this</div><p style="color:#fff;font-size:10pt">Aggregators don't own cars or employ drivers, so they can't guarantee a pickup, hold a price or plan charging. SAGA's model is the moat; the brand's job is to make it obvious.</p></div>
+  </div>
+  <div class="foot"><span>SAGA · Brand &amp; experience manual</span><span>sagamobility.com</span></div>
+</section>
 
-    <!-- 2.2 -->
-    <section id="messaging">
-      <div class="eyebrow">2.2 · Clear messaging</div>
-      <h2>One promise, four proofs, said the same way everywhere.</h2>
-      <p>Every campaign, store listing, push message and sales deck hangs from the same message house. If a line cannot be traced to one of the four proofs, it does not run.</p>
-      <div class="house">
-        <div class="roof"><div class="label" style="color:var(--plasma)">The promise</div><b>Arrive ahead.</b><p style="margin:8px auto 0;max-width:56ch;color:#DCE1EA">SAGA plans your ride before you need it, so you get there calm, on time and without surprises.</p></div>
-        <div class="cols">
-          <div class="card"><div class="label">Reliable</div><h4>It always turns up.</h4><p>Owned cars, salaried pilots, assigned rides. 98% of pickups on time.</p></div>
-          <div class="card"><div class="label">Fair</div><h4>The price never jumps.</h4><p>₹18 per km at any hour. No surge, no bargaining, no hidden fees.</p></div>
-          <div class="card"><div class="label">Safe</div><h4>Someone is watching out.</h4><p>Secure 360, trip codes, live sharing, SOS, trained pilots.</p></div>
-          <div class="card"><div class="label">Clean</div><h4>Every km is electric.</h4><p>Quiet cars, cleaner air, and the CO₂ you saved on every receipt.</p></div>
-        </div>
-      </div>
-      <h3>Lines we use</h3>
-      <div class="tablewrap"><table>
-        <thead><tr><th>Use</th><th>English</th><th>Telugu</th></tr></thead>
-        <tbody>
-          <tr><td>Master line</td><td>Arrive ahead.</td><td style="font-family:var(--f-te)">ముందే చేరుకోండి.</td></tr>
-          <tr><td>Reliability</td><td>The cab that doesn't cancel.</td><td style="font-family:var(--f-te)">క్యాన్సిల్ చేయని క్యాబ్.</td></tr>
-          <tr><td>Price</td><td>₹18 a km. Rain or shine.</td><td style="font-family:var(--f-te)">కి.మీకి ₹18. వాన వచ్చినా, ఎండ కాసినా.</td></tr>
-          <tr><td>Airport</td><td>Give us your PNR. We'll handle the 4 a.m.</td><td style="font-family:var(--f-te)">మీ PNR ఇవ్వండి. తెల్లవారుజాము 4 గంటల బాధ్యత మాది.</td></tr>
-          <tr><td>Safety</td><td>Your ride starts only when you say the code.</td><td style="font-family:var(--f-te)">మీరు కోడ్ చెప్పినప్పుడే రైడ్ మొదలవుతుంది.</td></tr>
-          <tr><td>Electric</td><td>Quiet ride. Clean air. Same price.</td><td style="font-family:var(--f-te)">నిశ్శబ్ద ప్రయాణం. స్వచ్ఛమైన గాలి. అదే ధర.</td></tr>
-        </tbody></table></div>
-      <div class="grid2">
-        <div class="card do"><div class="label">Always</div><p style="color:#fff">Lead with the benefit, then the proof. Use real numbers: minutes, rupees, kilometres. Show the real car and real pilots. Say "electric" plainly.</p></div>
-        <div class="card dont"><div class="label">Never</div><p>"Cheapest in town", "India's no. 1", "revolutionary", "AI-powered" as a headline, stock photos of cars that aren't ours, or attacking competitors by name.</p></div>
-      </div>
-    </section>
+<!-- 7 MESSAGING -->
+<section class="page" id="p7">
+  <div class="run"><b>SAGA · Clear messaging</b><span>07</span></div>
+  <div class="body">
+    <div class="eb">04 · Clear messaging</div>
+    <h2>One promise, four proofs, <span>said the same way everywhere.</span></h2>
+    <div class="roof"><div class="eb" style="justify-content:center;color:var(--cyan)">The promise</div><b>Arrive ahead.</b><p>SAGA plans your ride before you need it, so you get there calm, on time and without surprises.</p></div>
+    <div class="g4" style="margin-top:3.2mm">
+      <div class="c"><div class="lb">Reliable</div><h4>It always turns up.</h4><p>Owned cars, salaried pilots, assigned rides.</p></div>
+      <div class="c"><div class="lb">Fair</div><h4>The price never jumps.</h4><p>₹18 per km at any hour. No hidden fees.</p></div>
+      <div class="c"><div class="lb">Safe</div><h4>Someone's watching out.</h4><p>Secure 360, trip codes, live sharing, SOS.</p></div>
+      <div class="c"><div class="lb">Clean</div><h4>Every km is electric.</h4><p>Quiet cars and the CO₂ saved on every receipt.</p></div>
+    </div>
+    <table><thead><tr><th style="width:16%">Use</th><th style="width:38%">English</th><th>Telugu</th></tr></thead><tbody>
+      <tr><td><b>Master line</b></td><td>Arrive ahead.</td><td class="te">ముందే చేరుకోండి.</td></tr>
+      <tr><td><b>Reliability</b></td><td>The cab that doesn't cancel.</td><td class="te">క్యాన్సిల్ చేయని క్యాబ్.</td></tr>
+      <tr><td><b>Price</b></td><td>₹18 a km. Rain or shine.</td><td class="te">కి.మీకి ₹18. వాన వచ్చినా, ఎండ కాసినా.</td></tr>
+      <tr><td><b>Airport</b></td><td>Give us your PNR. We'll handle the 4 a.m.</td><td class="te">మీ PNR ఇవ్వండి. తెల్లవారుజాము బాధ్యత మాది.</td></tr>
+      <tr><td><b>Safety</b></td><td>Your ride starts only when you say the code.</td><td class="te">మీరు కోడ్ చెప్పినప్పుడే రైడ్ మొదలవుతుంది.</td></tr>
+    </tbody></table>
+    <div class="g2">
+      <div class="c do"><div class="lb">Always</div><p>Lead with the benefit, then the proof. Use real numbers: minutes, rupees, kilometres. Show the real car and real pilots.</p></div>
+      <div class="c dont"><div class="lb">Never</div><p>"Cheapest in town", "India's no. 1", "revolutionary", "AI-powered" as a headline, stock cars, or naming competitors.</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>SAGA · Brand &amp; experience manual</span><span>sagamobility.com</span></div>
+</section>
 
-    <!-- 2.3 -->
-    <section id="direction">
-      <div class="eyebrow">2.3 · Where we're headed</div>
-      <h2>From a cab service to the way the coast moves.</h2>
-      <p>The long-term direction is a predictive mobility network for Andhra Pradesh's coastal cities and the towns around them. Every step builds on the same three assets: owned electric cars, employed pilots, and data that lets us plan rides before people ask.</p>
-      <div class="grid3">
-        <div class="card"><div class="label">Now · 2026–27</div><h4>The most trusted ride in Vizag</h4><p>Airport, daily rides and business accounts. 200 cars. Voice booking in three languages. On-time above 98%.</p></div>
-        <div class="card"><div class="label">Next · 2027–28</div><h4>Across the coast</h4><p>Kakinada, Rajahmundry, Vizianagaram and Srikakulam. Intercity Voyages with planned charging. Hospital and campus partnerships.</p></div>
-        <div class="card"><div class="label">Later · 2029+</div><h4>A mobility network</h4><p>Shared shuttles on predicted routes, connections to rail and buses, and fleet charging that also supports the grid. Ready for driver-assist technology, with pilots kept in the car.</p></div>
-      </div>
-      <p>What will not change: flat, fair fares, salaried pilots, people reviewing safety decisions, and an app a 70-year-old can use alone.</p>
-    </section>
+<!-- 8 DIRECTION (dark) -->
+<section class="page dark" id="p8">
+  <div class="run"><b>SAGA · Where we're headed</b><span>08</span></div>
+  <div class="body">
+    <div class="eb">05 · Where we're headed</div>
+    <h2>From a cab service <span>to the way the coast moves.</span></h2>
+    <p class="lede">The direction is a predictive mobility network for Andhra Pradesh's coastal cities and the towns around them, built on three assets: owned electric cars, employed pilots, and data that lets us plan rides before people ask.</p>
+    <div class="g3" style="margin-top:9mm">
+      <div class="c"><div class="lb">Now · 2026–27</div><h4>The most trusted ride in Vizag</h4><p>Airport, daily rides and business accounts. 200 cars. Voice booking in three languages. On-time above 98%.</p></div>
+      <div class="c"><div class="lb">Next · 2027–28</div><h4>Across the coast</h4><p>Kakinada, Rajahmundry, Vizianagaram and Srikakulam. Intercity trips with planned charging. Hospital and campus partners.</p></div>
+      <div class="c"><div class="lb">Later · 2029+</div><h4>A mobility network</h4><p>Shared shuttles on predicted routes, links to rail and buses, and fleet charging that supports the grid. Pilots stay in the car.</p></div>
+    </div>
+    <h3>What will not change</h3>
+    <div class="g4">
+      <div class="c"><h4>Flat fares</h4><p>No surge, at any size.</p></div>
+      <div class="c"><h4>Salaried pilots</h4><p>Employees, not gig workers.</p></div>
+      <div class="c"><h4>People decide</h4><p>Humans review every safety call.</p></div>
+      <div class="c"><h4>Easy for all</h4><p>An app a 70-year-old can use alone.</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>SAGA · Brand &amp; experience manual</span><span>sagamobility.com</span></div>
+</section>
 
-    <!-- 2.4 -->
-    <section id="personas">
-      <div class="eyebrow">2.4 · Audiences &amp; personas</div>
-      <h2>Seven people we design and write for.</h2>
-      <p>Each persona is a composite drawn from the segments in chapter 02. Campaigns, screens and support scripts should name which persona they are for.</p>
-      <div class="grid2">
-        <div class="card persona"><div class="who"><span class="av">AR</span><div><h4>Ananya, 31</h4><div class="label">The early flyer · MVP Colony</div></div></div>
-          <dl><dt>Life</dt><dd>Pharma sales manager. Flies to Hyderabad and Bengaluru twice a month, often on the first flight.</dd><dt>Wants</dt><dd>To sleep the night before a 6 a.m. flight without worrying about the cab.</dd><dt>Frustrations</dt><dd>Cancelled bookings at 4 a.m., surge pricing, drivers asking for directions.</dd><dt>What SAGA offers</dt><dd>SAGA Fly, Comfort, business invoices.</dd><dt>Channel</dt><dd>App push, Google search, LinkedIn. English.</dd></dl>
-          <div class="say">"Give us your PNR. We'll handle the 4 a.m."</div></div>
-        <div class="card persona"><div class="who"><span class="av">VR</span><div><h4>Venkata Rao, 68</h4><div class="label">The careful elder · Seethammadhara</div></div></div>
-          <dl><dt>Life</dt><dd>Retired bank officer. Visits the doctor weekly and the temple on Saturdays. Children live abroad.</dd><dt>Wants</dt><dd>To get around independently, with someone trustworthy and a fare that is easy to understand.</dd><dt>Frustrations</dt><dd>Small text, English-only apps, being rushed, autos that overcharge.</dd><dt>What SAGA offers</dt><dd>Voice booking in Telugu, SAGA Assist, the same pilot each week.</dd><dt>Channel</dt><dd>WhatsApp, phone support, family setting it up, newspapers. Telugu.</dd></dl>
-          <div class="say">"మీరు మాట్లాడితే చాలు. మిగతాది మేం చూసుకుంటాం." (Just speak. We'll take care of the rest.)</div></div>
-        <div class="card persona"><div class="who"><span class="av">LN</span><div><h4>Lakshmi, 38</h4><div class="label">The planning parent · Madhurawada</div></div></div>
-          <dl><dt>Life</dt><dd>Works in a bank. Two children at school 7 km away. Juggles drop-offs and tuition.</dd><dt>Wants</dt><dd>A safe, same-pilot school run to watch live from work.</dd><dt>Frustrations</dt><dd>Not knowing who is driving the children. Vans that are late or crowded.</dd><dt>What SAGA offers</dt><dd>SAGA Loop, live sharing, trip codes, monthly price.</dd><dt>Channel</dt><dd>WhatsApp groups, Instagram reels, school partnerships. Telugu and English.</dd></dl>
-          <div class="say">"Same pilot. Same time. You see every km."</div></div>
-        <div class="card persona"><div class="who"><span class="av">AK</span><div><h4>Arjun, 21</h4><div class="label">The student · Gajuwaka</div></div></div>
-          <dl><dt>Life</dt><dd>Engineering student. Travels to college, part-time work and weekend outings with friends.</dd><dt>Wants</dt><dd>A fair price, and a brand that matches personal values on climate.</dd><dt>Frustrations</dt><dd>Surge pricing on weekend nights, bargaining with autos.</dd><dt>What SAGA offers</dt><dd>Flat fares, green points towards free rides, splitting a Tales trip with friends.</dd><dt>Channel</dt><dd>Instagram, YouTube Shorts, campus ambassadors, referrals. English and Telugu.</dd></dl>
-          <div class="say">"Same fare at midnight. Free rides from your CO₂."</div></div>
-        <div class="card persona"><div class="who"><span class="av">MT</span><div><h4>Meghana, 34</h4><div class="label">The company buyer · Rushikonda IT Park</div></div></div>
-          <dl><dt>Life</dt><dd>HR and admin lead for 600 staff working in shifts, including women on night shifts.</dd><dt>Wants</dt><dd>Safe shift transport, one monthly invoice and emissions data for the ESG report.</dd><dt>Frustrations</dt><dd>Vendors who don't show up, manual rosters, safety complaints.</dd><dt>What SAGA offers</dt><dd>SAGA Business, roster upload, Secure 360 reports, CO₂ data.</dd><dt>Channel</dt><dd>Sales meetings, LinkedIn, industry events, case studies. English.</dd></dl>
-          <div class="say">"Upload the roster. Every employee home safe, one invoice."</div></div>
-        <div class="card persona"><div class="who"><span class="av">RS</span><div><h4>Rohit &amp; family, 42</h4><div class="label">The weekend explorer · from Hyderabad</div></div></div>
-          <dl><dt>Life</dt><dd>Visits Vizag twice a year with family. Wants to see Araku and the beaches.</dd><dt>Wants</dt><dd>A planned day with a pilot who knows the route, without bargaining.</dd><dt>Frustrations</dt><dd>Taxi operators quoting different prices, unsafe ghat drivers.</dd><dt>What SAGA offers</dt><dd>SAGA Tales day trips, airport pickup, Voyage.</dd><dt>Channel</dt><dd>Google search, Meta ads on travel intent, hotel partners. English and Hindi.</dd></dl>
-          <div class="say">"Araku in a day. One price, all-inclusive."</div></div>
-        <div class="card persona"><div class="who"><span class="av">SK</span><div><h4>Suresh, 45</h4><div class="label">The first-timer · Anakapalli</div></div></div>
-          <dl><dt>Life</dt><dd>Runs a hardware shop in a tier 3 town. Has a smartphone but uses mainly WhatsApp and YouTube.</dd><dt>Wants</dt><dd>To reach the city hospital or railway station without hiring a car for the day.</dd><dt>Frustrations</dt><dd>Apps that ask for too much, unclear prices, not knowing if anyone will come.</dd><dt>What SAGA offers</dt><dd>Voice booking, call-to-book, cash or UPI, a fare shown before booking.</dd><dt>Channel</dt><dd>WhatsApp, local cable TV, posters at bus stands and pharmacies. Telugu.</dd></dl>
-          <div class="say">"ఒక్క కాల్. ధర ముందే తెలుస్తుంది." (One call. You know the price first.)</div></div>
-        <div class="card persona" style="border-color:rgba(127,230,255,.3)"><div class="who"><span class="av" style="background:#141A28">+</span><div><h4>Inside SAGA</h4><div class="label">Pilots and staff</div></div></div>
-          <p>Pilots are an audience too. Ravi, 34, a former auto driver, joined SAGA for a fixed salary, weekends off and respect. Speak to pilots as professionals: "Pilot", never "driver partner". Recognise safe driving publicly. Every rule in this manual applies to how we speak to our own people.</p></div>
-      </div>
-      <h3>How the message shifts by audience</h3>
-      <div class="tablewrap"><table>
-        <thead><tr><th>Audience</th><th>Lead with</th><th>Tone</th><th>Language</th><th>Main channels</th></tr></thead>
-        <tbody>
-          <tr><td>Frequent flyers</td><td>Never miss a flight</td><td>Crisp, time-exact</td><td>English</td><td>App, Google search, LinkedIn</td></tr>
-          <tr><td>Elders</td><td>Easy, safe, someone to help</td><td>Patient, respectful, warm</td><td>Telugu first</td><td>WhatsApp, phone, print</td></tr>
-          <tr><td>Parents</td><td>Same pilot, live tracking</td><td>Reassuring, specific</td><td>Telugu and English</td><td>WhatsApp, Instagram, schools</td></tr>
-          <tr><td>Students</td><td>Fair price, green points</td><td>Light, a little playful</td><td>English and Telugu</td><td>Instagram, YouTube Shorts, campus</td></tr>
-          <tr><td>Companies</td><td>Safety, one invoice, ESG data</td><td>Professional, evidence-led</td><td>English</td><td>Sales, LinkedIn, case studies</td></tr>
-          <tr><td>Tourists</td><td>A planned day, one price</td><td>Inviting, local pride</td><td>English and Hindi</td><td>Google, Meta, hotels</td></tr>
-          <tr><td>Tier 2 and 3 towns</td><td>A fare you know before you go</td><td>Simple, neighbourly</td><td>Telugu</td><td>WhatsApp, cable TV, posters</td></tr>
-        </tbody></table></div>
-    </section>
+<!-- 9 PERSONAS 1 -->
+<section class="page" id="p9">
+  <div class="run"><b>SAGA · Audiences &amp; personas</b><span>09</span></div>
+  <div class="body">
+    <div class="eb">06 · Audiences &amp; personas</div>
+    <h2>Seven people we design and write for. <span>Name one in every brief.</span></h2>
+    <div class="g2">
+      <div class="c pe"><div class="who"><span class="av">AR</span><div><h4>Ananya, 31</h4><span>The early flyer · MVP Colony</span></div></div>
+        <dl><dt>Life</dt><dd>Pharma sales manager. Flies twice a month, often on the first flight.</dd><dt>Wants</dt><dd>To sleep the night before a 6 a.m. flight without worrying about the cab.</dd><dt>Frustrated by</dt><dd>4 a.m. cancellations, surge, drivers asking for directions.</dd><dt>SAGA offers</dt><dd>SAGA Fly, Comfort rides, business invoices.</dd><dt>Reach</dt><dd>App, Google search, LinkedIn · English</dd></dl>
+        <div class="say">"Give us your PNR. We'll handle the 4 a.m."</div></div>
+      <div class="c pe"><div class="who"><span class="av">VR</span><div><h4>Venkata Rao, 68</h4><span>The careful elder · Seethammadhara</span></div></div>
+        <dl><dt>Life</dt><dd>Retired bank officer. Doctor every week, temple on Saturdays. Family lives abroad.</dd><dt>Wants</dt><dd>To get around independently, with someone trustworthy and a clear fare.</dd><dt>Frustrated by</dt><dd>Small text, English-only apps, being rushed, overcharging.</dd><dt>SAGA offers</dt><dd>Voice booking in Telugu, SAGA Assist, the same pilot each week.</dd><dt>Reach</dt><dd>WhatsApp, phone, family, newspapers · Telugu</dd></dl>
+        <div class="say te">"మీరు మాట్లాడితే చాలు. మిగతాది మేం చూసుకుంటాం."</div></div>
+      <div class="c pe"><div class="who"><span class="av">LN</span><div><h4>Lakshmi, 38</h4><span>The planning parent · Madhurawada</span></div></div>
+        <dl><dt>Life</dt><dd>Works in a bank. Two children at a school 7 km away.</dd><dt>Wants</dt><dd>A safe, same-pilot school run to watch live from work.</dd><dt>Frustrated by</dt><dd>Not knowing who is driving the children. Late, crowded vans.</dd><dt>SAGA offers</dt><dd>SAGA Loop, live sharing, trip codes, a monthly price.</dd><dt>Reach</dt><dd>WhatsApp groups, Instagram, schools · Telugu, English</dd></dl>
+        <div class="say">"Same pilot. Same time. You see every km."</div></div>
+      <div class="c pe"><div class="who"><span class="av">AK</span><div><h4>Arjun, 21</h4><span>The student · Gajuwaka</span></div></div>
+        <dl><dt>Life</dt><dd>Engineering student with a part-time job and weekend plans.</dd><dt>Wants</dt><dd>A fair price, and a brand that matches personal values on climate.</dd><dt>Frustrated by</dt><dd>Surge on weekend nights, bargaining with autos.</dd><dt>SAGA offers</dt><dd>Flat fares, green points, group day trips.</dd><dt>Reach</dt><dd>Instagram, YouTube Shorts, campus · English, Telugu</dd></dl>
+        <div class="say">"Same fare at midnight. Free rides from your CO₂."</div></div>
+    </div>
+  </div>
+  <div class="foot"><span>SAGA · Brand &amp; experience manual</span><span>sagamobility.com</span></div>
+</section>
 
-    <!-- 03 -->
-    <section id="architecture">
-      <div class="eyebrow">03 · Brand architecture</div>
-      <h2>One master brand, short product words.</h2>
-      <p>SAGA is always the hero. Each product is a single plain English word that describes the job, so it reads at a glance on a 6-inch screen and translates cleanly into Telugu.</p>
-      <div class="tablewrap"><table>
-        <thead><tr><th>Name</th><th>What it is</th><th>Use as</th></tr></thead>
-        <tbody>
-          <tr><td><b>SAGA Fly</b></td><td>Airport rides booked automatically from a PNR</td><td>"Book with SAGA Fly"</td></tr>
-          <tr><td><b>SAGA Loop</b></td><td>Recurring rides: school, college, office</td><td>"Start a Loop"</td></tr>
-          <tr><td><b>SAGA Voyage</b></td><td>Long-distance and intercity, charge-planned</td><td>"Plan a Voyage"</td></tr>
-          <tr><td><b>SAGA Tales</b></td><td>Curated end-to-end itineraries</td><td>"The Araku Valley Tale"</td></tr>
-          <tr><td><b>SAGA Business</b> / <b>Campus</b></td><td>Bulk booking for companies and institutions</td><td>"SAGA Business for Vizag Pharma Park"</td></tr>
-          <tr><td><b>AURA</b> ◈</td><td>CO₂-avoided rewards currency</td><td>"+30 ◈ AURA"</td></tr>
-          <tr><td><b>Secure 360</b></td><td>Safety system: road camera, pilot attention, SOS</td><td>"Secure 360 on"</td></tr>
-          <tr><td><b>SAGA Pilots</b></td><td>Salaried, trained drivers. Never call them "drivers" in UI or marketing.</td><td>"Your SAGA Pilot, Ravi"</td></tr>
-          <tr><td><b>SAGA ONE</b></td><td>The vehicle platform and livery name</td><td>"SAGA ONE · AP 39 EV 2147"</td></tr>
-        </tbody></table></div>
-    </section>
+<!-- 10 PERSONAS 2 -->
+<section class="page" id="p10">
+  <div class="run"><b>SAGA · Audiences &amp; personas</b><span>10</span></div>
+  <div class="body" style="margin-top:9mm">
+    <div class="g2" style="margin-top:0">
+      <div class="c pe"><div class="who"><span class="av">MT</span><div><h4>Meghana, 34</h4><span>The company buyer · Rushikonda IT Park</span></div></div>
+        <dl><dt>Life</dt><dd>HR and admin lead for 600 staff on shifts, including night shifts.</dd><dt>Wants</dt><dd>Safe shift transport, one monthly invoice, emissions data for ESG.</dd><dt>Frustrated by</dt><dd>No-show vendors, manual rosters, safety complaints.</dd><dt>SAGA offers</dt><dd>SAGA Business, roster upload, Secure 360 reports, CO₂ data.</dd><dt>Reach</dt><dd>Sales meetings, LinkedIn, case studies · English</dd></dl>
+        <div class="say">"Upload the roster. Everyone home safe, one invoice."</div></div>
+      <div class="c pe"><div class="who"><span class="av">RS</span><div><h4>Rohit's family, 42</h4><span>The weekend explorer · from Hyderabad</span></div></div>
+        <dl><dt>Life</dt><dd>Visits Vizag twice a year with family for Araku and the beaches.</dd><dt>Wants</dt><dd>A planned day with a pilot who knows the route, no bargaining.</dd><dt>Frustrated by</dt><dd>Operators quoting different prices, unsafe ghat driving.</dd><dt>SAGA offers</dt><dd>SAGA Tales day trips, airport pickup, Voyage.</dd><dt>Reach</dt><dd>Google, Meta travel ads, hotels · English, Hindi</dd></dl>
+        <div class="say">"Araku in a day. One price, all-inclusive."</div></div>
+      <div class="c pe"><div class="who"><span class="av">SK</span><div><h4>Suresh, 45</h4><span>The first-timer · Anakapalli</span></div></div>
+        <dl><dt>Life</dt><dd>Runs a hardware shop in a smaller town. Uses mainly WhatsApp and YouTube.</dd><dt>Wants</dt><dd>To reach the city hospital or station without hiring a car for the day.</dd><dt>Frustrated by</dt><dd>Apps that ask too much, unclear prices, no-shows.</dd><dt>SAGA offers</dt><dd>Voice booking, call-to-book, cash or UPI, fare shown first.</dd><dt>Reach</dt><dd>WhatsApp, cable TV, bus-stand posters · Telugu</dd></dl>
+        <div class="say te">"ఒక్క కాల్. ధర ముందే తెలుస్తుంది."</div></div>
+      <div class="c pe ink" style="background:var(--night);border-color:var(--night);color:var(--ntext)"><div class="who"><span class="av" style="background:var(--cyan);color:var(--night)">+</span><div><h4>Inside SAGA</h4><span style="color:var(--ntext3)">Pilots and staff</span></div></div>
+        <p style="color:var(--ntext2);font-size:8.5pt;margin-top:3mm">Pilots are an audience too. Ravi, 34, a former auto driver, joined SAGA for a fixed salary, weekends off and respect.</p>
+        <ul class="l" style="color:var(--ntext2)"><li>Call them pilots, never "driver partners".</li><li>Recognise safe driving in public.</li><li>Performance messages wait until the shift ends.</li><li>Every rule in this manual applies to how we speak to our own people.</li></ul></div>
+    </div>
+  </div>
+  <div class="foot"><span>SAGA · Brand &amp; experience manual</span><span>sagamobility.com</span></div>
+</section>
 
-    <!-- 04 -->
-    <section id="voice">
-      <div class="eyebrow">04 · Personality</div>
-      <h2>A calm navigator with a warm heart.</h2>
-      <p>If SAGA were a person, it would be the friend who works in air traffic control: always a step ahead, quietly technical, never showing off, and the first to call when something changes. The technology is real and visible, but it is always in service of a person getting somewhere safely and on time.</p>
-      <p class="quote">Futuristic in what we build. Human in how we speak.</p>
-      <h3>Character traits</h3>
-      <div class="grid3">
-        <div class="card"><div class="label">Anticipating</div><h4>One step ahead</h4><p>Tells you before you have to ask: the flight is late, the pickup has moved, your car is charged.</p></div>
-        <div class="card"><div class="label">Calm</div><h4>Never in a hurry</h4><p>No exclamation marks, no countdown pressure, no "hurry, offer ends soon".</p></div>
-        <div class="card"><div class="label">Exact</div><h4>Numbers, not adjectives</h4><p>"Arriving in 4 min", "₹749", "3.0 kg CO₂ saved". Precision is how we show respect.</p></div>
-        <div class="card"><div class="label">Warm</div><h4>Like family who drives</h4><p>Greets by name, remembers that you prefer AC, and checks you got home.</p></div>
-        <div class="card"><div class="label">Honest</div><h4>Owns mistakes</h4><p>If we're late, we say so first, explain why in one line, and make it right.</p></div>
-        <div class="card"><div class="label">Local</div><h4>From the coast</h4><p>Telugu first, knows the city by its landmarks, proud of Vizag without being loud about it.</p></div>
-      </div>
-      <h3>Where we sit</h3>
-      <div style="margin-top:16px">
-        <div class="spec"><span>Futuristic</span><span class="track"><i style="left:32%"></i></span><span>Traditional</span></div>
-        <div class="spec"><span>Technical</span><span class="track"><i style="left:62%"></i></span><span>Plain-spoken</span></div>
-        <div class="spec"><span>Serious</span><span class="track"><i style="left:40%"></i></span><span>Playful</span></div>
-        <div class="spec"><span>Reserved</span><span class="track"><i style="left:58%"></i></span><span>Warm</span></div>
-        <div class="spec"><span>Premium</span><span class="track"><i style="left:48%"></i></span><span>Everyday</span></div>
-      </div>
-      <div class="tablewrap"><table>
-        <thead><tr><th>We are</th><th>We are not</th></tr></thead>
-        <tbody>
-          <tr><td>Confident</td><td>Arrogant or boastful</td></tr>
-          <tr><td>Advanced</td><td>Cold, robotic or full of jargon</td></tr>
-          <tr><td>Caring</td><td>Sugary or over-familiar</td></tr>
-          <tr><td>Premium in quality</td><td>Expensive or exclusive</td></tr>
-          <tr><td>Proudly local</td><td>Small-town or parochial</td></tr>
-        </tbody></table></div>
-    </section>
+<!-- 11 AUDIENCE TABLE -->
+<section class="page" id="p11">
+  <div class="run"><b>SAGA · Audiences &amp; personas</b><span>11</span></div>
+  <div class="body">
+    <div class="eb">06 · One brand, many audiences</div>
+    <h2>The promise stays. <span>The lead message, tone and channel change.</span></h2>
+    <table><thead><tr><th style="width:18%">Audience</th><th style="width:22%">Lead with</th><th style="width:20%">Tone</th><th style="width:14%">Language</th><th>Main channels</th></tr></thead><tbody>
+      <tr><td><b>Frequent flyers</b></td><td>Never miss a flight</td><td>Crisp, time-exact</td><td>English</td><td>App, Google search, LinkedIn</td></tr>
+      <tr><td><b>Elders</b></td><td>Easy, safe, help at hand</td><td>Patient, respectful</td><td>Telugu first</td><td>WhatsApp, phone, print</td></tr>
+      <tr><td><b>Parents</b></td><td>Same pilot, live tracking</td><td>Reassuring, specific</td><td>Telugu, English</td><td>WhatsApp, Instagram, schools</td></tr>
+      <tr><td><b>Students</b></td><td>Fair price, green points</td><td>Light, a little playful</td><td>English, Telugu</td><td>Instagram, Shorts, campus</td></tr>
+      <tr><td><b>Companies</b></td><td>Safety, one invoice, ESG data</td><td>Professional, evidence-led</td><td>English</td><td>Sales, LinkedIn, case studies</td></tr>
+      <tr><td><b>Tourists</b></td><td>A planned day, one price</td><td>Inviting, local pride</td><td>English, Hindi</td><td>Google, Meta, hotels</td></tr>
+      <tr><td><b>Smaller towns</b></td><td>Know the fare before you go</td><td>Simple, neighbourly</td><td>Telugu</td><td>WhatsApp, cable TV, posters</td></tr>
+    </tbody></table>
+    <h3>Three questions for every brief</h3>
+    <div class="g3">
+      <div class="c"><span class="n">1</span><h4>Who is it for?</h4><p>Name the persona. A message for everyone reaches no one.</p></div>
+      <div class="c"><span class="n">2</span><h4>Which proof?</h4><p>Reliable, fair, safe or clean. Pick one; never all four at once.</p></div>
+      <div class="c"><span class="n">3</span><h4>What happens next?</h4><p>One clear action: book, add your PNR, start a Loop, call us.</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>SAGA · Brand &amp; experience manual</span><span>sagamobility.com</span></div>
+</section>
 
-    <section id="tone">
-      <div class="eyebrow">4.1 · Voice &amp; tone</div>
-      <h2>One voice. The tone changes with the moment.</h2>
-      <p>Our voice never changes: calm, exact, warm. Our tone adjusts to what the person is going through. A booking confirmation can smile; a safety message must not.</p>
-      <h3>Four voice rules</h3>
-      <div class="grid2">
-        <div class="card"><div class="label">1 · Say the fact first</div><p style="color:#fff">"Pickup moved to 04:42. Your flight is 25 min late."</p><p>Not: "Good news! We've got an update about your ride…"</p></div>
-        <div class="card"><div class="label">2 · Speak to one person</div><p style="color:#fff">"Ravi is at Gate 2."</p><p>Not: "Your driver partner has arrived at the pickup location."</p></div>
-        <div class="card"><div class="label">3 · Short, then shorter</div><p style="color:#fff">Under 12 words for a headline, under 25 for a message. One idea per sentence.</p></div>
-        <div class="card"><div class="label">4 · Same words everywhere</div><p style="color:#fff">"Trip code", "Pilot", "Green points". The same term in the app, on WhatsApp, on the phone and on the car.</p></div>
-      </div>
-      <h3>Tone by moment</h3>
-      <div class="tablewrap"><table>
-        <thead><tr><th>Moment</th><th>Tone</th><th>Example</th></tr></thead>
-        <tbody>
-          <tr><td>Booking confirmed</td><td>Reassuring, quietly pleased</td><td>"Done. Ravi will pick you up at 04:17. Sleep well."</td></tr>
-          <tr><td>Waiting</td><td>Informative, live</td><td>"Ravi is 3 min away. Black SAGA ONE, AP 39 EV 2147."</td></tr>
-          <tr><td>Something changed</td><td>Proactive, solution first</td><td>"Your flight is 25 min late, so we moved your pickup to 04:42. Nothing to do."</td></tr>
-          <tr><td>We got it wrong</td><td>Honest, accountable, brief</td><td>"We're sorry, we were 8 min late today. ₹50 is back in your wallet."</td></tr>
-          <tr><td>Safety</td><td>Serious, clear, no branding</td><td>"SOS received. Our safety team is calling you now. Stay on the line."</td></tr>
-          <tr><td>Celebration</td><td>Warm, a little proud</td><td>"100 rides with SAGA. You've saved 62 kg of CO₂. Thank you."</td></tr>
-          <tr><td>Payment</td><td>Plain, transparent</td><td>"₹749 paid by UPI. 41.6 km × ₹18 − ₹0 discounts."</td></tr>
-          <tr><td>Marketing</td><td>Inviting, never pushy</td><td>"Araku this Sunday? A full day for ₹4,140, back by 8 p.m."</td></tr>
-        </tbody></table></div>
-      <h3>Words we use and avoid</h3>
-      <div class="grid2">
-        <div class="card do"><div class="label">Use</div><p style="color:#fff">Pilot · trip code · pickup · arrive · planned · electric · green points · on time · we're sorry · thank you</p></div>
-        <div class="card dont"><div class="label">Avoid</div><p>Driver partner · surge · oops · uh-oh · hurry · limited time · AI-powered (in headlines) · revolutionary · emoji in product UI · ALL CAPS shouting</p></div>
-      </div>
-      <h3>Three languages, one voice</h3>
-      <p>Telugu, Hindi and English are written, not machine-translated. Telugu copy uses everyday spoken Telugu, not formal textbook Telugu. Respectful forms are the default (మీరు, आप). Numbers, times and prices stay in Western digits in every language so they are easy to scan.</p>
-    </section>
+<!-- 12 ARCHITECTURE -->
+<section class="page" id="p12">
+  <div class="run"><b>SAGA · Brand architecture</b><span>12</span></div>
+  <div class="body">
+    <div class="eb">07 · Brand architecture</div>
+    <h2>One master brand, <span>short product words.</span></h2>
+    <p class="lede">SAGA is always the hero. Each service is one plain word that describes the job. In the app, the plain name always comes first: "Airport rides · SAGA Fly".</p>
+    <table><thead><tr><th style="width:22%">Name</th><th style="width:22%">Plain name in the app</th><th>What it is</th><th style="width:24%">Say it like</th></tr></thead><tbody>
+      <tr><td><b>SAGA Fly</b></td><td>Airport rides</td><td>Airport rides booked from a PNR, re-timed for delays</td><td>"Book with SAGA Fly"</td></tr>
+      <tr><td><b>SAGA Loop</b></td><td>Daily rides</td><td>School, college and office rides on a schedule</td><td>"Start a Loop"</td></tr>
+      <tr><td><b>SAGA Voyage</b></td><td>Outstation</td><td>Intercity trips with planned charging stops</td><td>"Plan a Voyage"</td></tr>
+      <tr><td><b>SAGA Tales</b></td><td>Day trips</td><td>Curated day trips, one price, door to door</td><td>"The Araku Valley Tale"</td></tr>
+      <tr><td><b>SAGA Business</b></td><td>Business</td><td>Shift and campus transport for organisations</td><td>"SAGA Business for your team"</td></tr>
+      <tr><td><b>SAGA Saathi</b></td><td>Voice assistant</td><td>Book and ask by voice in Telugu, Hindi, English</td><td>"Just ask Saathi"</td></tr>
+      <tr><td><b>Green points</b></td><td>Green points</td><td>Points for CO₂ avoided, spent on rides</td><td>"+30 green points"</td></tr>
+      <tr><td><b>Secure 360</b></td><td>Safety</td><td>Road camera, attention alerts, SOS, trip code</td><td>"Secure 360 is on"</td></tr>
+      <tr><td><b>SAGA Pilots</b></td><td>Your pilot</td><td>Salaried, trained drivers</td><td>"Your pilot, Ravi"</td></tr>
+      <tr><td><b>SAGA ONE</b></td><td>Your car</td><td>The vehicle platform and livery</td><td>"SAGA ONE · AP 39 EV 2147"</td></tr>
+    </tbody></table>
+  </div>
+  <div class="foot"><span>SAGA · Brand &amp; experience manual</span><span>sagamobility.com</span></div>
+</section>
 
-    <section id="ethics">
-      <div class="eyebrow">4.2 · Tech with a conscience</div>
-      <h2>Loaded with technology. Led by people.</h2>
-      <p>SAGA uses AI, live 3D, voice and cameras. That only builds trust if people can see that the technology works for them and not on them. Three commitments keep the brand ethical, emotional and relatable.</p>
-      <div class="grid3">
-        <div class="card"><div class="label">Ethical</div><h4>Fair by design</h4>
-          <ul class="clean" style="margin-top:12px"><li>Pilots are salaried employees with weekends off, not gig workers chasing incentives.</li><li>No surge pricing. The fare does not rise when people need us most.</li><li>Safety alerts are always reviewed by a person. Pilots see their own alerts and can explain.</li><li>Data is used to plan rides, not sold. Camera footage is deleted after 7 days unless an incident is open.</li><li>The voice assistant can only do things inside the app, and always confirms before booking or paying.</li></ul></div>
-        <div class="card"><div class="label">Emotional</div><h4>Moments, not transactions</h4>
-          <ul class="clean" style="margin-top:12px"><li>The calm of knowing the 4 a.m. airport ride is handled.</li><li>A parent watching the school run arrive, live.</li><li>A grandparent booking alone, in Telugu, by voice.</li><li>A pilot proud of a safety bonus and a 4.96 rating.</li><li>Seeing the CO₂ you saved, ride after ride.</li></ul></div>
-        <div class="card"><div class="label">Relatable</div><h4>Of this place, for these people</h4>
-          <ul class="clean" style="margin-top:12px"><li>Landmarks, not coordinates: "Gate 2, near the temple".</li><li>Real pilots and real riders in campaigns, never stock models.</li><li>Prices compared to everyday life: "less than an auto at night".</li><li>Festivals, monsoon, exam season and the early-flight life are in our stories.</li><li>Tech explained the way you'd explain it to your parents.</li></ul></div>
-      </div>
-      <h3>How we talk about technology</h3>
-      <div class="tablewrap"><table>
-        <thead><tr><th>Feature</th><th>Don't say</th><th>Say</th></tr></thead>
-        <tbody>
-          <tr><td>AI dispatch</td><td>"AI-optimised predictive allocation engine"</td><td>"We plan your ride before you ask, so it's ready on time."</td></tr>
-          <tr><td>Secure 360</td><td>"Driver monitoring system"</td><td>"A road camera and attention alerts help our pilots stay focused. People review every alert."</td></tr>
-          <tr><td>Voice assistant</td><td>"Gemini-powered conversational AI"</td><td>"Just tell SAGA where you want to go, in Telugu, Hindi or English."</td></tr>
-          <tr><td>Live 3D</td><td>"Real-time 3D digital twin"</td><td>"Watch your car arrive, and see the route ahead."</td></tr>
-          <tr><td>Electric fleet</td><td>"Zero-emission sustainable mobility solutions"</td><td>"Every SAGA car is electric. Quieter rides, cleaner air."</td></tr>
-        </tbody></table></div>
-    </section>
+<!-- 13 PERSONALITY (dark) -->
+<section class="page dark" id="p13">
+  <div class="run"><b>SAGA · Personality</b><span>13</span></div>
+  <div class="body">
+    <div class="eb">08 · Personality</div>
+    <h2>A calm navigator <span>with a warm heart.</span></h2>
+    <p class="lede">If SAGA were a person, it would be the friend who works in air traffic control: always a step ahead, quietly technical, never showing off, and the first to call when something changes. Futuristic in what we build. Human in how we speak.</p>
+    <div class="g3" style="margin-top:7mm">
+      <div class="c"><div class="lb">Anticipating</div><h4>One step ahead</h4><p>Tells you before you ask: the flight is late, the pickup moved.</p></div>
+      <div class="c"><div class="lb">Calm</div><h4>Never in a hurry</h4><p>No exclamation marks, no countdown pressure.</p></div>
+      <div class="c"><div class="lb">Exact</div><h4>Numbers, not adjectives</h4><p>"4 min", "₹749", "3.0 kg CO₂". Precision is respect.</p></div>
+      <div class="c"><div class="lb">Warm</div><h4>Like family who drives</h4><p>Greets by name, remembers you like the AC at 24°.</p></div>
+      <div class="c"><div class="lb">Honest</div><h4>Owns mistakes</h4><p>If we're late, we say so first and make it right.</p></div>
+      <div class="c"><div class="lb">Local</div><h4>From the coast</h4><p>Telugu first, knows the city by its landmarks.</p></div>
+    </div>
+    <h3>Where we sit</h3>
+    <div style="margin-top:3mm">
+      <div class="spec"><span>Futuristic</span><span class="tr"><i style="left:32%"></i></span><span>Traditional</span></div>
+      <div class="spec"><span>Technical</span><span class="tr"><i style="left:64%"></i></span><span>Plain-spoken</span></div>
+      <div class="spec"><span>Serious</span><span class="tr"><i style="left:40%"></i></span><span>Playful</span></div>
+      <div class="spec"><span>Reserved</span><span class="tr"><i style="left:60%"></i></span><span>Warm</span></div>
+      <div class="spec"><span>Premium</span><span class="tr"><i style="left:48%"></i></span><span>Everyday</span></div>
+    </div>
+    <div class="g2" style="margin-top:6mm">
+      <div class="c"><div class="lb">We are</div><p>Confident · advanced · caring · premium in quality · proudly local</p></div>
+      <div class="c"><div class="lb">We are not</div><p>Boastful · cold or robotic · sugary · expensive or exclusive · small-town</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>SAGA · Brand &amp; experience manual</span><span>sagamobility.com</span></div>
+</section>
 
-    <section id="notifications">
-      <div class="eyebrow">4.3 · Notifications</div>
-      <h2>Fewer messages. Each one useful.</h2>
-      <p>Every notification must answer one question the rider would otherwise have to ask. If it doesn't, we don't send it.</p>
-      <div class="grid2">
-        <div class="card"><div class="label">Rules</div>
-          <ul class="clean" style="margin-top:8px"><li>Title: the fact, under 40 characters. Body: what it means and what to do, under 90.</li><li>Times, plates and prices in numbers.</li><li>Ride messages are never mixed with offers.</li><li>No marketing between 9 p.m. and 8 a.m., and at most 2 offers a week.</li><li>Every message opens the exact screen it is about.</li><li>Sent in the rider's chosen language.</li></ul></div>
-        <div class="card"><div class="label">Priority</div>
-          <ul class="clean" style="margin-top:8px"><li><b>Critical</b>, safety and SOS: push, SMS and a phone call, sound on.</li><li><b>Ride</b>, pickup and arrival: push and live activity on the lock screen.</li><li><b>Planned</b>, reminders and flight changes: push and WhatsApp.</li><li><b>Account</b>, receipts and points: in-app and email.</li><li><b>Offers</b>: in-app and WhatsApp only, opt-in.</li></ul></div>
-      </div>
-      <div class="notifs">
-        <div class="notif"><div class="app"><i></i>SAGA · NOW</div><b>Ride booked for 04:17</b><p>Ravi will pick you up at MVP Colony, Gate 2. Sleep well.</p><div class="te">రైడ్ 04:17కి బుక్ అయింది. రవి గేట్ 2 దగ్గర మిమ్మల్ని పికప్ చేస్తారు.</div><div class="when">BOOKING</div></div>
-        <div class="notif"><div class="app"><i></i>SAGA · 03:40</div><b>Pickup moved to 04:42</b><p>Your flight 6E 2147 is 25 min late. Nothing to do, we've adjusted.</p><div class="te">మీ ఫ్లైట్ 25 నిమిషాలు ఆలస్యం. పికప్ 04:42కి మార్చాం.</div><div class="when">CHANGE · PROACTIVE</div></div>
-        <div class="notif"><div class="app"><i></i>SAGA · 04:38</div><b>Ravi is 4 min away</b><p>Black SAGA ONE · AP 39 EV 2147 · blue lights. Your trip code is 4827.</p><div class="te">రవి 4 నిమిషాల దూరంలో ఉన్నారు. మీ ట్రిప్ కోడ్ 4827.</div><div class="when">ARRIVING</div></div>
-        <div class="notif"><div class="app"><i></i>SAGA · 04:42</div><b>Ravi is here, at Gate 2</b><p>Share your code 4827 to start the ride. Free waiting: 5 min.</p><div class="te">రవి గేట్ 2 దగ్గర ఉన్నారు. రైడ్ మొదలుపెట్టడానికి కోడ్ 4827 చెప్పండి.</div><div class="when">AT PICKUP</div></div>
-        <div class="notif"><div class="app"><i></i>SAGA · 05:31</div><b>You arrived ahead</b><p>Departures, 1 h 54 min before your flight. ₹749 paid. You saved 3.0 kg CO₂.</p><div class="te">మీరు ముందే చేరుకున్నారు. ₹749 చెల్లించారు. 3.0 కిలోల CO₂ ఆదా.</div><div class="when">ARRIVED</div></div>
-        <div class="notif" style="border-color:rgba(255,59,92,.4)"><div class="app"><i style="background:#C8243C"></i>SAGA SAFETY · NOW</div><b>SOS received</b><p>Our safety team is calling you now. Your live location is shared with them.</p><div class="te">SOS అందింది. మా సేఫ్టీ టీమ్ ఇప్పుడే మీకు కాల్ చేస్తోంది.</div><div class="when">CRITICAL · NO BRANDING, NO DELAY</div></div>
-        <div class="notif"><div class="app"><i></i>SAGA · 18:05</div><b>We were 8 min late today</b><p>We're sorry. ₹50 has been added to your wallet.</p><div class="te">ఈరోజు 8 నిమిషాలు ఆలస్యమయ్యాం. క్షమించండి. ₹50 మీ వాలెట్‌లో జమ చేశాం.</div><div class="when">APOLOGY · AUTOMATIC</div></div>
-        <div class="notif"><div class="app"><i></i>SAGA · SAT 10:00</div><b>Araku this Sunday?</b><p>A full day trip for ₹4,140, back by 8 p.m. Your green points cover ₹200.</p><div class="te">ఈ ఆదివారం అరకు? రోజంతా ట్రిప్ ₹4,140, రాత్రి 8 కల్లా తిరిగి.</div><div class="when">OFFER · OPT-IN</div></div>
-      </div>
-      <h3>Pilot notifications</h3>
-      <p>Pilots get the same calm, but even shorter, because they read while working. Job messages are spoken aloud and need one tap. Example: "New job: Ananya R., MVP Colony Gate 2, pickup 04:17. Tap to acknowledge." No ratings or performance messages while driving; those wait for the end of the shift.</p>
-    </section>
+<!-- 14 VOICE & TONE -->
+<section class="page" id="p14">
+  <div class="run"><b>SAGA · Voice &amp; tone</b><span>14</span></div>
+  <div class="body">
+    <div class="eb">09 · Voice &amp; tone</div>
+    <h2>One voice. <span>The tone changes with the moment.</span></h2>
+    <p class="lede">Our voice never changes: calm, exact, warm. Our tone adjusts to what the person is going through. A booking confirmation can smile; a safety message must not.</p>
+    <div class="g4">
+      <div class="c"><span class="n">1</span><h4>Fact first</h4><p>"Pickup moved to 04:42. Your flight is 25 min late."</p></div>
+      <div class="c"><span class="n">2</span><h4>One person</h4><p>"Ravi is at Gate 2." Not "your driver partner has arrived".</p></div>
+      <div class="c"><span class="n">3</span><h4>Short</h4><p>Headlines under 12 words, messages under 25.</p></div>
+      <div class="c"><span class="n">4</span><h4>Same words</h4><p>"Trip code", "pilot", "green points", everywhere.</p></div>
+    </div>
+    <table><thead><tr><th style="width:20%">Moment</th><th style="width:24%">Tone</th><th>Example</th></tr></thead><tbody>
+      <tr><td><b>Booked</b></td><td>Reassuring, quietly pleased</td><td>"Done. Ravi will pick you up at 04:17. Sleep well."</td></tr>
+      <tr><td><b>Waiting</b></td><td>Informative, live</td><td>"Ravi is 3 min away. Black SAGA ONE, AP 39 EV 2147."</td></tr>
+      <tr><td><b>Something changed</b></td><td>Proactive, solution first</td><td>"Your flight is 25 min late, so we moved your pickup to 04:42."</td></tr>
+      <tr><td><b>We got it wrong</b></td><td>Honest, brief</td><td>"We're sorry, we were 8 min late. ₹50 is back in your wallet."</td></tr>
+      <tr><td><b>Safety</b></td><td>Serious, clear, unbranded</td><td>"SOS received. Our safety team is calling you now."</td></tr>
+      <tr><td><b>Celebration</b></td><td>Warm, a little proud</td><td>"100 rides. You've saved 62 kg of CO₂. Thank you."</td></tr>
+      <tr><td><b>Payment</b></td><td>Plain, transparent</td><td>"₹749 paid by UPI. 41.6 km × ₹18."</td></tr>
+      <tr><td><b>Offers</b></td><td>Inviting, never pushy</td><td>"Araku this Sunday? A full day for ₹4,140."</td></tr>
+    </tbody></table>
+  </div>
+  <div class="foot"><span>SAGA · Brand &amp; experience manual</span><span>sagamobility.com</span></div>
+</section>
 
-    <section id="channels">
-      <div class="eyebrow">4.4 · Communication</div>
-      <h2>The same SAGA in every place you meet us.</h2>
-      <p>Whether someone reads a push message, chats on WhatsApp, calls support or sees a poster at a bus stand, it should feel like the same calm, exact, warm company.</p>
-      <div class="tablewrap"><table>
-        <thead><tr><th>Channel</th><th>Purpose</th><th>How we sound</th><th>Example</th></tr></thead>
-        <tbody>
-          <tr><td>App</td><td>Book, track, pay</td><td>Shortest form, numbers first</td><td>"Ravi is 4 min away."</td></tr>
-          <tr><td>Voice (SAGA Saathi)</td><td>Book and ask by speaking</td><td>Friendly, confirms before acting</td><td>"Route to RK Beach is ready, ₹155. Shall I book it?"</td></tr>
-          <tr><td>WhatsApp</td><td>Reminders, receipts, support</td><td>Conversational, still short</td><td>"Your Loop starts Monday at 07:30. Reply 1 to pause a day."</td></tr>
-          <tr><td>SMS</td><td>Backup for critical and ride messages</td><td>Bare facts</td><td>"SAGA: Ravi, AP39EV2147, arriving 04:17. Code 4827."</td></tr>
-          <tr><td>Phone support</td><td>Help, elders, complaints</td><td>Patient, never scripted-sounding, Telugu first</td><td>"Namaskaram, this is Divya from SAGA. How can I help?"</td></tr>
-          <tr><td>Email</td><td>Invoices, business reports</td><td>Professional, structured</td><td>"Your November statement: 1,284 rides, ₹4.2 L, 2.1 t CO₂ avoided."</td></tr>
-          <tr><td>Social</td><td>Stories, pilots, the city</td><td>Warm, local, human faces</td><td>"Meet Ravi. 6 years on Vizag roads, 4.96 stars, never late for a 4 a.m. flight."</td></tr>
-          <tr><td>In the car</td><td>Welcome, safety, feedback</td><td>Quiet; screen and voice, no ads during the first minute</td><td>"Welcome, Ananya. AC is set to 24°. Seatbelt, please."</td></tr>
-          <tr><td>Outdoor and print</td><td>Awareness</td><td>One idea, big type, the car</td><td>"₹18 a km. Rain or shine." + the SAGA ONE</td></tr>
-          <tr><td>Crisis and press</td><td>Incidents, outages</td><td>Facts, responsibility, next steps, within 1 hour</td><td>"At 18:40 our app was down for 22 min. All booked rides ran. Here's what we changed."</td></tr>
-        </tbody></table></div>
-      <div class="grid2">
-        <div class="card do"><div class="label">Do</div><p style="color:#fff">Use the rider's name and their language. Tell them what happens next. Close the loop: "Your issue is fixed" beats "Ticket closed".</p></div>
-        <div class="card dont"><div class="label">Don't</div><p>Send the same message on three channels at once, use copy-paste apologies, or reply only in English to a Telugu message.</p></div>
-      </div>
-    </section>
+<!-- 15 WORDS & LANGUAGES -->
+<section class="page" id="p15">
+  <div class="run"><b>SAGA · Voice &amp; tone</b><span>15</span></div>
+  <div class="body">
+    <div class="eb">09 · Words and languages</div>
+    <h2>Three languages, <span>one voice.</span></h2>
+    <p class="lede">Telugu, Hindi and English are written by people, not machine-translated. Telugu copy uses everyday spoken Telugu. Respectful forms are the default (మీరు, आप). Numbers, times and prices stay in Western digits in every language so they scan at a glance.</p>
+    <div class="g2">
+      <div class="c do"><div class="lb">Words we use</div><p>Pilot · trip code · pickup · arrive · planned · electric · green points · on time · we're sorry · thank you</p></div>
+      <div class="c dont"><div class="lb">Words we avoid</div><p>Driver partner · surge · oops · hurry · limited time · revolutionary · AI-powered in headlines · emoji in the app · ALL CAPS</p></div>
+    </div>
+    <table><thead><tr><th style="width:22%">Screen text</th><th style="width:26%">English</th><th style="width:26%">Telugu</th><th>Hindi</th></tr></thead><tbody>
+      <tr><td><b>Main question</b></td><td>Where are you going?</td><td class="te">ఎక్కడికి వెళ్ళాలి?</td><td>कहाँ जाना है?</td></tr>
+      <tr><td><b>Primary action</b></td><td>Book SAGA Ride · ₹155</td><td class="te">SAGA రైడ్ బుక్ చేయండి · ₹155</td><td>SAGA राइड बुक करें · ₹155</td></tr>
+      <tr><td><b>Arriving</b></td><td>Ravi is 4 min away</td><td class="te">రవి 4 నిమిషాల దూరంలో ఉన్నారు</td><td>रवि 4 मिनट दूर हैं</td></tr>
+      <tr><td><b>Trip code</b></td><td>Your trip code</td><td class="te">మీ ట్రిప్ కోడ్</td><td>आपका ट्रिप कोड</td></tr>
+      <tr><td><b>Help</b></td><td>Talk to a person</td><td class="te">మనిషితో మాట్లాడండి</td><td>किसी व्यक्ति से बात करें</td></tr>
+    </tbody></table>
+    <h3>Writing checklist</h3>
+    <div class="g3">
+      <div class="c"><h4>Would a grandparent understand it?</h4><p>If not, say it more simply.</p></div>
+      <div class="c"><h4>Is there a number?</h4><p>Replace "soon" with minutes and "cheap" with rupees.</p></div>
+      <div class="c"><h4>Does it say what happens next?</h4><p>Every message ends with the next step, or "nothing to do".</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>SAGA · Brand &amp; experience manual</span><span>sagamobility.com</span></div>
+</section>
 
-    <section id="usability">
-      <div class="eyebrow">05 · Usable by everyone</div>
-      <h2>Striking to look at. Effortless to use, at any age.</h2>
-      <p>SAGA serves first-time app users in tier 2 and 3 towns as much as frequent flyers. Visual ambition lives in the 3D renders and motion. The interface itself stays plain, large and obvious. If a grandparent can book an airport ride on their own, the design is working.</p>
-      <div class="tablewrap"><table>
-        <thead><tr><th>Rule</th><th>Standard</th></tr></thead>
-        <tbody>
-          <tr><td>Text size</td><td>Body 16 px minimum, labels 14 px, headings 34 px. Never use grey text below 4.5:1 contrast.</td></tr>
-          <tr><td>Touch targets</td><td>56 px minimum height for buttons and list rows. Primary button 60 px, full width.</td></tr>
-          <tr><td>Say what it does</td><td>A plain name first, the brand name second: "Airport rides · SAGA Fly", "Daily rides · SAGA Loop", "Green points (AURA)".</td></tr>
-          <tr><td>Explain jargon</td><td>"Ticket number (PNR), the 6-letter code on your ticket." "Trip code: share it with your driver at pickup."</td></tr>
-          <tr><td>One main action</td><td>Each screen has one blue button. Everything else is secondary grey.</td></tr>
-          <tr><td>Labels always visible</td><td>Tab bar shows icon and word together. No icon-only navigation.</td></tr>
-          <tr><td>Help in reach</td><td>"Talk to a person" on Home and SOS on every live ride, in Telugu, Hindi and English.</td></tr>
-          <tr><td>Motion with purpose</td><td>Animations show where things came from or that something worked. Every one has a reduced-motion fallback.</td></tr>
-        </tbody></table></div>
-    </section>
+<!-- 16 ETHICS -->
+<section class="page" id="p16">
+  <div class="run"><b>SAGA · Tech with a conscience</b><span>16</span></div>
+  <div class="body">
+    <div class="eb">10 · Tech with a conscience</div>
+    <h2>Loaded with technology. <span>Led by people.</span></h2>
+    <p class="lede">SAGA uses AI, live 3D, voice and cameras. That only builds trust if people can see the technology working for them, not on them.</p>
+    <div class="g3">
+      <div class="c"><div class="lb">Ethical · fair by design</div><ul class="l"><li>Pilots are salaried, with weekends off.</li><li>No surge when people need us most.</li><li>A person reviews every safety alert.</li><li>Data plans rides; it is never sold. Footage is deleted after 7 days.</li><li>The voice assistant confirms before booking or paying.</li></ul></div>
+      <div class="c"><div class="lb">Emotional · moments that matter</div><ul class="l"><li>The calm of a 4 a.m. airport ride already handled.</li><li>A parent watching the school run arrive.</li><li>A grandparent booking alone, in Telugu.</li><li>A pilot proud of a safety bonus.</li><li>Seeing the CO₂ you saved, ride after ride.</li></ul></div>
+      <div class="c"><div class="lb">Relatable · of this place</div><ul class="l"><li>Landmarks, not coordinates: "Gate 2, near the temple".</li><li>Real pilots and riders in campaigns.</li><li>Prices compared to everyday life.</li><li>Festivals, monsoon and exam season in our stories.</li><li>Tech explained the way you'd tell your parents.</li></ul></div>
+    </div>
+    <table><thead><tr><th style="width:18%">Feature</th><th style="width:34%">Don't say</th><th>Say</th></tr></thead><tbody>
+      <tr><td><b>AI dispatch</b></td><td>"AI-optimised predictive allocation engine"</td><td>"We plan your ride before you ask, so it's ready on time."</td></tr>
+      <tr><td><b>Secure 360</b></td><td>"Driver monitoring system"</td><td>"A road camera and attention alerts help pilots stay focused. People review every alert."</td></tr>
+      <tr><td><b>Voice</b></td><td>"Gemini-powered conversational AI"</td><td>"Just tell SAGA where you want to go, in Telugu, Hindi or English."</td></tr>
+      <tr><td><b>Live 3D</b></td><td>"Real-time 3D digital twin"</td><td>"Watch your car arrive and see the route ahead."</td></tr>
+      <tr><td><b>Electric</b></td><td>"Zero-emission sustainable mobility solutions"</td><td>"Every SAGA car is electric. Quieter rides, cleaner air."</td></tr>
+    </tbody></table>
+  </div>
+  <div class="foot"><span>SAGA · Brand &amp; experience manual</span><span>sagamobility.com</span></div>
+</section>
 
-    <!-- 05 -->
-    <section id="logo">
-      <div class="eyebrow">06 · Logo</div>
-      <h2>The racetrack S: two lanes, one turn back, an arrival node.</h2>
-      <p>The monogram is drawn as a single continuous lane, the same line of light that runs along the SAGA ONE's body. It turns back on itself twice, like a road through the Ghats, and ends one beat before a node: the pickup point, reached ahead of time. The wordmark SΛGΛ drops the crossbars from the A's, so the letters read as forward chevrons.</p>
-      <div class="logo-stage">
-        <div class="panel" style="background:#05060A">
-          <span class="label">Construction · 100-unit grid</span>
-          <svg viewBox="0 0 100 100" width="240" height="240" aria-label="Monogram construction grid">
-            <g stroke="rgba(127,230,255,.18)" stroke-width=".3">
-              <path d="M0 14H100M0 32H100M0 50H100M0 68H100M0 86H100M14 0V100M32 0V100M50 0V100M68 0V100M86 0V100"/>
-            </g>
-            <g fill="none" stroke="rgba(127,230,255,.5)" stroke-width=".4" stroke-dasharray="1.5 1.5"><circle cx="32" cy="32" r="18"/><circle cx="68" cy="68" r="18"/><circle cx="19" cy="86" r="13"/></g>
-            <path d="M86 14 H32 A18 18 0 0 0 32 50 H68 A18 18 0 0 1 68 86 H34" fill="none" stroke="#EEF1F7" stroke-width="13" opacity=".92"/>
-            <circle cx="19" cy="86" r="6.5" fill="#7FE6FF"/>
-            <g font-family="Geist Mono,monospace" font-size="3.4" fill="#7FE6FF"><text x="88" y="11">stroke 13</text><text x="50" y="30">r 18</text><text x="2" y="99">node r 6.5</text></g>
-          </svg>
-        </div>
-        <div style="display:grid;gap:16px">
-          <div class="panel" style="min-height:120px;background:#05060A"><span class="label">Primary · Ion Trail on void</span>
-            <svg viewBox="0 0 100 100" width="90" height="90"><defs><linearGradient id="lg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7FE6FF"/><stop offset=".55" stop-color="#4D8DFF"/><stop offset="1" stop-color="#092EC9"/></linearGradient></defs><path d="M86 14 H32 A18 18 0 0 0 32 50 H68 A18 18 0 0 1 68 86 H34" fill="none" stroke="url(#lg1)" stroke-width="13"/><circle cx="19" cy="86" r="6.5" fill="#fff"/></svg></div>
-          <div class="grid2" style="margin:0;gap:16px">
-            <div class="panel blue" style="min-height:120px"><svg viewBox="0 0 100 100" width="64" height="64"><path d="M86 14 H32 A18 18 0 0 0 32 50 H68 A18 18 0 0 1 68 86 H34" fill="none" stroke="#fff" stroke-width="13"/><circle cx="19" cy="86" r="6.5" fill="#fff"/></svg></div>
-            <div class="panel light" style="min-height:120px"><svg viewBox="0 0 100 100" width="64" height="64"><path d="M86 14 H32 A18 18 0 0 0 32 50 H68 A18 18 0 0 1 68 86 H34" fill="none" stroke="#05060A" stroke-width="13"/><circle cx="19" cy="86" r="6.5" fill="#092EC9"/></svg></div>
-          </div>
-        </div>
-      </div>
-      <h3>Lockups</h3>
-      <div class="lockups">
-        <div class="panel" style="min-height:160px;background:#05060A"><span class="label">Horizontal</span>
-          <div style="display:flex;align-items:center;gap:14px"><svg viewBox="0 0 100 100" width="46" height="46"><path d="M86 14 H32 A18 18 0 0 0 32 50 H68 A18 18 0 0 1 68 86 H34" fill="none" stroke="#4D8DFF" stroke-width="13"/><circle cx="19" cy="86" r="6.5" fill="#fff"/></svg><svg viewBox="-8 -10 404 92" width="130"><g fill="none" stroke="#F2F4F8" stroke-width="11"><path d="M72 0 H18 A18 18 0 0 0 18 36 H54 A18 18 0 0 1 54 72 H0"/><path d="M100 72 L140 0 L180 72"/><path d="M280 0 H226 A18 18 0 0 0 208 18 V54 A18 18 0 0 0 226 72 H262 A18 18 0 0 0 280 54 V38 H246"/><path d="M308 72 L348 0 L388 72"/></g></svg></div></div>
-        <div class="panel" style="min-height:160px;background:#05060A"><span class="label">Stacked · Japanese</span>
-          <div style="text-align:center"><svg viewBox="-8 -10 404 92" width="130"><g fill="none" stroke="#F2F4F8" stroke-width="11"><path d="M72 0 H18 A18 18 0 0 0 18 36 H54 A18 18 0 0 1 54 72 H0"/><path d="M100 72 L140 0 L180 72"/><path d="M280 0 H226 A18 18 0 0 0 208 18 V54 A18 18 0 0 0 226 72 H262 A18 18 0 0 0 280 54 V38 H246"/><path d="M308 72 L348 0 L388 72"/></g></svg><div style="font-family:var(--f-jp);letter-spacing:.5em;font-size:12px;color:var(--titanium);margin-top:10px">サーガ</div></div></div>
-        <div class="panel" style="min-height:160px;background:#05060A"><span class="label">Stacked · Telugu (local)</span>
-          <div style="text-align:center"><svg viewBox="-8 -10 404 92" width="130"><g fill="none" stroke="#F2F4F8" stroke-width="11"><path d="M72 0 H18 A18 18 0 0 0 18 36 H54 A18 18 0 0 1 54 72 H0"/><path d="M100 72 L140 0 L180 72"/><path d="M280 0 H226 A18 18 0 0 0 208 18 V54 A18 18 0 0 0 226 72 H262 A18 18 0 0 0 280 54 V38 H246"/><path d="M308 72 L348 0 L388 72"/></g></svg><div style="font-family:var(--f-te);font-size:15px;color:var(--titanium);margin-top:8px">సాగా</div></div></div>
-      </div>
-      <ul class="clean">
-        <li><b>Clear space:</b> one stroke width (13 units) on every side of the monogram; the cap height of the A on every side of the wordmark.</li>
-        <li><b>Minimum size:</b> monogram 16 px / 5 mm; wordmark 64 px / 18 mm wide.</li>
-        <li><b>The node is always a solid circle</b>, never a ring, and always white or Plasma on dark.</li>
-        <li><b>3D version:</b> glass tube with a Plasma core, rendered from the master file. Use it for hero moments only, never below 120 px.</li>
-      </ul>
-      <h3>Misuse</h3>
-      <div class="misuse">
-        <div><svg viewBox="0 0 100 100"><path d="M86 14 H32 A18 18 0 0 0 32 50 H68 A18 18 0 0 1 68 86 H34" fill="none" stroke="#C9CED8" stroke-width="13" transform="rotate(20 50 50)"/><circle cx="19" cy="86" r="6.5" fill="#C9CED8" transform="rotate(20 50 50)"/></svg>Don't rotate</div>
-        <div><svg viewBox="0 0 100 100"><path d="M86 14 H32 A18 18 0 0 0 32 50 H68 A18 18 0 0 1 68 86 H34" fill="none" stroke="#C9CED8" stroke-width="13" transform="translate(0 15) scale(1 .7)"/></svg>Don't squash</div>
-        <div><svg viewBox="0 0 100 100"><path d="M86 14 H32 A18 18 0 0 0 32 50 H68 A18 18 0 0 1 68 86 H34" fill="none" stroke="#FF8A00" stroke-width="13"/><circle cx="19" cy="86" r="6.5" fill="#22C55E"/></svg>No off-palette colour</div>
-        <div><svg viewBox="0 0 100 100"><path d="M86 14 H32 A18 18 0 0 0 32 50 H68 A18 18 0 0 1 68 86 H14" fill="none" stroke="#C9CED8" stroke-width="13"/></svg>Never drop the gap or node</div>
-      </div>
-    </section>
+<!-- 17 NOTIFICATIONS -->
+<section class="page" id="p17">
+  <div class="run"><b>SAGA · Notifications</b><span>17</span></div>
+  <div class="body">
+    <div class="eb">11 · Notifications</div>
+    <h2>Fewer messages. <span>Each one useful.</span></h2>
+    <p class="lede">Every notification answers one question the rider would otherwise have to ask. If it doesn't, we don't send it.</p>
+    <div class="g2">
+      <div class="c"><div class="lb">Rules</div><ul class="l"><li>Title: the fact, under 40 characters. Body: what it means, under 90.</li><li>Times, plates and prices as numbers.</li><li>Ride messages are never mixed with offers.</li><li>No offers between 9 p.m. and 8 a.m.; at most 2 a week.</li><li>Every message opens the screen it's about, in the rider's language.</li></ul></div>
+      <div class="c"><div class="lb">Priority and channel</div><ul class="l"><li><b>Critical</b> · SOS and safety: push, SMS and a call, sound on.</li><li><b>Ride</b> · pickup and arrival: push and lock-screen live activity.</li><li><b>Planned</b> · reminders and flight changes: push and WhatsApp.</li><li><b>Account</b> · receipts and points: in-app and email.</li><li><b>Offers</b> · opt-in only, in-app and WhatsApp.</li></ul></div>
+    </div>
+    <div class="g2">
+      <div class="nt"><div class="ap"><i></i>SAGA · NOW</div><b>Ride booked for 04:17</b><p>Ravi will pick you up at MVP Colony, Gate 2. Sleep well.</p><div class="te">రైడ్ 04:17కి బుక్ అయింది. రవి గేట్ 2 దగ్గర పికప్ చేస్తారు.</div><div class="w">BOOKING</div></div>
+      <div class="nt"><div class="ap"><i></i>SAGA · 03:40</div><b>Pickup moved to 04:42</b><p>Flight 6E 2147 is 25 min late. Nothing to do, we've adjusted.</p><div class="te">మీ ఫ్లైట్ 25 నిమిషాలు ఆలస్యం. పికప్ 04:42కి మార్చాం.</div><div class="w">CHANGE · PROACTIVE</div></div>
+      <div class="nt"><div class="ap"><i></i>SAGA · 04:38</div><b>Ravi is 4 min away</b><p>Black SAGA ONE · AP 39 EV 2147. Your trip code is 4827.</p><div class="te">రవి 4 నిమిషాల దూరంలో ఉన్నారు. మీ ట్రిప్ కోడ్ 4827.</div><div class="w">ARRIVING</div></div>
+      <div class="nt"><div class="ap"><i></i>SAGA · 04:42</div><b>Ravi is here, at Gate 2</b><p>Share your code 4827 to start the ride. Free waiting: 5 min.</p><div class="te">రవి గేట్ 2 దగ్గర ఉన్నారు. కోడ్ 4827 చెప్పండి.</div><div class="w">AT PICKUP</div></div>
+    </div>
+  </div>
+  <div class="foot"><span>SAGA · Brand &amp; experience manual</span><span>sagamobility.com</span></div>
+</section>
 
-    <!-- 06 -->
-    <section id="colour">
-      <div class="eyebrow">07 · Colour</div>
-      <h2>Void black, rich blue, and light.</h2>
-      <p>The palette is the night road with the car's light running through it. Silver appears only as titanium: hardware, hairlines and secondary text. It is never a fill. Light is used sparingly, so when it appears it means something.</p>
-      <div class="swatches">
-        <div class="sw"><div class="c" style="background:#05060A"></div><div class="t"><b>Void</b><span>#05060A · base 70%</span></div></div>
-        <div class="sw"><div class="c" style="background:#0B0E16"></div><div class="t"><b>Carbon</b><span>#0B0E16 · surfaces</span></div></div>
-        <div class="sw"><div class="c" style="background:#092EC9"></div><div class="t"><b>SAGA Blue</b><span>#092EC9 · brand, actions, heroes</span></div></div>
-        <div class="sw"><div class="c" style="background:#4D8DFF"></div><div class="t"><b>Ion</b><span>#4D8DFF · secondary light</span></div></div>
-        <div class="sw"><div class="c" style="background:#7FE6FF"></div><div class="t"><b>Plasma</b><span>#7FE6FF · 3D LED accents only</span></div></div>
-        <div class="sw"><div class="c" style="background:#C9CED8"></div><div class="t"><b>Titanium</b><span>#C9CED8 · hairlines, metal</span></div></div>
-        <div class="sw"><div class="c" style="background:#EEF1F7"></div><div class="t"><b>Signal White</b><span>#EEF1F7 · text</span></div></div>
-        <div class="sw"><div class="c" style="background:#3DDC97"></div><div class="t"><b>Live</b><span>#3DDC97 · on time, ready, on duty</span></div></div>
-      </div>
-      <div class="ratio" aria-label="Usage ratio"><i style="flex:70;background:#05060A"></i><i style="flex:18;background:#141A28"></i><i style="flex:8;background:#092EC9"></i><i style="flex:3;background:#7FE6FF"></i><i style="flex:1;background:#C9CED8"></i></div>
-      <p class="small">Ratio per screen: 70 void · 18 graphite surfaces · 8 SAGA Blue · 3 live green · 1 Titanium. On screens, SAGA Blue renders as #2F54FF for legibility on black. Alerts and SOS use #FF6B81.</p>
-      <h3>Ion Trail gradient</h3>
-      <div class="trail"></div>
-      <p class="small">Void → SAGA Blue → Ion → Plasma → white. Used for the monogram, progress bars and light trails. It always runs in the direction of travel: left to right, or bottom to top.</p>
-    </section>
+<!-- 18 NOTIFICATIONS 2 -->
+<section class="page" id="p18">
+  <div class="run"><b>SAGA · Notifications</b><span>18</span></div>
+  <div class="body">
+    <div class="eb">11 · After the ride, and when things go wrong</div>
+    <h2>The same calm <span>in good moments and bad ones.</span></h2>
+    <div class="g2">
+      <div class="nt"><div class="ap"><i></i>SAGA · 05:31</div><b>You arrived ahead</b><p>Departures, 1 h 54 min before your flight. ₹749 paid. 3.0 kg CO₂ saved.</p><div class="te">మీరు ముందే చేరుకున్నారు. ₹749 చెల్లించారు.</div><div class="w">ARRIVED</div></div>
+      <div class="nt sos"><div class="ap"><i></i>SAGA SAFETY · NOW</div><b>SOS received</b><p>Our safety team is calling you now. Your live location is shared with them.</p><div class="te">SOS అందింది. మా సేఫ్టీ టీమ్ ఇప్పుడే కాల్ చేస్తోంది.</div><div class="w">CRITICAL · NO BRANDING, NO DELAY</div></div>
+      <div class="nt"><div class="ap"><i></i>SAGA · 18:05</div><b>We were 8 min late today</b><p>We're sorry. ₹50 has been added to your wallet.</p><div class="te">ఈరోజు 8 నిమిషాలు ఆలస్యమయ్యాం. క్షమించండి.</div><div class="w">APOLOGY · AUTOMATIC</div></div>
+      <div class="nt"><div class="ap"><i></i>SAGA · SAT 10:00</div><b>Araku this Sunday?</b><p>A full day for ₹4,140, back by 8 p.m. Your green points cover ₹200.</p><div class="te">ఈ ఆదివారం అరకు? రోజంతా ట్రిప్ ₹4,140.</div><div class="w">OFFER · OPT-IN</div></div>
+    </div>
+    <h3>Pilot notifications</h3>
+    <div class="g2">
+      <div class="c ink"><div class="lb">New job</div><h4>Ananya R. · MVP Colony Gate 2 · 04:17</h4><p>Spoken aloud, one tap to acknowledge. Starts on its own after 10 seconds.</p></div>
+      <div class="c"><div class="lb">Rules for pilots</div><ul class="l"><li>Shorter than rider messages; read while working.</li><li>No ratings or performance messages while driving.</li><li>Charging and break reminders come from dispatch, not marketing.</li></ul></div>
+    </div>
+  </div>
+  <div class="foot"><span>SAGA · Brand &amp; experience manual</span><span>sagamobility.com</span></div>
+</section>
 
-    <!-- 07 -->
-    <section id="type">
-      <div class="eyebrow">08 · Typography</div>
-      <h2>One family, used with confidence.</h2>
-      <div style="margin-top:24px">
-        <div class="spec"><div><div class="label">Display</div><div class="small">Geist 500 · tight tracking</div></div><div class="sample" style="font-family:var(--f-display);font-size:clamp(30px,5vw,48px);line-height:1.05">You arrived ahead.</div></div>
-        <div class="spec"><div><div class="label">Interface &amp; body</div><div class="small">Geist 400–600</div></div><div class="sample" style="font-size:18px">Pickup locked for Thursday at 04:17 from MVP Colony. Your SAGA Pilot is assigned at 03:47.</div></div>
-        <div class="spec"><div><div class="label">Data &amp; labels</div><div class="small">Geist Mono 400–500 · tracked +0.2em caps</div></div><div class="sample mono" style="letter-spacing:.2em;color:var(--plasma);font-size:13px">6E 2147 · VTZ 07:25 → BLR 09:05 · ₹18/KM</div></div>
-        <div class="spec"><div><div class="label">Accent</div><div class="small">Zen Kaku Gothic New · Noto Sans Telugu</div></div><div class="sample" style="font-size:22px"><span style="font-family:var(--f-jp);letter-spacing:.3em">サーガ 先回り</span> &nbsp; <span style="font-family:var(--f-te)">మీ రైడ్ ముందే సిద్ధం</span></div></div>
-      </div>
-      <p class="small">Scale (px): 64 · 40 · 34 · 20 · 17.5 · 16 · 14. Headlines use tight negative tracking. Geist Mono only for codes: PNR, trip code, number plate. Telugu UI uses Noto Sans Telugu at 1.1× the Latin size for equal visual weight.</p>
-    </section>
+<!-- 19 CHANNELS -->
+<section class="page" id="p19">
+  <div class="run"><b>SAGA · Communication</b><span>19</span></div>
+  <div class="body">
+    <div class="eb">12 · Communication</div>
+    <h2>The same SAGA <span>in every place you meet us.</span></h2>
+    <table><thead><tr><th style="width:16%">Channel</th><th style="width:20%">Purpose</th><th style="width:22%">How we sound</th><th>Example</th></tr></thead><tbody>
+      <tr><td><b>App</b></td><td>Book, track, pay</td><td>Shortest form, numbers first</td><td>"Ravi is 4 min away."</td></tr>
+      <tr><td><b>Voice · Saathi</b></td><td>Book and ask by speaking</td><td>Friendly; confirms before acting</td><td>"Route to RK Beach is ready, ₹155. Shall I book it?"</td></tr>
+      <tr><td><b>WhatsApp</b></td><td>Reminders, receipts, help</td><td>Conversational, still short</td><td>"Your Loop starts Monday at 07:30. Reply 1 to skip a day."</td></tr>
+      <tr><td><b>SMS</b></td><td>Backup for critical messages</td><td>Bare facts</td><td>"SAGA: Ravi, AP39EV2147, 04:17. Code 4827."</td></tr>
+      <tr><td><b>Phone</b></td><td>Help, elders, complaints</td><td>Patient, Telugu first</td><td>"Namaskaram, this is Divya from SAGA. How can I help?"</td></tr>
+      <tr><td><b>Email</b></td><td>Invoices, business reports</td><td>Professional, structured</td><td>"November: 1,284 rides, ₹4.2 L, 2.1 t CO₂ avoided."</td></tr>
+      <tr><td><b>Social</b></td><td>Stories, pilots, the city</td><td>Warm, local, real faces</td><td>"Meet Ravi. 6 years on Vizag roads, never late for a 4 a.m. flight."</td></tr>
+      <tr><td><b>In the car</b></td><td>Welcome, safety</td><td>Quiet; no ads in the first minute</td><td>"Welcome, Ananya. AC is at 24°. Seatbelt, please."</td></tr>
+      <tr><td><b>Outdoor</b></td><td>Awareness</td><td>One idea, big type, the car</td><td>"₹18 a km. Rain or shine."</td></tr>
+      <tr><td><b>Crisis</b></td><td>Incidents, outages</td><td>Facts, ownership, within 1 hour</td><td>"At 18:40 the app was down for 22 min. All booked rides ran."</td></tr>
+    </tbody></table>
+    <div class="g2">
+      <div class="c do"><div class="lb">Do</div><p>Use the rider's name and language. Say what happens next. Close the loop: "Your issue is fixed" beats "Ticket closed".</p></div>
+      <div class="c dont"><div class="lb">Don't</div><p>Send one message on three channels at once, use copy-paste apologies, or reply in English to a Telugu message.</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>SAGA · Brand &amp; experience manual</span><span>sagamobility.com</span></div>
+</section>
 
-    <!-- 08 -->
-    <section id="glass">
-      <div class="eyebrow">09 · Glass system</div>
-      <h2>Three thicknesses of glass, each with a job.</h2>
-      <p>v2 uses glass sparingly: only for layers that float over content, such as the tab bar, the map sheet and toasts. Everything else is a flat graphite card with a hairline edge, which is calmer and easier to read.</p>
-      <div class="glassdemo">
-        <img src="assets/business.jpg" alt="">
-        <div class="layers">
-          <div class="gl veil"><span>VEIL · blur 12 · fill 4%</span><b>Overlays &amp; nav</b></div>
-          <div class="gl pane"><span>PANE · blur 22 · fill 8→2%</span><b>Default cards</b></div>
-          <div class="gl slab"><span>SLAB · blur 26 · blue 40%</span><b>Commitments</b></div>
-        </div>
-      </div>
-      <ul class="clean">
-        <li><b>Veil</b> is for things that float: tab bar, map chips, toasts.</li>
-        <li><b>Pane</b> is for information: trip cards, KPIs, settings. It catches a moving highlight under the pointer or finger.</li>
-        <li><b>Slab</b> is for money and commitments: fares, ride pass, monthly estimates. If a screen has a Slab, it has only one.</li>
-        <li>Never stack more than two layers of glass. Text on glass must reach a 4.5:1 contrast ratio. Test it on the brightest frame of the render behind.</li>
-        <li>Edges: 1 px Titanium at 11%, an inner top highlight at 16%, radius 22 px for cards and 18 px for buttons.</li>
-      </ul>
-    </section>
+<!-- 20 USABILITY -->
+<section class="page" id="p20">
+  <div class="run"><b>SAGA · Usable by everyone</b><span>20</span></div>
+  <div class="body">
+    <div class="eb">13 · Usable by everyone</div>
+    <h2>Striking to look at. <span>Effortless at any age.</span></h2>
+    <p class="lede">SAGA serves first-time app users in smaller towns as much as frequent flyers. The ambition lives in the 3D and motion; the interface stays plain, large and obvious. If a grandparent can book an airport ride alone, the design is working.</p>
+    <table><thead><tr><th style="width:24%">Rule</th><th>Standard</th></tr></thead><tbody>
+      <tr><td><b>Text size</b></td><td>Body 16 px, never below 12 px. Grey text at least 4.5:1 contrast.</td></tr>
+      <tr><td><b>Touch targets</b></td><td>44 px minimum; primary buttons 52 px, full width.</td></tr>
+      <tr><td><b>Plain name first</b></td><td>"Airport rides · SAGA Fly", "Daily rides · SAGA Loop", "Green points".</td></tr>
+      <tr><td><b>Explain jargon</b></td><td>"Ticket number (PNR), the 6 letters on your ticket."</td></tr>
+      <tr><td><b>One main action</b></td><td>One blue button per screen. Everything else is secondary.</td></tr>
+      <tr><td><b>Labels always visible</b></td><td>Tab bar shows icon and word together.</td></tr>
+      <tr><td><b>Help in reach</b></td><td>"Talk to a person" on Home, SOS on every live ride, voice in three languages.</td></tr>
+      <tr><td><b>Motion with purpose</b></td><td>Animations show where things came from or that something worked. Reduced-motion is always respected.</td></tr>
+    </tbody></table>
+  </div>
+  <div class="foot"><span>SAGA · Brand &amp; experience manual</span><span>sagamobility.com</span></div>
+</section>
 
-    <!-- 09 -->
-    <section id="three-d">
-      <div class="eyebrow">10 · 3D language</div>
-      <h2>One studio-lit object per product, made in Blender.</h2>
-      <p>v2 replaces the neon grid with a product-photography studio: a satin graphite floor falling off into black, one soft overhead light, frosted glass, satin titanium and a single blue element per object. Light-lines appear only as small LED signatures on the car. Each product keeps its own object, so a glance at the hero tells you where you are.</p>
-      <div class="lib">
-        <figure><img src="assets/logo.jpg" alt=""><figcaption><b>Monogram tube</b><span>Boot, arrival, campaigns</span></figcaption></figure>
-        <figure style="background:#EEF1F7"><img src="assets/car3_front.webp" alt="" style="object-fit:contain;mix-blend-mode:normal"><figcaption><b>SAGA ONE · front</b><span>Arriving hero, ads</span></figcaption></figure>
-        <figure style="background:#EEF1F7"><img src="assets/car3_side.webp" alt="" style="object-fit:contain;mix-blend-mode:normal"><figcaption><b>SAGA ONE · side</b><span>Ride options, Pilot app, livery</span></figcaption></figure>
-        <figure style="background:#EEF1F7"><img src="assets/car3_top.webp" alt="" style="object-fit:contain;mix-blend-mode:normal"><figcaption><b>SAGA ONE · top</b><span>Live map markers</span></figcaption></figure>
-        <figure><img src="assets/fly.jpg" alt=""><figcaption><b>Glass jet</b><span>SAGA Fly</span></figcaption></figure>
-        <figure><img src="assets/loop.jpg" alt=""><figcaption><b>Loop ring</b><span>SAGA Loop: the week as seven discs</span></figcaption></figure>
-        <figure><img src="assets/voyage.jpg" alt=""><figcaption><b>Wire terrain</b><span>SAGA Voyage: route drawn on hills</span></figcaption></figure>
-        <figure><img src="assets/tales.jpg" alt=""><figcaption><b>Ghats at dawn</b><span>SAGA Tales</span></figcaption></figure>
-        <figure><img src="assets/business.jpg" alt=""><figcaption><b>Glass towers</b><span>SAGA Business: many rides at once</span></figcaption></figure>
-        <figure><img src="assets/aura.jpg" alt=""><figcaption><b>AURA orb</b><span>Rewards</span></figcaption></figure>
-        
-      </div>
-      <h3>Render recipe</h3>
-      <div class="tablewrap"><table><tbody>
-        <tr><th>Source</th><td><span class="mono">blender/saga_car_v3.py</span> builds the real SAGA ONE, renders transparent front, side, rear and top views, and exports <span class="mono">saga_one.glb</span> for the app. <span class="mono">saga_modules_light.py</span> renders the service objects as transparent cut-outs for the light UI.</td></tr>
-        <tr><th>Engine</th><td>Cycles, GPU (OptiX), 112–192 samples, denoised. AgX view transform, Medium High Contrast look.</td></tr>
-        <tr><th>Materials</th><td>Frosted glass (roughness 0.2–0.3) · Midnight clear-coat paint · satin Titanium · one satin SAGA Blue part. Emission scaled to 20%, used only for car LEDs and small cores.</td></tr>
-        <tr><th>Ground</th><td>Seamless studio floor: satin graphite with a radial falloff into the black background.</td></tr>
-        <tr><th>Camera</th><td>35–58 mm, slightly above the eye line. One hero object, centred or on the right third.</td></tr>
-        <tr><th>Post</th><td>Light bloom on highlights only (threshold 0.7, strength 0.3), exported as JPEG on black. In the UI, fade with a vertical mask.</td></tr>
-      </tbody></table></div>
-    </section>
+<!-- 21 LOGO (dark) -->
+<section class="page dark" id="p21">
+  <div class="run"><b>SAGA · Logo</b><span>21</span></div>
+  <div class="body">
+    <div class="eb">14 · Logo</div>
+    <h2>The racetrack S: <span>two lanes, one turn back, an arrival node.</span></h2>
+    <p class="lede">The monogram is one continuous lane, the same line of light that runs along the SAGA ONE. It turns back like a ghat road and ends one beat before a node: the pickup, reached ahead of time. The wordmark drops the A crossbars so the letters read as forward chevrons.</p>
+    <div class="g2" style="margin-top:7mm">
+      <div class="mark" style="background:var(--night2);border:1px solid var(--nline)"><span class="lb" style="color:var(--ntext3)">Primary · on black</span><svg viewBox="0 0 100 100" width="120" aria-label="SAGA monogram"><path d="M86 14 H32 A18 18 0 0 0 32 50 H68 A18 18 0 0 1 68 86 H34" fill="none" stroke="#F2F4F8" stroke-width="13"/><circle cx="19" cy="86" r="6.5" fill="#33C6F0"/></svg></div>
+      <div class="mark" style="background:var(--blue)"><span class="lb" style="color:rgba(255,255,255,.7)">App icon · on SAGA Blue</span><svg viewBox="0 0 100 100" width="120" aria-hidden="true"><path d="M86 14 H32 A18 18 0 0 0 32 50 H68 A18 18 0 0 1 68 86 H34" fill="none" stroke="#fff" stroke-width="13"/><circle cx="19" cy="86" r="6.5" fill="#33C6F0"/></svg></div>
+      <div class="mark" style="background:#F4F5F7;min-height:34mm"><span class="lb" style="color:#7A8090">Wordmark · on light</span><svg viewBox="-8 -10 404 92" width="200" aria-label="SAGA"><g fill="none" stroke="#07080C" stroke-width="11"><path d="M72 0 H18 A18 18 0 0 0 18 36 H54 A18 18 0 0 1 54 72 H0"/><path d="M100 72 L140 0 L180 72"/><path d="M280 0 H226 A18 18 0 0 0 208 18 V54 A18 18 0 0 0 226 72 H262 A18 18 0 0 0 280 54 V38 H246"/><path d="M308 72 L348 0 L388 72"/></g></svg></div>
+      <div class="mark" style="background:var(--night2);border:1px solid var(--nline);min-height:34mm"><span class="lb" style="color:var(--ntext3)">Wordmark · on black</span><svg viewBox="-8 -10 404 92" width="200" aria-hidden="true"><g fill="none" stroke="#F2F4F8" stroke-width="11"><path d="M72 0 H18 A18 18 0 0 0 18 36 H54 A18 18 0 0 1 54 72 H0"/><path d="M100 72 L140 0 L180 72"/><path d="M280 0 H226 A18 18 0 0 0 208 18 V54 A18 18 0 0 0 226 72 H262 A18 18 0 0 0 280 54 V38 H246"/><path d="M308 72 L348 0 L388 72"/></g></svg></div>
+    </div>
+    <div class="g3">
+      <div class="c"><div class="lb">Clear space</div><p>One stroke width around the monogram; one A cap height around the wordmark.</p></div>
+      <div class="c"><div class="lb">Minimum size</div><p>Monogram 16 px or 5 mm. Wordmark 64 px or 18 mm wide.</p></div>
+      <div class="c"><div class="lb">Never</div><p>Rotate, squash, recolour outside the palette, or drop the gap and node.</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>SAGA · Brand &amp; experience manual</span><span>sagamobility.com</span></div>
+</section>
 
-    <!-- 10 -->
-    <section id="motion">
-      <div class="eyebrow">11 · Motion</div>
-      <h2>Four verbs: anticipate, glide, lock, glow.</h2>
-      <div class="motion">
-        <div class="mo anticipate"><div class="stage"><div class="bars"><i></i><i></i><i></i><i></i></div></div><b>Anticipate</b><code>stagger 70ms · rise 800ms</code><span class="small">Content arrives in order before you look for it.</span></div>
-        <div class="mo glide"><div class="stage"><span class="dot"></span></div><b>Glide</b><code>cubic-bezier(.22,1,.36,1)</code><span class="small">All travel: screens, cards, the car. Fast start, long settle.</span></div>
-        <div class="mo lock"><div class="stage"><span class="dot"></span></div><b>Lock</b><code>cubic-bezier(.7,0,.2,1)</code><span class="small">Commitments: slide to lock, ring draw, wordmark draw.</span></div>
-        <div class="mo glow"><div class="stage"><span class="dot"></span></div><b>Glow</b><code>pulse 2s · bloom</code><span class="small">Live state: the pilot moving, a pickup pin, AURA earned.</span></div>
-      </div>
-      <h3>Signature moments</h3>
-      <div class="tablewrap"><table>
-        <thead><tr><th>Moment</th><th>Spec</th></tr></thead>
-        <tbody>
-          <tr><td>Welcome</td><td>Mark and wordmark rise 10 px and fade in over 0.9 s. The car slides in 24 px from the left as if arriving.</td></tr>
-          <tr><td>Car drive-in (Home)</td><td>The hero car glides in 60 px over 1.4 s. A slow light sheen crosses the next-trip card every 5 s.</td></tr>
-          <tr><td>Morph (tile → module)</td><td>Shared-element view transition, 700 ms glide. The old screen blurs out at 97% scale.</td></tr>
-          <tr><td>Reading your booking</td><td>A thin progress bar fills as four checks complete 700 ms apart, then the plan opens on its own.</td></tr>
-          <tr><td>Slide to lock</td><td>The thumb follows the finger. Past 85% it snaps to the end and confirms. Otherwise it springs back in 500 ms.</td></tr>
-          <tr><td>Route draw</td><td>Stroke-dashoffset over 2.4 s with lock easing. The car marker follows the same path.</td></tr>
-          <tr><td>AURA earned</td><td>The counter springs up over 1.4 s (quartic ease-out). Bars rise 60 ms apart.</td></tr>
-        </tbody></table></div>
-      <p class="small">Every motion has a reduced-motion fallback that jumps straight to the end state. Nothing important is ever hidden behind an animation.</p>
-    </section>
+<!-- 22 COLOUR -->
+<section class="page" id="p22">
+  <div class="run"><b>SAGA · Colour</b><span>22</span></div>
+  <div class="body">
+    <div class="eb">15 · Colour</div>
+    <h2>Black and blue for the brand moments. <span>White for reading.</span></h2>
+    <p class="lede">Black and SAGA Blue carry heroes, the tab bar and live panels. White and paper grey carry everything people read, so it stays legible in daylight and for older eyes. Cyan appears only for live, technical moments.</p>
+    <div class="g4">
+      <div class="sw"><div class="cl" style="background:#07080C"></div><div class="t"><b>Night</b><span>#07080C · heroes, tab bar</span></div></div>
+      <div class="sw"><div class="cl" style="background:#092EC9"></div><div class="t"><b>SAGA Blue</b><span>#092EC9 · brand, actions</span></div></div>
+      <div class="sw"><div class="cl" style="background:#2449F0"></div><div class="t"><b>Blue on dark</b><span>#2449F0 · actions on black</span></div></div>
+      <div class="sw"><div class="cl" style="background:#33C6F0"></div><div class="t"><b>Cyan</b><span>#33C6F0 · live, tech only</span></div></div>
+      <div class="sw"><div class="cl" style="background:#FFFFFF;border-bottom:1px solid #E1E4EA"></div><div class="t"><b>White</b><span>#FFFFFF · cards</span></div></div>
+      <div class="sw"><div class="cl" style="background:#F2F4F9"></div><div class="t"><b>Paper</b><span>#F2F4F9 · backgrounds</span></div></div>
+      <div class="sw"><div class="cl" style="background:#0E8F5B"></div><div class="t"><b>Green</b><span>#0E8F5B · eco, success</span></div></div>
+      <div class="sw"><div class="cl" style="background:#C8243C"></div><div class="t"><b>Red</b><span>#C8243C · SOS, errors only</span></div></div>
+    </div>
+    <h3>Proportion on a typical screen</h3>
+    <div class="ratio"><i style="width:58%;background:#F2F4F9"></i><i style="width:20%;background:#FFFFFF"></i><i style="width:12%;background:#07080C"></i><i style="width:7%;background:#092EC9"></i><i style="width:2%;background:#33C6F0"></i><i style="width:1%;background:#0E8F5B"></i></div>
+    <p style="font-size:8.5pt">58 paper · 20 white cards · 12 night · 7 SAGA Blue · 2 cyan · 1 green. Text is #0A0D18, with #454B59 and #7A8090 for secondary text.</p>
+    <div class="g2">
+      <div class="c do"><div class="lb">Do</div><p>Use one blue button per screen. Use green only for eco and success, red only for safety and errors, always with an icon and a word.</p></div>
+      <div class="c dont"><div class="lb">Don't</div><p>Use neon glows, gradients on text, cyan for buttons, or colour as the only signal.</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>SAGA · Brand &amp; experience manual</span><span>sagamobility.com</span></div>
+</section>
 
-    <!-- 11 -->
-    <section id="modules">
-      <div class="eyebrow">12 · Product modules</div>
-      <h2>Five business models, one promise: the ride is ready before you are.</h2>
-      <p>The owned fleet and payroll pilots are what make pre-scheduling reliable. Every scheduled ride also feeds the fleet planner, so SAGA knows tomorrow's demand tonight. That lets it position cars, plan charging and staff shifts ahead of time.</p>
+<!-- 23 TYPE -->
+<section class="page" id="p23">
+  <div class="run"><b>SAGA · Typography</b><span>23</span></div>
+  <div class="body">
+    <div class="eb">16 · Typography</div>
+    <h2>One family for words, <span>one mono for data. Nothing else.</span></h2>
+    <p class="lede">Inter Tight does every word people read. JetBrains Mono is only for small labels and live data: plates, codes, times, kilometres. Telugu uses Noto Sans Telugu, which sits well beside Inter Tight. Three weights only: 400, 500, and 600 for buttons.</p>
+    <div style="margin-top:5mm">
+      <div class="ts"><span class="lb">Display · 28 px · 500</span><span style="font-size:20pt;letter-spacing:-.02em;font-weight:500">You arrived ahead.</span></div>
+      <div class="ts"><span class="lb">Title · 24 px · 500</span><span style="font-size:16pt;letter-spacing:-.02em;font-weight:500">Flying soon? We'll book your cab.</span></div>
+      <div class="ts"><span class="lb">Heading · 18 px · 500</span><span style="font-size:12.5pt;font-weight:500">Choose your ride</span></div>
+      <div class="ts"><span class="lb">Body · 16 px · 400</span><span style="font-size:11pt">Ravi will pick you up at Gate 2. Share your trip code to start.</span></div>
+      <div class="ts"><span class="lb">Small · 14 px · 400</span><span style="font-size:9.5pt;color:var(--ink2)">4 seats · 2 min away · ₹18 per km</span></div>
+      <div class="ts"><span class="lb">Label · mono 11 px</span><span class="mono" style="font-size:7.5pt;letter-spacing:.08em">ON THE WAY · AP 39 EV 2147 · 86%</span></div>
+      <div class="ts"><span class="lb">Telugu · 16 px</span><span class="te" style="font-size:11pt">ఎక్కడికి వెళ్ళాలి? రవి 4 నిమిషాల దూరంలో ఉన్నారు.</span></div>
+    </div>
+    <table><thead><tr><th style="width:30%">Rule</th><th>Detail</th></tr></thead><tbody>
+      <tr><td><b>App scale</b></td><td>11 · 12 · 13 · 14 · 16 · 18 · 20 · 24 · 28 · 34 · 44 px. Nothing in between.</td></tr>
+      <tr><td><b>Tracking</b></td><td>−2% on 24 px and up; normal below. Mono labels +6% to +8%, uppercase.</td></tr>
+      <tr><td><b>Line height</b></td><td>1.12 for headings, 1.5 for body.</td></tr>
+      <tr><td><b>Two-tone headlines</b></td><td>Statement in ink, the continuation in grey, as on these pages.</td></tr>
+    </tbody></table>
+  </div>
+  <div class="foot"><span>SAGA · Brand &amp; experience manual</span><span>sagamobility.com</span></div>
+</section>
 
-      <article class="module"><div class="vis"><img src="assets/fly.jpg" alt=""></div><div class="body">
-        <div class="eyebrow">01 · SAGA Fly</div><h4>PNR in. Pickup locked.</h4>
-        <div class="flow"><span>Enter PNR + last name</span><span>Flight found</span><span>Pickup computed</span><span>Slide to lock</span><span>Pilot assigned T−30</span><span>Flight watch</span></div>
-        <div class="formula">pickup = departure − <b>check-in lead</b> (2 h domestic / 3 h intl) − <b>p85 drive time</b> − <b>buffer</b> (10–20 min by hour &amp; weather)</div>
-        <dl><dt>Arrivals</dt><dd>The pilot is dispatched to arrive at landing time + bag time (≈ 15 min domestic) and tracks the live ETA. Free waiting time to be set by ops.</dd>
-        <dt>Re-plan</dt><dd>Delay over 15 min, gate or terminal change, or a traffic shift of more than 8 min. The rider gets one calm message with the new time.</dd>
-        <dt>Data</dt><dd>PNR lookup through an airline data aggregator API. Fallbacks: forward the e-ticket email, or scan the boarding pass. Provider is an open decision.</dd>
-        <dt>Measure</dt><dd>Share of airport rides booked by PNR · on-time pickup % · missed-flight incidents (target 0).</dd></dl>
-      </div></article>
+<!-- 24 ICONS / LAYOUT / MOTION -->
+<section class="page" id="p24">
+  <div class="run"><b>SAGA · Icons, layout &amp; motion</b><span>24</span></div>
+  <div class="body">
+    <div class="eb">17 · Icons, layout &amp; motion</div>
+    <h2>A calm grid, <span>one icon set, motion that explains.</span></h2>
+    <div class="g3">
+      <div class="c"><div class="lb">Icons</div><h4>Lucide, 2 px stroke</h4><p>One outline set at 20–24 px. Always paired with a word in navigation. No filled or multicolour icons.</p></div>
+      <div class="c"><div class="lb">Spacing</div><h4>An 8-point grid</h4><p>4 · 8 · 12 · 16 · 24 · 32 px. Screen margins 16 px; space between cards 12 px; between sections 24 px.</p></div>
+      <div class="c"><div class="lb">Cards</div><h4>Rounded, quiet</h4><p>20 px corners, 16 px padding, a 1 px hairline or soft shadow. One idea per card.</p></div>
+    </div>
+    <table><thead><tr><th style="width:24%">Motion</th><th style="width:30%">Spec</th><th>Used for</th></tr></thead><tbody>
+      <tr><td><b>Anticipate</b></td><td>Stagger 60 ms, rise 600 ms</td><td>Content arrives in order before you look for it.</td></tr>
+      <tr><td><b>Glide</b></td><td>cubic-bezier(.2,.8,.2,1)</td><td>Screens, cards and the car: fast start, long settle.</td></tr>
+      <tr><td><b>Roll</b></td><td>Odometer digits, 900 ms</td><td>ETA, fare, battery and CO₂ changes.</td></tr>
+      <tr><td><b>Lock</b></td><td>Ring draw, spring press</td><td>Commitments: booking, trip code accepted.</td></tr>
+      <tr><td><b>Live</b></td><td>2 s pulse</td><td>Something is happening now: the car moving, the mic listening.</td></tr>
+    </tbody></table>
+    <div class="c" style="margin-top:6mm"><div class="lb">Rule</div><p>Every animation has a reduced-motion fallback that jumps to the end state. Nothing important is hidden behind an animation.</p></div>
+  </div>
+  <div class="foot"><span>SAGA · Brand &amp; experience manual</span><span>sagamobility.com</span></div>
+</section>
 
-      <article class="module"><div class="vis"><img src="assets/loop.jpg" alt=""></div><div class="body">
-        <div class="eyebrow">02 · SAGA Loop</div><h4>Your routine, on a loop.</h4>
-        <div class="flow"><span>Preset: office / school / college</span><span>Days &amp; times</span><span>Monthly estimate</span><span>Prepay</span><span>Same pilot daily</span></div>
-        <div class="formula">monthly = round(days/week × 52 ÷ 12) × legs × km × <b>₹18</b> × (1 − <b>loop discount</b>)</div>
-        <dl><dt>Rules</dt><dd>Skip or pause a day by 21:00 the night before for a credit. The same pilot and car are guaranteed when available, with a named backup pilot.</dd>
-        <dt>Campus</dt><dd>Guardian live view, boarding and drop confirmed by OTP, and a notification at each event.</dd>
-        <dt>Open</dt><dd>The prototype uses a −12% Loop discount. Confirm against fleet economics.</dd>
-        <dt>Measure</dt><dd>Loop retention at 3 months · fleet hours sold ahead · on-time %.</dd></dl>
-      </div></article>
+<!-- 25 3D (dark) -->
+<section class="page dark" id="p25">
+  <div class="run"><b>SAGA · 3D &amp; imagery</b><span>25</span></div>
+  <div class="body">
+    <div class="eb">18 · 3D &amp; imagery</div>
+    <h2>The real car, <span>lit like a product, made in Blender.</span></h2>
+    <p class="lede">Every render is the actual SAGA ONE: a compact black five-door electric hatchback with cyan LED lines, roof sensor pods and the checkered taxi mark. Studio light, one hero object, no neon.</p>
+    <div class="g2" style="margin-top:7mm">
+      <div class="render" style="background:#ECEEF2"><img src="assets/car3_front.webp" alt="SAGA ONE, front three-quarter view"></div>
+      <div class="render" style="background:#ECEEF2"><img src="assets/car3_side.webp" alt="SAGA ONE, side view"></div>
+      <div class="render" style="background:#ECEEF2"><img src="assets/car3_rear.webp" alt="SAGA ONE, rear view"></div>
+      <div class="render" style="background:#07080C;border:1px solid var(--nline)"><img src="assets/car3_front_dark.webp" alt="SAGA ONE on a dark stage"></div>
+    </div>
+    <div class="g3">
+      <div class="c"><div class="lb">Light</div><p>Soft studio key from above, blue rim light on dark scenes.</p></div>
+      <div class="c"><div class="lb">Live 3D</div><p>The same model drives the ride and navigation screens.</p></div>
+      <div class="c"><div class="lb">Avoid</div><p>Stock cars, glowing grids, lens flares, and any car that isn't ours.</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>SAGA · Brand &amp; experience manual</span><span>sagamobility.com</span></div>
+</section>
 
-      <article class="module"><div class="vis"><img src="assets/voyage.jpg" alt=""></div><div class="body">
-        <div class="eyebrow">03 · SAGA Voyage</div><h4>Long roads, planned to the charge.</h4>
-        <div class="flow"><span>From / to</span><span>Auto charge stops</span><span>Battery chart</span><span>Fare &amp; time</span><span>Book</span></div>
-        <dl><dt>Engine</dt><dd>Range model (vehicle, load, speed, AC) plus the charger network. Charge stops are planned at places riders actually want to stop: food, restrooms.</dd>
-        <dt>Pilot</dt><dd>Maximum continuous driving time and rest stops built into the plan. An overnight allowance for multi-day trips.</dd>
-        <dt>Open</dt><dd>Return-leg pricing for one-way trips; tolls and interstate permits passed through at cost.</dd></dl>
-      </div></article>
+<!-- 26 RIDER APP (dark) -->
+<section class="page dark" id="p26">
+  <div class="run"><b>SAGA · The apps</b><span>26</span></div>
+  <div class="body">
+    <div class="eb">19 · Rider app</div>
+    <h2>A ride first. <span>Everything else, one swipe away.</span></h2>
+    <div class="g4" style="margin-top:8mm">
+      <div><div class="phone"><div class="sc"><img src="assets/shots/r-home.png" alt="Rider app home screen"></div></div><div class="cap">Home</div></div>
+      <div><div class="phone"><div class="sc"><img src="assets/shots/r-choose.png" alt="Choose your ride screen"></div></div><div class="cap">Choose ride</div></div>
+      <div><div class="phone"><div class="sc"><img src="assets/shots/r-arriving.png" alt="Car arriving screen"></div></div><div class="cap">Car arriving</div></div>
+      <div><div class="phone"><div class="sc"><img src="assets/shots/r-aura.png" alt="Green points screen"></div></div><div class="cap">Green points</div></div>
+    </div>
+    <div class="g3" style="margin-top:7mm">
+      <div class="c"><div class="lb">Home</div><p>Live map, "Where are you going?", the airport card and four service cards with working controls.</p></div>
+      <div class="c"><div class="lb">The pilot starts the ride</div><p>The rider shares a 4-digit code; the pilot types it in. No "start ride" button for riders.</p></div>
+      <div class="c"><div class="lb">SAGA Saathi</div><p>A mic on every main screen. Book, track, cancel or SOS by voice in three languages.</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>SAGA · Brand &amp; experience manual</span><span>sagamobility.com</span></div>
+</section>
 
-      <article class="module"><div class="vis"><img src="assets/tales.jpg" alt=""></div><div class="body">
-        <div class="eyebrow">04 · SAGA Tales</div><h4>Journeys with a story, door to door.</h4>
-        <div class="flow"><span>Browse Tales</span><span>Hour-by-hour plan</span><span>One fare</span><span>Pilot all day</span><span>Home</span></div>
-        <dl><dt>Launch set</dt><dd>Araku Valley (230 km) · Lambasingi Dawn (210 km) · Vizag Coast (60 km, half day). Seasonal: Araku in Oct–Feb, coast all year.</dd>
-        <dt>Partners</dt><dd>Cafés, homestays and guides receive SAGA Tales guests, with optional revenue share. AP Tourism listing.</dd>
-        <dt>Why</dt><dd>Fills weekend and off-peak fleet hours at a higher ticket.</dd></dl>
-      </div></article>
+<!-- 27 DRIVER + OPS (dark) -->
+<section class="page dark" id="p27">
+  <div class="run"><b>SAGA · The apps</b><span>27</span></div>
+  <div class="body">
+    <div class="eb">19 · Driver app and ops command centre</div>
+    <h2>A work tool for pilots, <span>one screen to run the region.</span></h2>
+    <div class="g4" style="margin-top:7mm">
+      <div><div class="phone"><div class="sc"><img src="assets/shots/d-online.png" alt="Driver app online screen"></div></div><div class="cap">Online · plan</div></div>
+      <div><div class="phone"><div class="sc"><img src="assets/shots/d-job.png" alt="Driver job assigned screen"></div></div><div class="cap">Job assigned</div></div>
+      <div><div class="phone"><div class="sc"><img src="assets/shots/d-pickup.png" alt="Driver trip code keypad"></div></div><div class="cap">Trip code</div></div>
+      <div><div class="phone"><div class="sc"><img src="assets/shots/d-summary.png" alt="Driver shift summary"></div></div><div class="cap">Shift summary</div></div>
+    </div>
+    <div class="shot" style="margin-top:6mm;height:62mm"><img src="assets/shots/o-command.png" alt="Ops command centre" style="object-position:top left"></div>
+    <div class="cap" style="text-align:left">Ops command centre · revenue forecast, ranked actions, marketing, customer voice</div>
+  </div>
+  <div class="foot"><span>SAGA · Brand &amp; experience manual</span><span>sagamobility.com</span></div>
+</section>
 
-      <article class="module"><div class="vis"><img src="assets/business.jpg" alt=""></div><div class="body">
-        <div class="eyebrow">05 · SAGA Business &amp; Campus</div><h4>Book a whole shift in one tap.</h4>
-        <div class="flow"><span>Roster (CSV / HRMS)</span><span>Pick shift</span><span>Auto-pool by area</span><span>Approve</span><span>Dispatch</span><span>Monthly GST invoice</span></div>
-        <dl><dt>Roles</dt><dd>Admin (billing, policies) · Manager (book for a team) · Rider (sees own rides). Campus adds Guardian.</dd>
-        <dt>Pooling</dt><dd>Groups riders by area and shift time, up to 3 per EV by default, with a maximum detour of 12 min.</dd>
-        <dt>Policy</dt><dd>Night-shift safety rules (for example, drop order and escort policies for women employees) set per client policy and local law.</dd>
-        <dt>Report</dt><dd>Spend by cost centre, on-time %, and CO₂e avoided for ESG and BRSR reporting.</dd></dl>
-      </div></article>
-    </section>
+<!-- 28 MODULES -->
+<section class="page" id="p28">
+  <div class="run"><b>SAGA · Product modules</b><span>28</span></div>
+  <div class="body">
+    <div class="eb">20 · Product modules</div>
+    <h2>Five services, one promise: <span>the ride is ready before you are.</span></h2>
+    <p class="lede">Every planned ride feeds the fleet planner, so SAGA knows tomorrow's demand tonight and can position cars, plan charging and staff shifts ahead of time.</p>
+    <table><thead><tr><th style="width:20%">Service</th><th style="width:34%">How it works</th><th>Key rule</th></tr></thead><tbody>
+      <tr><td><b>Airport rides</b><br><span class="mono" style="font-size:6.5pt;color:var(--ink3)">SAGA FLY</span></td><td>PNR in, flight found, pickup computed, slide to book, pilot assigned 30 min before.</td><td>Pickup = departure − check-in lead − drive time − buffer. Re-planned if the flight moves 15+ min.</td></tr>
+      <tr><td><b>Daily rides</b><br><span class="mono" style="font-size:6.5pt;color:var(--ink3)">SAGA LOOP</span></td><td>Choose a preset, days and times; see the monthly price; same pilot daily.</td><td>Skip a day by 21:00 the night before for a credit. Guardian live view for school runs.</td></tr>
+      <tr><td><b>Outstation</b><br><span class="mono" style="font-size:6.5pt;color:var(--ink3)">SAGA VOYAGE</span></td><td>From and to, automatic charging stops, fare and time, book.</td><td>Charging stops at places people want to stop. Pilot rest built into the plan.</td></tr>
+      <tr><td><b>Day trips</b><br><span class="mono" style="font-size:6.5pt;color:var(--ink3)">SAGA TALES</span></td><td>Pick a curated trip, one price, the same pilot all day.</td><td>Launch set: Araku Valley, Lambasingi Dawn, Vizag Coast.</td></tr>
+      <tr><td><b>Business</b><br><span class="mono" style="font-size:6.5pt;color:var(--ink3)">SAGA BUSINESS</span></td><td>Upload a roster; riders are pooled by area into cars; one invoice.</td><td>Night-shift drops are tracked live by the company admin; Secure 360 reports monthly.</td></tr>
+    </tbody></table>
+  </div>
+  <div class="foot"><span>SAGA · Brand &amp; experience manual</span><span>sagamobility.com</span></div>
+</section>
 
-    <section id="pilot">
-      <div class="eyebrow">13 · Pilot app</div>
-      <h2>A work tool for salaried pilots, not a gig marketplace.</h2>
-      <div class="bleed"><img src="assets/car_side.jpg" alt="SAGA ONE side profile" style="aspect-ratio:16/7;object-fit:cover"></div>
-      <div class="grid2">
-        <div class="card"><div class="label">Start of shift</div><h4>Car, battery, checklist</h4><p>Assigned car and depot, battery and range, and a four-point pre-trip checklist: tyres and lights, clean cabin, Secure 360 online, uniform. The shift can't start until every check is done.</p></div>
-        <div class="card"><div class="label">Today's plan</div><h4>The whole day, in advance</h4><p>Dispatch plans every job: Fly pickups with live flight status, Loop and Business pools, and the charging slot. No bidding, no surge chasing.</p></div>
-        <div class="card"><div class="label">Trip</div><h4>Navigate and verify</h4><p>Turn-by-turn on a dark map. The trip only starts when the rider's 4-digit trip code matches, so the right rider is in the right car.</p></div>
-        <div class="card"><div class="label">End of shift</div><h4>Rewarded for safe and on time</h4><p>Trips, distance, on-time record, rating, safety-bonus progress and short training modules. The bonus rewards zero attention alerts, not trip volume.</p></div>
-      </div>
-    </section>
+<!-- 29 REWARDS & ADS -->
+<section class="page" id="p29">
+  <div class="run"><b>SAGA · Rewards &amp; advertising</b><span>29</span></div>
+  <div class="body">
+    <div class="eb">21 · Green points and advertising</div>
+    <h2>Rewards that mean something. <span>Ads that never feel like noise.</span></h2>
+    <div class="g3">
+      <div class="c"><div class="lb">How points work</div><p>1 point = 100 g CO₂ avoided compared with a petrol cab. Points expire after 12 months.</p></div>
+      <div class="c"><div class="lb">What they buy</div><p>2,000 points: a free airport ride and priority daily-ride slots. 6,000: upgrades and partner experiences.</p></div>
+      <div class="c"><div class="lb">Honest claims</div><p>Always "estimated CO₂ avoided", never "zero emissions". The method is published in the app.</p></div>
+    </div>
+    <table><thead><tr><th style="width:24%">Placement</th><th>Where</th><th style="width:20%">Sample rate</th></tr></thead><tbody>
+      <tr><td><b>Home partner card</b></td><td>One per session: stays, food, travel.</td><td>₹180 CPM</td></tr>
+      <tr><td><b>Arrival offer</b></td><td>After the drop at airports, malls or a day-trip stop.</td><td>₹420 CPM</td></tr>
+      <tr><td><b>Rear-seat screen</b></td><td>Muted 15 s loops with the ETA always visible.</td><td>₹260 CPM</td></tr>
+      <tr><td><b>Day-trip partner stop</b></td><td>Homestays, cafés and guides inside itineraries.</td><td>Revenue share</td></tr>
+    </tbody></table>
+    <div class="g2">
+      <div class="c do"><div class="lb">Always</div><p>One ad per screen, labelled "Partner offer", relevant to the trip, capped per rider per day.</p></div>
+      <div class="c dont"><div class="lb">Never</div><p>Ads on live-ride, SOS, payment or trip-code screens, in student views, or for betting, alcohol or politics.</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>SAGA · Brand &amp; experience manual</span><span>sagamobility.com</span></div>
+</section>
 
-    <section id="ops">
-      <div class="eyebrow">14 · Ops console</div>
-      <h2>One screen to run the region.</h2>
-      <p>The backend console is where the dispatch, fleet, pilot, business, advertising, rewards and safety teams work. It uses the same tokens as the apps, tuned for dense, scannable data.</p>
-      <div class="tablewrap"><table>
-        <thead><tr><th>View</th><th>What the team does there</th></tr></thead>
-        <tbody>
-          <tr><td>Overview</td><td>Live KPIs, a fleet map by status, alerts that need a decision, and 24-hour demand: locked rides against forecast on-demand and cars available.</td></tr>
-          <tr><td>Dispatch</td><td>Every upcoming ride with pilot, car and status, filterable by service. Flight watch moves pickups for delays and frees cars on cancellations.</td></tr>
-          <tr><td>Fleet</td><td>Battery and state per car, depot bay occupancy, and automatic reassignment when a car runs low.</td></tr>
-          <tr><td>Pilots</td><td>Roster, shift status, on-time record, ratings, attention alerts awaiting review, and training progress.</td></tr>
-          <tr><td>Business</td><td>Company, campus and partner accounts with rides, spend, CO₂e and invoice status.</td></tr>
-          <tr><td>Advertising</td><td>Placements, rate card, a campaign builder with a live reach and cost estimate, and running campaigns.</td></tr>
-          <tr><td>AURA</td><td>Points issued and redeemed, open liability, expiring points and the CO₂ method.</td></tr>
-          <tr><td>Safety</td><td>The Secure 360 alert queue. Every alert is reviewed by a person, and pilots can add context.</td></tr>
-        </tbody></table></div>
-    </section>
+<!-- 30 CAMPAIGN -->
+<section class="page" id="p30">
+  <div class="run"><b>SAGA · Launch campaign</b><span>30</span></div>
+  <div class="body">
+    <div class="eb">22 · Launch campaign</div>
+    <h2>Arrive Ahead: <span>the cars at night, then the product truth.</span></h2>
+    <table><thead><tr><th style="width:20%">Phase</th><th>What we do</th><th style="width:28%">Channels</th></tr></thead><tbody>
+      <tr><td><b>0 · Fix</b><br><span class="mono" style="font-size:6.5pt;color:var(--ink3)">WEEKS 1–4</span></td><td>New store listing and screenshots, one airport name, Google Business Profile, Telugu strings.</td><td>Owned</td></tr>
+      <tr><td><b>1 · Glow</b><br><span class="mono" style="font-size:6.5pt;color:var(--ink3)">WEEKS 5–6</span></td><td>Night shoot of the fleet on Beach Road and the airport road. "The cars that glow" teasers.</td><td>Instagram, Shorts, local creators</td></tr>
+      <tr><td><b>2 · Arrive Ahead</b><br><span class="mono" style="font-size:6.5pt;color:var(--ink3)">WEEKS 7–10</span></td><td>SAGA Fly launch: airport-road billboard, hotel and travel-agent partners, +200 points on the first PNR booking.</td><td>Outdoor, Google Search, Telugu radio</td></tr>
+      <tr><td><b>3 · Loop &amp; Business</b><br><span class="mono" style="font-size:6.5pt;color:var(--ink3)">MONTHS 3–6</span></td><td>Sales to IT parks, pharma zones and schools. Campus ambassadors. Give 200, get 200 referrals.</td><td>Direct sales, LinkedIn, WhatsApp</td></tr>
+      <tr><td><b>4 · Tales</b><br><span class="mono" style="font-size:6.5pt;color:var(--ink3)">SEASON</span></td><td>Araku season with AP Tourism and homestays; a creator-led "48 hours of Tales".</td><td>Instagram, travel platforms</td></tr>
+    </tbody></table>
+    <h3>Headline bank</h3>
+    <div class="g2">
+      <div class="c ink"><h4 style="font-size:13pt">"Your cab was booked before you asked."</h4></div>
+      <div class="c ink"><h4 style="font-size:13pt">"₹18 a km. No surprises."</h4></div>
+      <div class="c ink"><h4 style="font-size:13pt">"Same pilot. Same minute. Every school day."</h4></div>
+      <div class="c ink"><h4 style="font-size:13pt">"Araku, without the bargaining."</h4></div>
+    </div>
+  </div>
+  <div class="foot"><span>SAGA · Brand &amp; experience manual</span><span>sagamobility.com</span></div>
+</section>
 
-    <section id="ads">
-      <div class="eyebrow">15 · Advertising</div>
-      <h2>Useful offers at the right moment, never noise.</h2>
-      <p>Advertising is a revenue line, but riders must never feel sold to. Ads are native, relevant to the trip, labelled and capped.</p>
-      <div class="grid2">
-        <div class="card"><div class="label">In app</div><h4>Home partner card</h4><p>One per session: stays, food, travel. Sample rate ₹180 CPM.</p></div>
-        <div class="card"><div class="label">In app</div><h4>Arrival offer</h4><p>Shown after the drop at the airport, malls or a Tales stop, such as a lounge pass at Departures. Sample rate ₹420 CPM.</p></div>
-        <div class="card"><div class="label">In car</div><h4>Rear-seat screen</h4><p>Muted 15 s loops, with the ride ETA always visible. Sample rate ₹260 CPM.</p></div>
-        <div class="card"><div class="label">Tales</div><h4>Featured partner stop</h4><p>Homestays, cafés and guides inside itineraries, on revenue share.</p></div>
-      </div>
-      <h3>Rules</h3>
-      <ul class="clean">
-        <li>At most one ad per screen, always labelled "Sponsored" or "Partner offer".</li>
-        <li>No ads on live-ride, SOS, payment or trip-code screens, and none in any Campus or student view.</li>
-        <li>Categories: travel, food, stays, retail and services. No betting, alcohol or political ads.</li>
-        <li>Frequency capped per rider per day. Plasma and Nova riders can turn in-app ads off.</li>
-        <li>All rates in the prototype are samples, to be set by SAGA.</li>
-      </ul>
-    </section>
+<!-- 31 ROADMAP -->
+<section class="page" id="p31">
+  <div class="run"><b>SAGA · Roadmap</b><span>31</span></div>
+  <div class="body">
+    <div class="eb">23 · Roadmap &amp; open decisions</div>
+    <h2>From manual to market <span>in sixteen weeks.</span></h2>
+    <div class="g4">
+      <div class="c"><div class="lb">Weeks 1–3</div><p>Sign off the identity, build the component library, rebuild the store listing and website, choose the PNR data provider.</p></div>
+      <div class="c"><div class="lb">Weeks 4–10</div><p>Airport rides, live ride and green points. UPI. Publish the CO₂ method. Fit Secure 360 after a privacy review.</p></div>
+      <div class="c"><div class="lb">Weeks 10–16</div><p>Daily rides and campus, then the business console with roster upload and GST invoicing.</p></div>
+      <div class="c"><div class="lb">Season</div><p>Outstation charge planner and the first three day trips with partners.</p></div>
+    </div>
+    <h3>Decisions for the SAGA team</h3>
+    <table><tbody>
+      <tr><td><b>PNR data</b></td><td>Provider and cost per lookup</td></tr>
+      <tr><td><b>Pricing</b></td><td>Comfort rate (₹22/km is a sample), daily-ride discount and skip credits, outstation return legs</td></tr>
+      <tr><td><b>Green points</b></td><td>A verified CO₂ factor and redemption value</td></tr>
+      <tr><td><b>Voice</b></td><td>Gemini speech and function calling, limited to the app's own actions; data and consent review</td></tr>
+      <tr><td><b>Livery</b></td><td>Lighting compliance with RTO rules</td></tr>
+      <tr><td><b>Advertising</b></td><td>Rate card, categories and rear-seat screen hardware</td></tr>
+      <tr><td><b>Pilots</b></td><td>Safety-bonus amounts and the training plan</td></tr>
+    </tbody></table>
+  </div>
+  <div class="foot"><span>SAGA · Brand &amp; experience manual</span><span>sagamobility.com</span></div>
+</section>
 
-    <!-- 12 -->
-    <section id="aura">
-      <div class="eyebrow">16 · AURA rewards</div>
-      <h2>Kilometres become light you can spend.</h2>
-      <div class="bleed"><img src="assets/aura.jpg" alt="" style="aspect-ratio:16/8;object-fit:cover"><figcaption>AURA ◈ · 1 POINT = 100 g CO₂e AVOIDED</figcaption></div>
-      <div class="formula">CO₂e avoided = km × (<b>petrol-cab factor</b> − <b>EV grid factor</b>) · prototype uses a net <b>72 g/km</b> placeholder</div>
-      <p>The factor has to be verified, and the method published in the app, before launch. Claims are always "estimated CO₂e avoided compared with a petrol cab", never "zero emissions".</p>
-      <div class="grid3">
-        <div class="card"><div class="label">Ion</div><h4>0 – 1,999 ◈</h4><p>Earn on every ride. Monthly AURA card to share.</p></div>
-        <div class="card"><div class="label">Plasma</div><h4>2,000 ◈</h4><p>Priority Loop slots and a free airport ride on reaching the tier.</p></div>
-        <div class="card"><div class="label">Nova</div><h4>6,000 ◈</h4><p>Premium upgrades and partner experiences. Your name on a planted mangrove.</p></div>
-      </div>
-      <p class="small">Points expire 12 months after they are earned. Liability is capped by keeping the redemption value at or below 1.5% of fare.</p>
-    </section>
+<!-- 32 BACK COVER -->
+<section class="page dark">
+  <div class="run"><b>SAGA</b><span>32</span></div>
+  <div style="margin:auto 0;display:flex;flex-direction:column;align-items:flex-start;gap:8mm">
+    <svg viewBox="0 0 100 100" width="90" aria-label="SAGA monogram"><path d="M86 14 H32 A18 18 0 0 0 32 50 H68 A18 18 0 0 1 68 86 H34" fill="none" stroke="#F2F4F8" stroke-width="13"/><circle cx="19" cy="86" r="6.5" fill="#33C6F0"/></svg>
+    <h2 style="font-size:32pt;margin:0">Arrive ahead. <span>ముందే చేరుకోండి.</span></h2>
+    <p class="lede">Questions about this manual: the brand team at SAGA Mobility, Visakhapatnam.</p>
+  </div>
+  <div class="foot"><span>SAGA · Brand &amp; experience manual · v5.0</span><span>sagamobility.com</span></div>
+</section>
 
-    <!-- 13 -->
-    <section id="marketing">
-      <div class="eyebrow">17 · Marketing</div>
-      <h2>Campaign: Arrive Ahead.</h2>
-      <p>Lead with the cars at night, the light-lines on Beach Road, then the product truth: your ride is ready before you ask.</p>
-      <div class="apps">
-        <div class="billboard"><img src="assets/car.jpg" alt=""><div class="copy"><span class="eyebrow">SAGA FLY</span><b>Type your PNR. Sleep in.</b><span class="mono small" style="color:var(--titanium)">sagamobility.com · ₹18/km · 100% electric</span></div></div>
-        <div class="card" style="display:flex;flex-direction:column;gap:10px">
-          <div class="label">Headline bank</div>
-          <p style="margin:0;color:#fff">"Your cab was booked before you asked."</p>
-          <p style="margin:0;color:#fff">"₹18 a km. No surprises."</p>
-          <p style="margin:0;color:#fff">"Same pilot. Same minute. Every school day."</p>
-          <p style="margin:0;color:#fff">"Araku, without the bargaining."</p>
-          <p style="margin:0;color:#fff">"Every kilometre, electric."</p>
-        </div>
-      </div>
-      <h3>Phased plan</h3>
-      <div class="tablewrap"><table>
-        <thead><tr><th>Phase</th><th>Actions</th><th>Channels</th></tr></thead>
-        <tbody>
-          <tr><td><b>0 · Fix</b><br><span class="small">Weeks 1–4</span></td><td>Org developer account, new store listing and screenshots, website Play badge, one airport name, Google Business Profile, Telugu strings.</td><td>Owned</td></tr>
-          <tr><td><b>1 · Glow</b><br><span class="small">Weeks 5–6</span></td><td>Night shoot of the fleet on Beach Road and the NH16 airport road. "The cars that glow" teaser reels. No offer, just intrigue.</td><td>Instagram, YouTube Shorts, local creators</td></tr>
-          <tr><td><b>2 · Arrive Ahead</b><br><span class="small">Weeks 7–10</span></td><td>SAGA Fly launch: billboard on the airport road, hotel concierge and travel-agent partners, a launch bonus of +200 ◈ on the first PNR booking.</td><td>OOH, Google Search ("airport cab Vizag"), Telugu radio</td></tr>
-          <tr><td><b>3 · Loop &amp; Business</b><br><span class="small">Months 3–6</span></td><td>B2B sales to IT parks, pharma zones and schools. Campus ambassadors. Shared monthly AURA cards. Referral: give 200 ◈, get 200 ◈.</td><td>Direct sales, LinkedIn, WhatsApp</td></tr>
-          <tr><td><b>4 · Tales</b><br><span class="small">Season</span></td><td>Araku season launch with AP Tourism and homestays, plus a creator-led "48 hours of Tales".</td><td>Instagram, travel platforms</td></tr>
-        </tbody></table></div>
-      <h3>Metrics</h3>
-      <p>Track from day one: on-time pickup %, share of rides pre-scheduled (PNR + Loop + Business), cost to acquire a rider by channel, Loop 3-month retention, fleet utilisation hours, AURA redemption rate, and rider NPS. Set targets after the first four weeks of real data.</p>
-    </section>
-
-    <!-- 14 -->
-    <section id="applications">
-      <div class="eyebrow">18 · Applications</div>
-      <h2>The system on the street.</h2>
-      <div class="livery">
-        <div class="img"><img src="assets/car.jpg" alt="SAGA ONE render with Plasma light-lines"></div>
-        <div class="spec2">
-          <div class="label">Vehicle livery · SAGA ONE</div>
-          <ul class="clean">
-            <li>Body: gloss "Midnight Ion" black wrap, no stickers or offer graphics.</li>
-            <li>Light-line: Plasma beltline and wheel rings, the signature. <b>Confirm decorative lighting is compliant with RTO and Motor Vehicles rules</b> before fitting.</li>
-            <li>Front doors: monogram 40 cm, Titanium vinyl.</li>
-            <li>Rear: SΛGΛ wordmark plus fleet number, e.g. "ONE·2147".</li>
-            <li>Pilots: carbon jacket with Plasma piping and a monogram on the chest.</li>
-          </ul>
-        </div>
-      </div>
-      <h3>App icon</h3>
-      <div class="icons" style="margin-top:16px">
-        <div style="text-align:center"><div class="appicon"><svg viewBox="0 0 100 100" width="52" height="52"><defs><linearGradient id="ig" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7FE6FF"/><stop offset=".55" stop-color="#4D8DFF"/><stop offset="1" stop-color="#092EC9"/></linearGradient></defs><path d="M86 14 H32 A18 18 0 0 0 32 50 H68 A18 18 0 0 1 68 86 H34" fill="none" stroke="url(#ig)" stroke-width="13"/><circle cx="19" cy="86" r="6.5" fill="#fff"/></svg></div><div class="small" style="margin-top:8px">Primary</div></div>
-        <div style="text-align:center"><div class="appicon b"><svg viewBox="0 0 100 100" width="52" height="52"><path d="M86 14 H32 A18 18 0 0 0 32 50 H68 A18 18 0 0 1 68 86 H34" fill="none" stroke="#fff" stroke-width="13"/><circle cx="19" cy="86" r="6.5" fill="#fff"/></svg></div><div class="small" style="margin-top:8px">Business</div></div>
-        <div style="text-align:center"><div class="appicon w"><svg viewBox="0 0 100 100" width="52" height="52"><path d="M86 14 H32 A18 18 0 0 0 32 50 H68 A18 18 0 0 1 68 86 H34" fill="none" stroke="#05060A" stroke-width="13"/><circle cx="19" cy="86" r="6.5" fill="#092EC9"/></svg></div><div class="small" style="margin-top:8px">Pilot app</div></div>
-      </div>
-    </section>
-
-    <!-- 15 -->
-    <section id="roadmap">
-      <div class="eyebrow">19 · Roadmap</div>
-      <h2>From manual to market.</h2>
-      <div class="roadmap">
-        <div class="phase"><b>Weeks 1–3</b><p style="margin:0">Sign off the identity. Turn this simulation into a Figma component library. Rebuild the store listing and website. Choose the PNR data provider.</p></div>
-        <div class="phase"><b>Weeks 4–10</b><p style="margin:0">Build the Fly, Live ride and AURA MVP. Add UPI. Publish the CO₂ method. Fit Secure 360 to pilot cars, after a privacy review.</p></div>
-        <div class="phase"><b>Weeks 10–16</b><p style="margin:0">Loop and Campus, then the Business console with CSV roster import and GST invoicing.</p></div>
-        <div class="phase"><b>Season</b><p style="margin:0">Voyage charge planner and the first three Tales with partners.</p></div>
-      </div>
-      <div class="card" style="margin-top:28px">
-        <div class="label">Open decisions for the SAGA team</div>
-        <ul class="clean"><li>PNR data provider and its cost per lookup</li><li>EV Premium rate (₹22/km is a sample in the prototype)</li><li>Loop discount and skip-credit rules</li><li>Verified CO₂ factor for AURA</li><li>Return-leg pricing for Voyage</li><li>Lighting compliance for the livery</li><li>Ad rate card, categories and rear-seat screen hardware</li><li>Pilot safety-bonus amounts and training plan</li></ul>
-      </div>
-    </section>
-  </main>
 </div>
 
 <script>
 (() => {
-  const links = [...document.querySelectorAll("#toc a")];
-  const map = new Map(links.map(a => [a.getAttribute("href").slice(1), a]));
-  const io = new IntersectionObserver(es => {
-    es.forEach(e => { if (e.isIntersecting) { links.forEach(l => l.classList.remove("on")); map.get(e.target.id)?.classList.add("on"); } });
-  }, { rootMargin: "-40% 0px -55% 0px" });
-  document.querySelectorAll("main section[id]").forEach(s => io.observe(s));
+  const doc = document.getElementById("doc");
+  const fit = () => { const w = document.documentElement.clientWidth; const pw = 210 * 96 / 25.4; doc.style.setProperty("--z", Math.min(1, (w - 24) / pw).toFixed(3)); };
+  addEventListener("resize", fit); fit();
 })();
 </script>
 

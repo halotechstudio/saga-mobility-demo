@@ -35,17 +35,17 @@ svg.lucide{width:20px;height:20px;stroke-width:2;flex:none}
 /* stage */
 .stage{min-height:100%;display:grid;grid-template-columns:minmax(190px,240px) auto minmax(250px,320px);gap:clamp(20px,4vw,60px);align-items:center;justify-content:center;padding-block:20px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 .side{display:flex;flex-direction:column;gap:14px;min-width:0}
-.brandline{display:flex;align-items:center;gap:10px;font-weight:800;font-size:15px}
+.brandline{display:flex;align-items:center;gap:10px;font-weight:500;font-size:14px}
 .brandline small{display:block;font-family:var(--mono);font-weight:500;color:var(--ink3);font-size:11px;letter-spacing:.06em}
-.navgroup h4{margin:12px 0 2px;font-family:var(--mono);font-size:11px;font-weight:600;color:var(--ink3);letter-spacing:.08em;text-transform:uppercase}
-.navbtn{display:block;text-align:left;padding:5px 0;color:var(--ink2);font-size:14.5px;font-weight:500}
+.navgroup h4{margin:12px 0 2px;font-family:var(--mono);font-size:11px;font-weight:500;color:var(--ink3);letter-spacing:.08em;text-transform:uppercase}
+.navbtn{display:block;text-align:left;padding:5px 0;color:var(--ink2);font-size:14px;font-weight:500}
 .navbtn:hover,.navbtn[aria-current="true"]{color:var(--blue)}
-.navbtn[aria-current="true"]{font-weight:700}
+.navbtn[aria-current="true"]{font-weight:500}
 .notes .k{font-family:var(--mono);font-size:11px;color:var(--ink3);letter-spacing:.06em;text-transform:uppercase}
-.notes h3{margin:6px 0 16px;font-weight:800;font-size:22px;line-height:1.15;letter-spacing:-.025em;text-wrap:balance}
+.notes h3{margin:6px 0 16px;font-weight:500;font-size:20px;line-height:1.15;letter-spacing:-.02em;text-wrap:balance}
 .notes dl{margin:0;display:grid;gap:14px}
-.notes dt{font-family:var(--mono);font-size:11px;color:var(--blue);font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px}
-.notes dd{margin:0;color:var(--ink2);line-height:1.55;font-size:14.5px}
+.notes dt{font-family:var(--mono);font-size:11px;color:var(--blue);font-weight:500;letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px}
+.notes dd{margin:0;color:var(--ink2);line-height:1.55;font-size:14px}
 
 /* device */
 .device-wrap{zoom:var(--z,1)}
@@ -53,7 +53,7 @@ svg.lucide{width:20px;height:20px;stroke-width:2;flex:none}
 .screen{position:relative;width:392px;height:846px;border-radius:53px;overflow:hidden;background:var(--bg);isolation:isolate}
 .screen::before{content:"";position:absolute;inset:0 0 auto;height:56px;z-index:74;pointer-events:none;background:linear-gradient(var(--sbg,rgba(242,244,249,.96)) 60%,transparent);transition:background .3s}
 .island{position:absolute;top:11px;left:50%;translate:-50% 0;width:120px;height:34px;border-radius:20px;background:#000;z-index:80}
-.statusbar{position:absolute;inset:0 0 auto;height:52px;display:flex;align-items:center;justify-content:space-between;padding:6px 34px 0 42px;z-index:75;font-weight:700;font-size:15px;pointer-events:none;color:var(--sb,var(--ink));transition:color .3s}
+.statusbar{position:absolute;inset:0 0 auto;height:52px;display:flex;align-items:center;justify-content:space-between;padding:6px 34px 0 42px;z-index:75;font-weight:500;font-size:14px;pointer-events:none;color:var(--sb,var(--ink));transition:color .3s}
 .statusbar svg.lucide{width:17px;height:17px}
 .scr{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;padding:56px 16px 104px;scrollbar-width:none;visibility:hidden}
 .scr::-webkit-scrollbar{display:none}
@@ -61,11 +61,11 @@ svg.lucide{width:20px;height:20px;stroke-width:2;flex:none}
 .scr.no-tab{padding-bottom:36px}
 
 /* primitives */
-.h1{font-weight:800;font-size:28px;line-height:1.05;letter-spacing:-.035em;margin:0;text-wrap:balance}
-.h2{font-weight:800;font-size:19px;letter-spacing:-.02em;margin:0}
-.k{font-size:14px;color:var(--ink3);font-weight:500}
-.lab{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3)}
-.sub{color:var(--ink2);line-height:1.5;margin:6px 0 0;font-size:15px}
+.h1{font-weight:500;font-size:28px;line-height:1.1;letter-spacing:-.02em;margin:0;text-wrap:balance}
+.h2{font-weight:500;font-size:18px;letter-spacing:-.02em;margin:0}
+.k{font-size:14px;color:var(--ink3);font-weight:400}
+.lab{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3)}
+.sub{color:var(--ink2);line-height:1.5;margin:6px 0 0;font-size:14px}
 .card{background:var(--card);border-radius:26px;box-shadow:var(--sh)}
 .black{background:var(--ink);color:#fff}
 .black .k,.black .sub{color:var(--kt)}
@@ -75,7 +75,7 @@ svg.lucide{width:20px;height:20px;stroke-width:2;flex:none}
 .between{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .stack{display:flex;flex-direction:column;gap:10px}
 .mt4{margin-top:4px}.mt8{margin-top:8px}.mt12{margin-top:12px}.mt16{margin-top:16px}.mt20{margin-top:20px}.mt24{margin-top:24px}.mt28{margin-top:28px}
-.btn{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:52px;border-radius:999px;font-weight:700;font-size:16px;background:var(--blue);color:#fff;box-shadow:0 12px 26px rgba(9,46,201,.3);transition:transform .25s var(--spring),background .2s}
+.btn{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:52px;border-radius:999px;font-weight:600;font-size:16px;background:var(--blue);color:#fff;box-shadow:0 12px 26px rgba(9,46,201,.3);transition:transform .25s var(--spring),background .2s}
 .btn:hover{background:var(--blue2)}
 .btn:active{transform:scale(.97)}
 .btn.sec{background:var(--card);color:var(--ink);box-shadow:inset 0 0 0 2px var(--line)}
@@ -85,22 +85,22 @@ svg.lucide{width:20px;height:20px;stroke-width:2;flex:none}
 .ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.4);transform:scale(0);animation:rip .6s var(--ease) forwards;pointer-events:none}
 .btn.sec .ripple,.btn.white .ripple{background:rgba(9,46,201,.15)}
 @keyframes rip{to{transform:scale(1);opacity:0}}
-.chip{display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:0 14px;border-radius:999px;font-size:14.5px;font-weight:600;background:var(--card);box-shadow:inset 0 0 0 1.5px var(--line);white-space:nowrap;transition:all .25s var(--ease)}
+.chip{display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:0 14px;border-radius:999px;font-size:14px;font-weight:500;background:var(--card);box-shadow:inset 0 0 0 1.5px var(--line);white-space:nowrap;transition:all .25s var(--ease)}
 .chip svg.lucide{width:18px;height:18px}
 .chip.on{background:var(--ink);color:#fff;box-shadow:none}
 .chip:active{transform:scale(.96)}
 .icon-btn{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--card);box-shadow:var(--sh);flex:none;transition:transform .2s var(--spring)}
 .icon-btn:active{transform:scale(.9)}
 .topbar{display:flex;align-items:center;justify-content:space-between;min-height:48px;margin-bottom:4px}
-.topbar .t{font-size:17px;font-weight:700}
+.topbar .t{font-size:16px;font-weight:500}
 .dot{width:8px;height:8px;border-radius:50%;background:var(--green);flex:none}
 .live{box-shadow:0 0 0 0 rgba(14,143,91,.5);animation:live 2s infinite}
 @keyframes live{70%{box-shadow:0 0 0 10px rgba(14,143,91,0)}100%{box-shadow:0 0 0 0 rgba(14,143,91,0)}}
 .divider{height:1px;background:var(--line);margin:14px 0}
 .black .divider{background:var(--kl)}
-.tchip{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 10px;border-radius:8px;font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.04em;background:var(--k2);color:#fff}
+.tchip{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 10px;border-radius:8px;font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.04em;background:var(--k2);color:#fff}
 .tchip i{width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan)}
-.plate{display:inline-flex;align-items:center;padding:6px 12px;border-radius:10px;background:#FFFBEA;color:#111;box-shadow:inset 0 0 0 2px #111;font-family:var(--mono);font-weight:700;letter-spacing:.04em;font-size:16px;white-space:nowrap}
+.plate{display:inline-flex;align-items:center;padding:6px 12px;border-radius:10px;background:#FFFBEA;color:#111;box-shadow:inset 0 0 0 2px #111;font-family:var(--mono);font-weight:500;letter-spacing:.04em;font-size:16px;white-space:nowrap}
 /* odometer digits */
 .roll{display:inline-flex;align-items:flex-start;line-height:1;height:1em;overflow:hidden}
 .roll .rd{display:inline-block;height:1em;overflow:hidden}
@@ -110,7 +110,7 @@ svg.lucide{width:20px;height:20px;stroke-width:2;flex:none}
 /* tab bar */
 .tabbar{position:absolute;left:10px;right:10px;bottom:12px;z-index:60;height:66px;padding:6px;border-radius:26px;background:var(--ink);box-shadow:0 14px 34px rgba(7,8,12,.3);display:grid;grid-template-columns:repeat(4,1fr);gap:4px;transition:transform .5s var(--ease),opacity .3s}
 .tabbar.hide{transform:translateY(130px);opacity:0;pointer-events:none}
-.tab{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border-radius:20px;font-size:11.5px;font-weight:700;color:rgba(255,255,255,.6);transition:all .3s var(--ease)}
+.tab{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border-radius:20px;font-size:11px;font-weight:500;color:rgba(255,255,255,.6);transition:all .3s var(--ease)}
 .tab svg.lucide{width:21px;height:21px}
 .tab[aria-current="true"]{background:var(--blue);color:#fff}
 
@@ -123,7 +123,7 @@ svg.lucide{width:20px;height:20px;stroke-width:2;flex:none}
 .me{position:absolute;width:22px;height:22px;margin:-11px 0 0 -11px;border-radius:50%;background:var(--blue);border:4px solid #fff;animation:mepulse 2.2s infinite}
 @keyframes mepulse{0%{box-shadow:0 0 0 0 rgba(9,46,201,.45)}70%{box-shadow:0 0 0 24px rgba(9,46,201,0)}100%{box-shadow:0 0 0 0 rgba(9,46,201,0)}}
 .dpin{position:absolute;width:20px;height:20px;margin:-10px;border-radius:6px;background:var(--ink);border:3px solid #fff;box-shadow:0 6px 12px rgba(7,8,12,.3)}
-.pinlabel{position:absolute;transform:translate(-50%,-160%);background:var(--ink);color:#fff;font-size:13px;font-weight:700;padding:6px 10px;border-radius:10px;white-space:nowrap}
+.pinlabel{position:absolute;transform:translate(-50%,-160%);background:var(--ink);color:#fff;font-size:13px;font-weight:500;padding:6px 10px;border-radius:10px;white-space:nowrap}
 .flow{fill:none;stroke:#fff;stroke-width:2.2;stroke-dasharray:3 9;stroke-linecap:round;animation:flow 1s linear infinite}
 @keyframes flow{to{stroke-dashoffset:-12}}
 
@@ -131,19 +131,19 @@ svg.lucide{width:20px;height:20px;stroke-width:2;flex:none}
 #s-splash{padding:0;background:var(--ink);color:#fff;display:flex;flex-direction:column}
 #heroCanvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 .splash-top{position:relative;z-index:2;padding:70px 26px 0}
-.splash-top .h1{font-size:36px}
+.splash-top .h1{font-size:34px}
 .boot{position:relative;z-index:2;margin-top:auto;padding:0 26px 40px}
 .bootlog{font-family:var(--mono);font-size:12px;line-height:1.9;color:rgba(255,255,255,.7);min-height:92px}
-.bootlog b{color:var(--cyan);font-weight:600}
+.bootlog b{color:var(--cyan);font-weight:500}
 
 /* HOME */
 #s-home{padding:0}
 .home-map{position:sticky;top:0;height:380px;z-index:0}
 .home-top{position:absolute;top:58px;left:16px;right:16px;display:flex;justify-content:space-between;align-items:center;z-index:2}
-.hello{display:flex;align-items:center;gap:10px;padding:6px 16px 6px 6px;border-radius:999px;background:#fff;box-shadow:var(--sh);font-weight:700}
-.avatar{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-weight:800;background:var(--blue);color:#fff}
+.hello{display:flex;align-items:center;gap:10px;padding:6px 16px 6px 6px;border-radius:999px;background:#fff;box-shadow:var(--sh);font-weight:500}
+.avatar{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-weight:500;background:var(--blue);color:#fff}
 .ticker{position:absolute;left:14px;right:14px;bottom:76px;z-index:2;height:34px;border-radius:12px;background:var(--ink);color:#fff;overflow:hidden;display:flex;align-items:center}
-.ticker .tl{display:flex;gap:28px;white-space:nowrap;font-family:var(--mono);font-size:12.5px;font-weight:600;letter-spacing:.04em;animation:tick 22s linear infinite;padding-left:16px}
+.ticker .tl{display:flex;gap:28px;white-space:nowrap;font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.04em;animation:tick 22s linear infinite;padding-left:16px}
 .ticker .tl span{display:inline-flex;align-items:center;gap:8px}
 .ticker .tl i{width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan)}
 @keyframes tick{to{transform:translateX(-50%)}}
@@ -151,19 +151,19 @@ svg.lucide{width:20px;height:20px;stroke-width:2;flex:none}
 .grab{width:44px;height:5px;border-radius:9px;background:#C9CFDC;margin:0 auto 14px}
 .where{display:flex;align-items:center;gap:12px;width:100%;min-height:58px;padding:0 8px 0 18px;border-radius:20px;background:#fff;box-shadow:var(--sh);text-align:left;transition:transform .25s var(--spring)}
 .where:active{transform:scale(.98)}
-.where .q{flex:1;font-size:18px;font-weight:800;letter-spacing:-.025em}
-.where .now{display:flex;align-items:center;gap:6px;min-height:42px;padding:0 14px;border-radius:999px;background:var(--ink);color:#fff;font-size:15px;font-weight:700}
+.where .q{flex:1;font-size:18px;font-weight:500;letter-spacing:-.01em}
+.where .now{display:flex;align-items:center;gap:6px;min-height:42px;padding:0 14px;border-radius:999px;background:var(--ink);color:#fff;font-size:14px;font-weight:500}
 .places{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:10px -16px 0;padding:2px 16px}
 .places::-webkit-scrollbar{display:none}
 /* airport flagship */
 .fly-card{position:relative;overflow:hidden;border-radius:26px;background:radial-gradient(120% 90% at 85% 10%,#1b2a7a 0%,#07080C 55%);color:#fff;padding:18px;min-height:244px;box-shadow:0 20px 40px rgba(7,8,12,.25)}
 .fly-card canvas{position:absolute;right:-24px;top:-4px;width:230px;height:180px;touch-action:none;cursor:grab}
-.fly-card .tag{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.08em;color:var(--cyan)}
-.fly-card h3{position:relative;margin:6px 0 0;font-size:23px;line-height:1.02;font-weight:800;letter-spacing:-.04em;max-width:7.5ch;pointer-events:none}
+.fly-card .tag{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.08em;color:var(--cyan)}
+.fly-card h3{position:relative;margin:6px 0 0;font-size:24px;line-height:1.15;font-weight:500;letter-spacing:-.02em;max-width:9ch;pointer-events:none}
 .fly-card .w{position:relative;margin-top:62px}
 .mini-pnr{display:flex;gap:8px}
-.mini-pnr input{flex:1;min-width:0;height:50px;border-radius:15px;border:0;background:rgba(255,255,255,.1);color:#fff;padding:0 16px;font-family:var(--mono);font-size:22px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;outline:none;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.25)}
-.mini-pnr input::placeholder{color:rgba(255,255,255,.6);letter-spacing:.04em;font-size:15px;font-family:var(--f);text-transform:none}
+.mini-pnr input{flex:1;min-width:0;height:50px;border-radius:15px;border:0;background:rgba(255,255,255,.1);color:#fff;padding:0 16px;font-family:var(--mono);font-size:20px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;outline:none;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.25)}
+.mini-pnr input::placeholder{color:rgba(255,255,255,.6);letter-spacing:.04em;font-size:14px;font-family:var(--f);text-transform:none}
 .mini-pnr input:focus{box-shadow:inset 0 0 0 2px var(--cyan)}
 .mini-pnr button{width:50px;height:50px;border-radius:15px;background:var(--blue);color:#fff;display:grid;place-items:center;flex:none;transition:transform .2s var(--spring)}
 .mini-pnr button:active{transform:scale(.9)}
@@ -172,8 +172,8 @@ svg.lucide{width:20px;height:20px;stroke-width:2;flex:none}
 .svc-wrap::-webkit-scrollbar{display:none}
 .svc{position:relative;flex:none;width:256px;min-height:332px;border-radius:26px;padding:18px;scroll-snap-align:start;overflow:hidden;box-shadow:0 18px 36px rgba(7,8,12,.12);display:flex;flex-direction:column;transition:transform .45s var(--ease)}
 .svc canvas{position:absolute;left:0;right:0;top:70px;width:100%;height:150px;touch-action:none;cursor:grab}
-.svc .tag{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.08em}
-.svc h3{position:relative;margin:4px 0 0;font-size:21px;line-height:1.02;font-weight:800;letter-spacing:-.035em;max-width:10ch;pointer-events:none}
+.svc .tag{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.08em}
+.svc h3{position:relative;margin:4px 0 0;font-size:20px;line-height:1.12;font-weight:500;letter-spacing:-.02em;max-width:10ch;pointer-events:none}
 .svc .w{margin-top:auto;position:relative;z-index:2}
 .svc .open{position:absolute;right:14px;top:14px;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;z-index:3;transition:transform .3s var(--spring)}
 .svc .open:hover{transform:rotate(-45deg) scale(1.08)}
@@ -182,21 +182,21 @@ svg.lucide{width:20px;height:20px;stroke-width:2;flex:none}
 .s-white{background:#fff;color:var(--ink)}.s-white .open{background:var(--ink);color:#fff}.s-white .tag{color:var(--blue)}
 .s-tint{background:linear-gradient(165deg,#F4F6FF,#DCE4FF);color:var(--ink)}.s-tint .open{background:var(--blue);color:#fff}.s-tint .tag{color:var(--blue)}
 .mini-days{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
-.mini-days button{aspect-ratio:1;border-radius:50%;font-weight:800;font-size:15px;background:#fff;color:var(--ink3);box-shadow:inset 0 0 0 1.5px var(--line);transition:all .25s var(--spring)}
+.mini-days button{aspect-ratio:1;border-radius:50%;font-weight:500;font-size:14px;background:#fff;color:var(--ink3);box-shadow:inset 0 0 0 1.5px var(--line);transition:all .25s var(--spring)}
 .mini-days button[aria-pressed="true"]{background:var(--blue);color:#fff;box-shadow:none;transform:scale(1.06)}
-.bigprice{font-size:25px;font-weight:800;letter-spacing:-.03em}
+.bigprice{font-size:24px;font-weight:500;letter-spacing:-.02em}
 .range{width:100%;accent-color:var(--cyan);height:34px}
 .stepper{display:flex;align-items:center;justify-content:space-between;background:var(--soft);border-radius:20px;padding:6px}
 .stepper button{width:44px;height:44px;border-radius:16px;background:#fff;box-shadow:var(--sh);display:grid;place-items:center;transition:transform .2s var(--spring)}
 .stepper button:active{transform:scale(.88)}
-.stepper b{font-size:24px;font-weight:800}
+.stepper b{font-size:24px;font-weight:500}
 .tabs3{display:flex;gap:6px;flex-wrap:wrap}
-.tabs3 button{min-height:38px;padding:0 12px;border-radius:999px;font-size:13.5px;font-weight:700;background:rgba(255,255,255,.14);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.3);transition:all .25s var(--ease)}
+.tabs3 button{min-height:38px;padding:0 12px;border-radius:999px;font-size:13px;font-weight:500;background:rgba(255,255,255,.14);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.3);transition:all .25s var(--ease)}
 .tabs3 button[aria-pressed="true"]{background:#fff;color:var(--ink)}
 .dots{display:flex;justify-content:center;gap:6px}
 .dots i{width:8px;height:8px;border-radius:9px;background:#C9CFDC;transition:all .3s var(--ease)}
 .dots i.on{width:24px;background:var(--ink)}
-.drag-hint{position:absolute;right:16px;top:248px;z-index:3;display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.06em;padding:5px 9px;border-radius:8px;background:rgba(7,8,12,.55);color:#fff;pointer-events:none}
+.drag-hint{position:absolute;right:16px;top:248px;z-index:3;display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.06em;padding:5px 9px;border-radius:8px;background:rgba(7,8,12,.55);color:#fff;pointer-events:none}
 .green-card{display:flex;align-items:center;gap:14px;padding:14px 16px;width:100%;text-align:left;background:linear-gradient(135deg,#E3F6EC,#fff);border-radius:26px;box-shadow:var(--sh)}
 .leaf{width:48px;height:48px;border-radius:18px;background:var(--green);color:#fff;display:grid;place-items:center;flex:none}
 .help{display:flex;align-items:center;gap:14px;padding:16px 18px;width:100%;text-align:left}
@@ -207,14 +207,14 @@ svg.lucide{width:20px;height:20px;stroke-width:2;flex:none}
 .inputs .a{width:12px;height:12px;border-radius:50%;background:var(--blue);margin-left:5px}
 .inputs .b{width:12px;height:12px;border-radius:3px;background:var(--ink);margin-left:5px}
 .inputs .ln{width:2px;height:20px;background:var(--line);margin-left:10px}
-.inputs input{width:100%;height:48px;border:0;border-radius:14px;background:var(--soft);padding:0 14px;font-size:18px;font-weight:600;outline:none}
+.inputs input{width:100%;height:48px;border:0;border-radius:14px;background:var(--soft);padding:0 14px;font-size:18px;font-weight:500;outline:none}
 .inputs input:focus{box-shadow:inset 0 0 0 2px var(--blue)}
 .sug{display:flex;align-items:center;gap:14px;padding:14px 6px;border-bottom:1px solid var(--line);width:100%;text-align:left;transition:background .2s}
 .sug:hover{background:#fff}
 .sug .ic{width:42px;height:42px;border-radius:15px;background:var(--ink);color:#fff;display:grid;place-items:center;flex:none}
-.sug b{display:block;font-weight:700;font-size:16px}
-.sug span{font-size:15px;color:var(--ink3)}
-.sug .d{margin-left:auto;font-family:var(--mono);font-size:13px;font-weight:600;color:var(--ink2);white-space:nowrap}
+.sug b{display:block;font-weight:500;font-size:16px}
+.sug span{font-size:14px;color:var(--ink3)}
+.sug .d{margin-left:auto;font-family:var(--mono);font-size:13px;font-weight:500;color:var(--ink2);white-space:nowrap}
 
 /* CHOOSE */
 #s-choose{padding:0}
@@ -227,15 +227,15 @@ svg.lucide{width:20px;height:20px;stroke-width:2;flex:none}
 .opt:active{transform:scale(.98)}
 .opt img{width:92px;height:48px;object-fit:contain;flex:none;transition:transform .5s var(--ease)}
 .opt[aria-pressed="true"] img{transform:translateX(6px) scale(1.08)}
-.opt b{display:block;font-weight:800;font-size:16px}
+.opt b{display:block;font-weight:500;font-size:16px}
 .opt .k{font-size:14px}
 .opt .p{margin-left:auto;text-align:right;flex:none}
 .opt .p b{font-size:18px}
 .vpanel{margin-top:10px;padding:14px 16px;border-radius:22px}
 .vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
 .vgrid div{background:var(--k2);border-radius:14px;padding:10px 12px}
-.vgrid b{display:block;font-family:var(--mono);font-size:18px;font-weight:600}
-.vgrid span{font-size:12.5px;color:var(--kt);font-weight:600}
+.vgrid b{display:block;font-family:var(--mono);font-size:18px;font-weight:500}
+.vgrid span{font-size:12px;color:var(--kt);font-weight:500}
 .pay{display:flex;gap:8px}
 
 /* FINDING */
@@ -251,78 +251,78 @@ svg.lucide{width:20px;height:20px;stroke-width:2;flex:none}
 .lock::before,.lock::after{content:"";position:absolute;inset:-8px;border:2px solid var(--cyan);border-radius:18px;clip-path:polygon(0 0,30% 0,30% 8%,8% 8%,8% 30%,0 30%,0 0,100% 0,100% 30%,92% 30%,92% 8%,70% 8%,70% 0,100% 0,100% 100%,70% 100%,70% 92%,92% 92%,92% 70%,100% 70%,100% 100%,0 100%,0 70%,8% 70%,8% 92%,30% 92%,30% 100%,0 100%)}
 .find-panel{position:absolute;left:14px;right:14px;bottom:24px;z-index:3;padding:20px;border-radius:28px;background:rgba(17,20,28,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:inset 0 0 0 1px var(--kl)}
 .flog{font-family:var(--mono);font-size:13px;line-height:2;color:rgba(255,255,255,.75);min-height:78px}
-.flog b{color:var(--cyan);font-weight:600}
+.flog b{color:var(--cyan);font-weight:500}
 
 /* ARRIVING */
 #s-arriving{padding:0}
 .hero-blue{position:relative;background:radial-gradient(120% 80% at 80% 100%,#2449F0,#092EC9 45%,#07080C 100%);color:#fff;padding:58px 18px 0;border-radius:0 0 34px 34px;overflow:hidden;min-height:400px}
 .hero-blue>*:not(.car){position:relative;z-index:2}
-.hero-blue .big{font-size:30px;line-height:1;font-weight:800;letter-spacing:-.04em;margin:14px 0 0;max-width:9ch}
+.hero-blue .big{font-size:28px;line-height:1;font-weight:500;letter-spacing:-.02em;margin:14px 0 0;max-width:9ch}
 .etaring{position:relative;width:80px;height:80px;margin-top:12px}
 .etaring svg{width:100%;height:100%;transform:rotate(-90deg)}
 .etaring .v{position:absolute;inset:0;display:grid;place-items:center;text-align:center;line-height:1}
-.etaring .v b{font-family:var(--mono);font-size:24px;font-weight:600}
-.etaring .v small{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;opacity:.8;margin-top:3px}
+.etaring .v b{font-family:var(--mono);font-size:24px;font-weight:500}
+.etaring .v small{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.08em;opacity:.8;margin-top:3px}
 .hero-blue .car{position:absolute;right:-50px;bottom:-22px;width:340px;max-width:none;z-index:1}
 .steps4{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:16px 18px 0}
 .steps4 div{display:flex;flex-direction:column;gap:6px}
 .steps4 i{height:5px;border-radius:9px;background:var(--line);overflow:hidden;position:relative}
 .steps4 i::after{content:"";position:absolute;inset:0;width:var(--p,0%);background:var(--blue);border-radius:inherit;transition:width .8s var(--ease)}
-.steps4 span{font-size:12.5px;font-weight:700;color:var(--ink3)}
+.steps4 span{font-size:12px;font-weight:500;color:var(--ink3)}
 .steps4 .done span{color:var(--ink)}
 .arr-body{padding:14px 18px 30px}
 .tele{padding:18px;border-radius:26px}
 .batt{display:flex;align-items:flex-end;gap:14px}
-.batt .pct{font-family:var(--mono);font-size:36px;font-weight:600;line-height:1}
+.batt .pct{font-family:var(--mono);font-size:34px;font-weight:500;line-height:1}
 .cells{flex:1;display:grid;grid-template-columns:repeat(10,1fr);gap:3px;height:22px}
 .cells i{border-radius:3px;background:var(--k2)}
 .cells i.on{background:linear-gradient(180deg,#5BE3A6,var(--green))}
 .feat{display:flex;flex-wrap:wrap;gap:8px}
-.feat span{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:999px;background:var(--k2);font-size:14px;font-weight:600}
+.feat span{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:999px;background:var(--k2);font-size:14px;font-weight:500}
 .feat svg.lucide{width:16px;height:16px;color:var(--cyan)}
 .pilot{display:flex;gap:12px;align-items:center}
-.pilot .av{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font-weight:800;background:var(--tint);color:var(--blue);font-size:19px}
+.pilot .av{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font-weight:500;background:var(--tint);color:var(--blue);font-size:18px}
 .act{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:var(--tint);color:var(--blue);flex:none;transition:transform .2s var(--spring)}
 .act:active{transform:scale(.9)}
 .codecard{padding:18px;border-radius:26px;transition:box-shadow .4s}
 .codecard.hot{box-shadow:0 0 0 3px var(--blue),var(--sh)}
 .otp{display:flex;gap:8px}
-.otp span{width:46px;height:56px;border-radius:14px;display:grid;place-items:center;font-family:var(--mono);font-size:26px;font-weight:600;background:var(--ink);color:#fff}
-.demo{display:block;margin:14px auto 0;font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--ink3);padding:8px 12px;border-radius:8px;border:1.5px dashed #C9CFDC}
+.otp span{width:46px;height:56px;border-radius:14px;display:grid;place-items:center;font-family:var(--mono);font-size:24px;font-weight:500;background:var(--ink);color:#fff}
+.demo{display:block;margin:14px auto 0;font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.04em;color:var(--ink3);padding:8px 12px;border-radius:8px;border:1.5px dashed #C9CFDC}
 .started{position:absolute;inset:0;z-index:20;background:rgba(7,8,12,.86);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:grid;place-items:center;text-align:center;color:#fff;padding:30px;opacity:0;pointer-events:none}
 
 /* 3D */
 #s-ride{padding:0;background:#E9EDF4}
 #rideCanvas,#viewCanvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none}
-.loading3d{position:absolute;inset:0;display:grid;place-items:center;z-index:4;font-family:var(--mono);font-size:13px;font-weight:600;color:var(--ink3);pointer-events:none;transition:opacity .4s}
+.loading3d{position:absolute;inset:0;display:grid;place-items:center;z-index:4;font-family:var(--mono);font-size:13px;font-weight:500;color:var(--ink3);pointer-events:none;transition:opacity .4s}
 .hud-top{position:absolute;top:56px;left:12px;right:12px;z-index:5;display:flex;gap:10px;align-items:stretch}
 .turn{flex:1;display:flex;gap:12px;align-items:center;padding:12px 14px;border-radius:24px;background:var(--ink);color:#fff;box-shadow:0 10px 30px rgba(7,8,12,.3)}
 .turn .ar{width:46px;height:46px;border-radius:16px;background:var(--blue);display:grid;place-items:center;flex:none}
 .turn .ar svg.lucide{width:30px;height:30px}
-.turn b{display:block;font-size:16px;font-weight:800;line-height:1.2}
-.turn span{font-family:var(--mono);font-size:12.5px;color:var(--kt)}
-.camtog{width:66px;border-radius:22px;background:#fff;box-shadow:var(--sh);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:12px;font-weight:800;gap:2px}
+.turn b{display:block;font-size:16px;font-weight:500;line-height:1.2}
+.turn span{font-family:var(--mono);font-size:12px;color:var(--kt)}
+.camtog{width:66px;border-radius:22px;background:#fff;box-shadow:var(--sh);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:12px;font-weight:500;gap:2px}
 .hud-bot{position:absolute;left:10px;right:10px;bottom:14px;z-index:5;padding:16px;border-radius:30px;background:rgba(7,8,12,.92);color:#fff;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 14px 34px rgba(7,8,12,.3)}
 .hud-grid{display:grid;grid-template-columns:110px 1fr;gap:14px;align-items:center}
 .gauge{position:relative;width:110px;height:76px}
 .gauge svg{width:100%;height:100%}
 .gauge .v{position:absolute;left:0;right:0;bottom:2px;text-align:center;line-height:1}
-.gauge .v b{font-family:var(--mono);font-size:26px;font-weight:600}
-.gauge .v small{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--kt);margin-top:2px}
+.gauge .v b{font-family:var(--mono);font-size:24px;font-weight:500}
+.gauge .v small{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--kt);margin-top:2px}
 .hrow{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .hrow div{background:var(--k2);border-radius:16px;padding:9px 12px}
-.hrow b{display:block;font-family:var(--mono);font-size:18px;font-weight:600}
-.hrow span{font-size:12px;font-weight:600;color:var(--kt)}
+.hrow b{display:block;font-family:var(--mono);font-size:18px;font-weight:500}
+.hrow span{font-size:12px;font-weight:500;color:var(--kt)}
 .hrow .eco b{color:#5BE3A6}
 .prog{height:6px;border-radius:9px;background:var(--k2);overflow:hidden}
 .prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue2),var(--cyan));border-radius:inherit;transition:width .5s var(--ease)}
 .light .prog{background:var(--soft)}
-.sos{min-height:50px;padding:0 18px;border-radius:999px;font-weight:800;color:#fff;background:var(--red)}
+.sos{min-height:50px;padding:0 18px;border-radius:999px;font-weight:500;color:#fff;background:var(--red)}
 .hotspot{position:absolute;z-index:6;transform:translate(-50%,-50%);transition:opacity .25s}
 .hotspot button{width:34px;height:34px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;box-shadow:0 0 0 6px rgba(9,46,201,.2);animation:hp 2s infinite}
 .hotspot button svg.lucide{width:16px;height:16px}
 @keyframes hp{50%{box-shadow:0 0 0 12px rgba(9,46,201,0)}}
-.hotspot .tip{position:absolute;left:50%;bottom:44px;transform:translateX(-50%);white-space:nowrap;background:var(--ink);color:#fff;font-size:13.5px;font-weight:600;padding:8px 12px;border-radius:12px;opacity:0;pointer-events:none;transition:opacity .25s}
+.hotspot .tip{position:absolute;left:50%;bottom:44px;transform:translateX(-50%);white-space:nowrap;background:var(--ink);color:#fff;font-size:13px;font-weight:500;padding:8px 12px;border-radius:12px;opacity:0;pointer-events:none;transition:opacity .25s}
 .hotspot.open .tip{opacity:1}
 
 /* ARRIVED */
@@ -331,7 +331,7 @@ svg.lucide{width:20px;height:20px;stroke-width:2;flex:none}
 .receipt-slot::before{content:"";position:absolute;left:-6px;right:-6px;top:0;height:10px;border-radius:9px;background:var(--ink)}
 .receipt{background:#fff;border-radius:0 0 22px 22px;padding:18px;box-shadow:var(--sh);font-family:var(--mono);font-size:14px}
 .receipt .ln{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed var(--line)}
-.receipt .tot{font-size:20px;font-weight:600;border-bottom:0;padding-top:12px}
+.receipt .tot{font-size:20px;font-weight:500;border-bottom:0;padding-top:12px}
 .leafs{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:5}
 .leafs i{position:absolute;width:14px;height:14px;border-radius:0 70% 0 70%;background:var(--green)}
 .stars{display:flex;gap:8px;justify-content:center}
@@ -345,10 +345,10 @@ svg.lucide{width:20px;height:20px;stroke-width:2;flex:none}
 .mod-hero .h1{position:relative;max-width:8.5ch}
 .mod-hero .back{position:absolute;top:58px;left:20px}
 .field{display:flex;flex-direction:column;gap:8px}
-.field input{height:52px;border-radius:15px;border:0;background:#fff;box-shadow:var(--sh);padding:0 16px;font-size:17px;font-weight:600;outline:none}
+.field input{height:52px;border-radius:15px;border:0;background:#fff;box-shadow:var(--sh);padding:0 16px;font-size:16px;font-weight:500;outline:none}
 .field input:focus{box-shadow:0 0 0 2.5px var(--blue)}
 .pnr-boxes{position:relative;display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
-.pnr-boxes span{height:56px;border-radius:15px;display:grid;place-items:center;font-family:var(--mono);font-size:23px;font-weight:600;background:#fff;box-shadow:var(--sh);transition:all .2s var(--spring)}
+.pnr-boxes span{height:56px;border-radius:15px;display:grid;place-items:center;font-family:var(--mono);font-size:24px;font-weight:500;background:#fff;box-shadow:var(--sh);transition:all .2s var(--spring)}
 .pnr-boxes span.fill{background:var(--ink);color:#fff;transform:translateY(-3px)}
 .pnr-boxes span.cur{box-shadow:0 0 0 2.5px var(--blue)}
 .pnr-boxes input{position:absolute;inset:0;opacity:0;width:100%;font-size:16px}
@@ -357,42 +357,42 @@ svg.lucide{width:20px;height:20px;stroke-width:2;flex:none}
 .steps .step i{flex:none;width:30px;height:30px;border-radius:50%;background:var(--line);display:grid;place-items:center;color:#fff;transition:all .35s var(--spring)}
 .steps .step.done i{background:var(--blue)}
 .steps .step i svg.lucide{width:16px;height:16px}
-.steps b{display:block;font-weight:700}
-.steps span{font-size:15px;color:var(--ink3)}
+.steps b{display:block;font-weight:500}
+.steps span{font-size:14px;color:var(--ink3)}
 .timeline .tl{display:grid;grid-template-columns:62px 16px 1fr;gap:10px;padding:9px 0}
-.timeline time{font-family:var(--mono);font-weight:600;font-size:15px}
+.timeline time{font-family:var(--mono);font-weight:500;font-size:14px}
 .timeline .rail{position:relative;display:flex;justify-content:center}
 .timeline .rail::before{content:"";position:absolute;top:20px;bottom:-20px;width:2px;background:var(--line)}
 .timeline .tl:last-child .rail::before{display:none}
 .timeline .rail i{position:relative;width:12px;height:12px;margin-top:4px;border-radius:50%;background:#fff;box-shadow:inset 0 0 0 2.5px var(--ink3)}
 .timeline .key .rail i{background:var(--blue);box-shadow:none}
-.timeline b{display:block;font-weight:700}
-.timeline span{font-size:15px;color:var(--ink3)}
+.timeline b{display:block;font-weight:500}
+.timeline span{font-size:14px;color:var(--ink3)}
 .slide{position:relative;height:62px;border-radius:999px;background:var(--ink);overflow:hidden;touch-action:none;user-select:none}
-.slide .txt{position:absolute;inset:0;display:grid;place-items:center;font-size:17px;font-weight:700;color:#fff;padding-left:50px}
+.slide .txt{position:absolute;inset:0;display:grid;place-items:center;font-size:16px;font-weight:500;color:#fff;padding-left:50px}
 .slide .fill{position:absolute;inset:0 auto 0 0;width:calc(var(--x,0px) + 62px);background:var(--blue);border-radius:999px}
 .slide .thumb{position:absolute;top:6px;left:6px;width:50px;height:50px;border-radius:50%;display:grid;place-items:center;transform:translateX(var(--x,0px));background:#fff;color:var(--blue);cursor:grab}
 .slide.snap .thumb,.slide.snap .fill{transition:transform .45s var(--spring),width .45s var(--spring)}
 .statgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .statgrid .card{padding:16px}
-.statgrid b{display:block;font-size:26px;font-weight:800;letter-spacing:-.03em;margin-top:4px}
+.statgrid b{display:block;font-size:24px;font-weight:500;letter-spacing:-.02em;margin-top:4px}
 .bars{display:flex;align-items:flex-end;gap:10px;height:130px}
 .bars div{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end}
 .bars i{width:100%;border-radius:10px;background:#CFE9DC;height:0}
 .bars div:last-child i{background:var(--green)}
-.bars span{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--ink3)}
-.bars em{font-style:normal;font-family:var(--mono);font-size:12px;font-weight:600;color:var(--ink2)}
+.bars span{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--ink3)}
+.bars em{font-style:normal;font-family:var(--mono);font-size:12px;font-weight:500;color:var(--ink2)}
 .person{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);width:100%;text-align:left}
 .person:last-child{border-bottom:0}
-.person .av{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-size:14px;font-weight:800;background:var(--soft);flex:none}
+.person .av{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-size:14px;font-weight:500;background:var(--soft);flex:none}
 .person .info{flex:1}
 .person .info span{display:block;font-size:14px;color:var(--ink3)}
 .check{width:30px;height:30px;border-radius:50%;box-shadow:inset 0 0 0 2px var(--line);display:grid;place-items:center;color:#fff;transition:all .25s var(--spring);flex:none}
 .check svg.lucide{width:16px;height:16px;opacity:0}
 .person[aria-pressed="true"] .check{background:var(--blue);box-shadow:none}
 .person[aria-pressed="true"] .check svg.lucide{opacity:1}
-.mode{display:inline-flex;align-items:center;gap:8px;min-height:36px;padding:0 14px;border-radius:999px;background:var(--green-t);color:var(--green);font-size:14px;font-weight:800}
-.toast{position:absolute;left:18px;right:18px;bottom:110px;z-index:70;padding:16px 18px;border-radius:22px;background:var(--ink);color:#fff;font-weight:600;display:flex;gap:12px;align-items:center;transform:translateY(20px);opacity:0;pointer-events:none;transition:all .45s var(--spring)}
+.mode{display:inline-flex;align-items:center;gap:8px;min-height:36px;padding:0 14px;border-radius:999px;background:var(--green-t);color:var(--green);font-size:14px;font-weight:500}
+.toast{position:absolute;left:18px;right:18px;bottom:110px;z-index:70;padding:16px 18px;border-radius:22px;background:var(--ink);color:#fff;font-weight:500;display:flex;gap:12px;align-items:center;transform:translateY(20px);opacity:0;pointer-events:none;transition:all .45s var(--spring)}
 .toast.show{transform:none;opacity:1}
 
 @media (max-width:1180px){.stage{grid-template-columns:auto minmax(250px,320px)}.side.left{display:none}}
@@ -408,7 +408,7 @@ svg.lucide{width:20px;height:20px;stroke-width:2;flex:none}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 html.embed .side{display:none!important}
 html.embed,html.embed body{overflow:hidden}
-.screen[data-scr=splash] .sv-fab,.screen[data-scr=finding] .sv-fab,.screen[data-scr=ride] .sv-fab,.screen[data-scr=car3d] .sv-fab,.screen[data-scr=fly-scan] .sv-fab,.screen[data-scr=arrived] .sv-fab,.screen[data-scr=choose] .sv-fab,.screen[data-scr=fly-plan] .sv-fab{display:none}
+.screen[data-scr=home] .sv-fab,.screen[data-scr=splash] .sv-fab,.screen[data-scr=finding] .sv-fab,.screen[data-scr=ride] .sv-fab,.screen[data-scr=car3d] .sv-fab,.screen[data-scr=fly-scan] .sv-fab,.screen[data-scr=arrived] .sv-fab,.screen[data-scr=choose] .sv-fab,.screen[data-scr=fly-plan] .sv-fab{display:none}
 .screen[data-scr=arriving] .sv-fab,.screen[data-scr=fly-pnr] .sv-fab,.screen[data-scr=fly-locked] .sv-fab{bottom:24px}
 </style>
 
@@ -436,7 +436,7 @@ html.embed,html.embed body{overflow:hidden}
     <!-- HOME -->
     <section class="scr" id="s-home">
       <div class="home-map"><div class="lmap" id="homeMap"></div>
-        <div class="home-top"><div class="hello"><span class="avatar">A</span>Hi, Ananya</div><button class="icon-btn" aria-label="Notifications" data-toast="No new notifications"><i data-lucide="bell"></i></button></div>
+        <div class="home-top"><div class="hello"><span class="avatar">A</span>Hi, Ananya</div><span style="display:flex;gap:8px"><button class="icon-btn" id="homeMic" aria-label="Speak to SAGA Saathi" style="background:var(--blue);color:#fff"><i data-lucide="mic"></i></button><button class="icon-btn" aria-label="Notifications" data-toast="No new notifications"><i data-lucide="bell"></i></button></span></div>
         <div class="ticker" aria-label="Live fleet status"><div class="tl"><span><i></i>06 CARS NEARBY</span><span><i></i>AVG PICKUP 3 MIN</span><span><i></i>FLEET 92% CHARGED</span><span><i></i>0 SURGE · ₹18/KM</span><span><i></i>06 CARS NEARBY</span><span><i></i>AVG PICKUP 3 MIN</span><span><i></i>FLEET 92% CHARGED</span><span><i></i>0 SURGE · ₹18/KM</span></div></div>
       </div>
       <div class="sheet-home">
@@ -453,7 +453,7 @@ html.embed,html.embed body{overflow:hidden}
           <canvas id="cFly" aria-label="3D jet. Drag to turn it."></canvas>
           <span class="tag">SAGA FLY · AIRPORT</span>
           <h3>Flying soon? We'll book your cab.</h3>
-          <div class="w"><p style="margin:0 0 10px;font-size:15.5px;font-weight:600;color:rgba(255,255,255,.85)">Type the 6-letter PNR from your ticket</p>
+          <div class="w"><p style="margin:0 0 10px;font-size:16px;font-weight:500;color:rgba(255,255,255,.85)">Type the 6-letter PNR from your ticket</p>
             <div class="mini-pnr"><input id="miniPnr" maxlength="6" placeholder="e.g. K7QX2M" aria-label="PNR" autocomplete="off"><button id="miniPnrGo" aria-label="Find my flight"><i data-lucide="arrow-right"></i></button></div></div>
         </article>
 
@@ -464,7 +464,7 @@ html.embed,html.embed body{overflow:hidden}
             <button class="open" data-go="loop" aria-label="Open daily rides"><i data-lucide="arrow-up-right"></i></button>
             <span class="tag">SAGA LOOP</span><h3>Daily rides, same driver</h3>
             <canvas id="cLoop" aria-label="3D loop ring. Drag to turn it."></canvas>
-            <div class="w"><span class="k" style="color:var(--ink2);font-weight:700;font-size:14.5px">Office, 14 km · tap your days</span>
+            <div class="w"><span class="k" style="color:var(--ink2);font-weight:500;font-size:14px">Office, 14 km · tap your days</span>
               <div class="mini-days mt8" id="miniDays"></div>
               <div class="between mt12"><span class="bigprice num" id="miniLoop">₹9,897</span><span class="k">a month</span></div></div>
           </article>
@@ -472,30 +472,30 @@ html.embed,html.embed body{overflow:hidden}
             <button class="open" data-go="voyage" aria-label="Open outstation trips"><i data-lucide="arrow-up-right"></i></button>
             <span class="tag">SAGA VOYAGE</span><h3>Outstation, charging planned</h3>
             <canvas id="cVoyage" aria-label="3D terrain with the route. Drag to turn it."></canvas>
-            <div class="w"><div class="between"><span style="font-weight:700;color:rgba(255,255,255,.85)">How far?</span><span class="mono" style="font-weight:600" id="miniKm">350 KM</span></div>
+            <div class="w"><div class="between"><span style="font-weight:500;color:rgba(255,255,255,.85)">How far?</span><span class="mono" style="font-weight:500" id="miniKm">350 KM</span></div>
               <input type="range" class="range" id="miniRange" min="60" max="500" step="10" value="350" aria-label="Distance in km">
-              <div class="between"><span class="bigprice num" id="miniFare">₹6,300</span><span style="color:rgba(255,255,255,.8);font-weight:700;font-size:14px" id="miniStops">1 charging stop</span></div></div>
+              <div class="between"><span class="bigprice num" id="miniFare">₹6,300</span><span style="color:rgba(255,255,255,.8);font-weight:500;font-size:14px" id="miniStops">1 charging stop</span></div></div>
           </article>
           <article class="svc s-blue">
             <button class="open" data-go="tales" aria-label="Open day trips"><i data-lucide="arrow-up-right"></i></button>
             <span class="tag">SAGA TALES</span><h3>Day trips, door to door</h3>
             <canvas id="cTales" aria-label="3D hills with the sun. Drag to look around."></canvas>
             <div class="w"><div class="tabs3" id="miniTrips"><button aria-pressed="true" data-i="0">Araku</button><button aria-pressed="false" data-i="1">Lambasingi</button><button aria-pressed="false" data-i="2">Coast</button></div>
-              <div class="between mt12"><span class="bigprice num" id="miniTripP">₹4,140</span><span style="color:rgba(255,255,255,.88);font-weight:700;font-size:14px" id="miniTripT">1 day · 230 km</span></div></div>
+              <div class="between mt12"><span class="bigprice num" id="miniTripP">₹4,140</span><span style="color:rgba(255,255,255,.88);font-weight:500;font-size:14px" id="miniTripT">1 day · 230 km</span></div></div>
           </article>
           <article class="svc s-white">
             <button class="open" data-go="business" aria-label="Open business"><i data-lucide="arrow-up-right"></i></button>
             <span class="tag">SAGA BUSINESS</span><h3>Rides for your whole team</h3>
             <canvas id="cBiz" aria-label="3D towers that light up per car. Drag to turn."></canvas>
-            <div class="w"><span class="k" style="color:var(--ink2);font-weight:700;font-size:14.5px">How many people?</span>
+            <div class="w"><span class="k" style="color:var(--ink2);font-weight:500;font-size:14px">How many people?</span>
               <div class="stepper mt8"><button id="bMinus" aria-label="Fewer people"><i data-lucide="minus"></i></button><b class="num" id="bCount">12</b><button id="bPlus" aria-label="More people"><i data-lucide="plus"></i></button></div>
               <div class="between mt12"><span class="bigprice num" id="bCost">₹1,296</span><span class="k" id="bCars">4 cars</span></div></div>
           </article>
         </div>
         <div class="dots" id="svcDots"><i class="on"></i><i></i><i></i><i></i></div>
 
-        <button class="green-card mt20" data-go="aura"><span class="leaf"><i data-lucide="leaf" style="width:28px;height:28px"></i></span><span style="flex:1"><span class="lab" style="color:#0B4F33">Green points</span><b style="display:block;font-size:23px;font-weight:800;margin-top:2px" class="num">128.4 kg CO₂ saved</b><span class="k">1,284 points · 716 more for a free ride</span></span></button>
-        <button class="card help mt12" data-toast="Calling SAGA support (demo)"><span class="ic"><i data-lucide="headset"></i></span><span><b style="font-size:18px;font-weight:800">Need help? Talk to a person</b><span class="k" style="display:block;margin-top:2px">24 × 7 in Telugu, Hindi or English</span></span></button>
+        <button class="green-card mt20" data-go="aura"><span class="leaf"><i data-lucide="leaf" style="width:28px;height:28px"></i></span><span style="flex:1"><span class="lab" style="color:#0B4F33">Green points</span><b style="display:block;font-size:24px;font-weight:500;margin-top:2px" class="num">128.4 kg CO₂ saved</b><span class="k">1,284 points · 716 more for a free ride</span></span></button>
+        <button class="card help mt12" data-toast="Calling SAGA support (demo)"><span class="ic"><i data-lucide="headset"></i></span><span><b style="font-size:18px;font-weight:500">Need help? Talk to a person</b><span class="k" style="display:block;margin-top:2px">24 × 7 in Telugu, Hindi or English</span></span></button>
       </div>
     </section>
 
@@ -518,7 +518,7 @@ html.embed,html.embed body{overflow:hidden}
       <div style="position:absolute;top:58px;left:16px;z-index:3"><button class="icon-btn" data-back aria-label="Back"><i data-lucide="chevron-left"></i></button></div>
       <div class="chsheet">
         <div class="grab"></div>
-        <div class="between"><h2 class="h2">Choose your ride</h2><span class="mono" style="font-size:13px;font-weight:600"><span id="destName">RK Beach</span> · 8.6 KM</span></div>
+        <div class="between"><h2 class="h2">Choose your ride</h2><span class="mono" style="font-size:13px;font-weight:500"><span id="destName">RK Beach</span> · 8.6 KM</span></div>
         <div class="stack mt12" id="opts">
           <button class="opt" aria-pressed="true" data-name="SAGA Ride" data-price="155" data-batt="86"><img src="assets/car3_side.webp" alt=""><span><b>SAGA Ride</b><span class="k">4 seats · 2 min away</span></span><span class="p"><b class="num">₹155</b><span class="lab" style="display:block">₹18/KM</span></span></button>
           <button class="opt" aria-pressed="false" data-name="SAGA Assist" data-price="185" data-batt="91"><img src="assets/car3_side.webp" alt=""><span><b>SAGA Assist</b><span class="k">Help with bags & boarding</span></span><span class="p"><b class="num">₹185</b><span class="lab" style="display:block">+₹30 CARE</span></span></button>
@@ -538,14 +538,14 @@ html.embed,html.embed body{overflow:hidden}
       <div id="blips"></div>
       <div class="lock" id="lock"></div>
       <div class="find-panel"><span class="tchip"><i></i>MATCHING</span>
-        <h2 class="h2 mt12" style="font-size:26px" id="findT">Finding your SAGA car</h2>
+        <h2 class="h2 mt12" style="font-size:24px" id="findT">Finding your SAGA car</h2>
         <div class="flog mt8" id="flog"></div>
         <button class="btn white mt12" data-back>Cancel</button></div>
     </section>
 
     <!-- ARRIVING -->
     <section class="scr no-tab" id="s-arriving">
-      <div class="started" id="started"><div><svg width="96" height="96" viewBox="0 0 96 96" aria-hidden="true"><circle cx="48" cy="48" r="44" fill="none" stroke="#33C6F0" stroke-width="4"/><path d="M30 49l12 12 24-26" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg><h2 class="h1 mt16" style="font-size:30px">Ravi entered your code</h2><p class="sub" style="color:rgba(255,255,255,.8)">Your ride has started. Sit back.</p></div></div>
+      <div class="started" id="started"><div><svg width="96" height="96" viewBox="0 0 96 96" aria-hidden="true"><circle cx="48" cy="48" r="44" fill="none" stroke="#33C6F0" stroke-width="4"/><path d="M30 49l12 12 24-26" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg><h2 class="h1 mt16" style="font-size:28px">Ravi entered your code</h2><p class="sub" style="color:rgba(255,255,255,.8)">Your ride has started. Sit back.</p></div></div>
       <div class="hero-blue">
         <div class="between"><button class="icon-btn" data-go="home" aria-label="Close" style="background:rgba(255,255,255,.14);box-shadow:none;color:#fff"><i data-lucide="x"></i></button><span class="tchip" id="arrChip"><i></i>ON THE WAY</span></div>
         <p class="big" id="arrBig">Your SAGA ONE is arriving</p>
@@ -555,21 +555,21 @@ html.embed,html.embed body{overflow:hidden}
       <div class="steps4" id="steps4"><div class="done"><i style="--p:100%"></i><span>Car assigned</span></div><div><i></i><span>On the way</span></div><div><i></i><span>At pickup</span></div><div><i></i><span>Ride started</span></div></div>
       <div class="arr-body">
         <div class="black tele ar-in">
-          <div class="between"><div><span class="lab">Look for</span><div style="font-weight:800;font-size:19px;line-height:1.2;margin-top:2px">Black SAGA ONE<br>with blue lights</div></div><span class="plate">AP 39 EV 2147</span></div>
+          <div class="between"><div><span class="lab">Look for</span><div style="font-weight:500;font-size:18px;line-height:1.2;margin-top:2px">Black SAGA ONE<br>with blue lights</div></div><span class="plate">AP 39 EV 2147</span></div>
           <div class="divider"></div>
           <div class="between"><span class="lab">Battery</span><span class="lab">Range <span class="mono" style="color:#fff">268 KM</span></span></div>
           <div class="batt mt8"><span class="pct roll" id="battPct">86%</span><div class="cells" id="cells"></div></div>
-          <div class="hrow mt12" style="grid-template-columns:1fr 1fr"><div class="eco" style="background:var(--k2);border-radius:16px;padding:10px 12px"><b class="mono" style="color:#5BE3A6;font-size:20px;display:block">4.2 T</b><span style="font-size:12.5px;font-weight:600;color:var(--kt)">CO₂ saved by this car</span></div><div style="background:var(--k2);border-radius:16px;padding:10px 12px"><b class="mono" style="font-size:20px;display:block">58,300</b><span style="font-size:12.5px;font-weight:600;color:var(--kt)">electric km driven</span></div></div>
+          <div class="hrow mt12" style="grid-template-columns:1fr 1fr"><div class="eco" style="background:var(--k2);border-radius:16px;padding:10px 12px"><b class="mono" style="color:#5BE3A6;font-size:20px;display:block">4.2 T</b><span style="font-size:12px;font-weight:500;color:var(--kt)">CO₂ saved by this car</span></div><div style="background:var(--k2);border-radius:16px;padding:10px 12px"><b class="mono" style="font-size:20px;display:block">58,300</b><span style="font-size:12px;font-weight:500;color:var(--kt)">electric km driven</span></div></div>
           <div class="feat mt12"><span><i data-lucide="users"></i>4 seats</span><span><i data-lucide="luggage"></i>2 big bags</span><span><i data-lucide="snowflake"></i>AC</span><span><i data-lucide="shield-check"></i>Secure 360</span><span><i data-lucide="plug-zap"></i>Charger</span></div>
           <button class="btn white mt12" data-go="car3d"><i data-lucide="rotate-3d"></i>See your car in 3D</button>
         </div>
         <div class="card pad mt12 ar-in">
-          <div class="pilot"><div class="av">RK</div><div style="flex:1"><div style="font-weight:800;font-size:19px">Ravi Kumar</div><div class="k">SAGA Pilot · ★ 4.96</div></div><button class="act" aria-label="Call Ravi" data-toast="Calling Ravi (demo)"><i data-lucide="phone"></i></button><button class="act" aria-label="Message Ravi" data-toast="Sent: I'm at the gate"><i data-lucide="message-circle"></i></button></div>
+          <div class="pilot"><div class="av">RK</div><div style="flex:1"><div style="font-weight:500;font-size:18px">Ravi Kumar</div><div class="k">SAGA Pilot · ★ 4.96</div></div><button class="act" aria-label="Call Ravi" data-toast="Calling Ravi (demo)"><i data-lucide="phone"></i></button><button class="act" aria-label="Message Ravi" data-toast="Sent: I'm at the gate"><i data-lucide="message-circle"></i></button></div>
         </div>
         <div class="card codecard mt12 ar-in" id="codecard">
-          <div class="between"><div><div style="font-weight:800;font-size:18px" id="codeT">Your trip code</div><div class="k" id="codeS">When Ravi arrives, tell him this number. He starts the ride.</div></div></div>
+          <div class="between"><div><div style="font-weight:500;font-size:18px" id="codeT">Your trip code</div><div class="k" id="codeS">When Ravi arrives, tell him this number. He starts the ride.</div></div></div>
           <div class="otp mt12" style="justify-content:center"><span>4</span><span>8</span><span>2</span><span>7</span></div>
-          <div class="between mt12" id="waitRow" hidden><span class="lab">Free waiting</span><span class="mono" style="font-weight:600" id="waitT">05:00</span></div>
+          <div class="between mt12" id="waitRow" hidden><span class="lab">Free waiting</span><span class="mono" style="font-weight:500" id="waitT">05:00</span></div>
         </div>
         <div class="row mt12 ar-in"><button class="btn sec" data-toast="Trip link shared"><i data-lucide="share-2"></i>Share</button><button class="btn sec" data-go="home">Cancel</button></div>
         <button class="demo" id="demoSkip">DEMO: SKIP THE WAIT</button>
@@ -582,7 +582,7 @@ html.embed,html.embed body{overflow:hidden}
       <div id="hotspots"></div>
       <div class="loading3d" id="viewLoad">LOADING 3D MODEL…</div>
       <div style="position:absolute;top:58px;left:16px;right:16px;z-index:7" class="between"><button class="icon-btn" data-back aria-label="Back"><i data-lucide="chevron-left"></i></button><span class="tchip"><i></i>DRAG · TAP THE DOTS</span></div>
-      <div style="position:absolute;top:124px;left:22px;z-index:5;pointer-events:none"><span class="lab">Your car</span><div style="font-size:34px;font-weight:800;letter-spacing:-.04em">SAGA ONE</div><span class="plate mt8">AP 39 EV 2147</span></div>
+      <div style="position:absolute;top:124px;left:22px;z-index:5;pointer-events:none"><span class="lab">Your car</span><div style="font-size:34px;font-weight:500;letter-spacing:-.02em">SAGA ONE</div><span class="plate mt8">AP 39 EV 2147</span></div>
       <div style="position:absolute;left:14px;right:14px;bottom:18px;z-index:7" class="black" ><div class="hrow" style="grid-template-columns:repeat(3,1fr);background:var(--ink);padding:12px;border-radius:24px"><div><b>86%</b><span>Battery</span></div><div><b>268 KM</b><span>Range</span></div><div class="eco"><b>4.2 T</b><span>CO₂ saved</span></div></div><button class="btn mt12" data-back>Back to my ride</button></div>
     </section>
 
@@ -592,7 +592,7 @@ html.embed,html.embed body{overflow:hidden}
       <div class="loading3d" id="rideLoad">BUILDING 3D ROUTE…</div>
       <div class="hud-top"><div class="turn"><span class="ar" id="turnAr"><i data-lucide="corner-up-right"></i></span><span><b id="turnT">Head north on MVP Main Road</b><span id="turnD">STRAIGHT · 600 M</span></span></div><button class="camtog" id="camTog" aria-label="Change camera view"><i data-lucide="video"></i><span id="camLbl">Follow</span></button></div>
       <div class="hud-bot">
-        <div class="between"><div><span class="lab">Arriving at <span id="rideDest">RK Beach</span></span><div style="font-size:28px;font-weight:800;letter-spacing:-.03em" class="num"><span class="mono" id="rideEta">21:56</span> · <span id="rideMin">14 min</span></div></div><button class="sos" data-toast="SOS: SAGA safety team alerted (demo)">SOS</button></div>
+        <div class="between"><div><span class="lab">Arriving at <span id="rideDest">RK Beach</span></span><div style="font-size:28px;font-weight:500;letter-spacing:-.02em" class="num"><span class="mono" id="rideEta">21:56</span> · <span id="rideMin">14 min</span></div></div><button class="sos" data-toast="SOS: SAGA safety team alerted (demo)">SOS</button></div>
         <div class="prog mt12"><i id="rideProg"></i></div>
         <div class="hud-grid mt12">
           <div class="gauge"><svg viewBox="0 0 110 76"><path d="M10 70 A45 45 0 0 1 100 70" fill="none" stroke="#1A1E29" stroke-width="9" stroke-linecap="round"/><path id="gArc" d="M10 70 A45 45 0 0 1 100 70" fill="none" stroke="url(#gg)" stroke-width="9" stroke-linecap="round" stroke-dasharray="141" stroke-dashoffset="141"/><defs><linearGradient id="gg"><stop offset="0" stop-color="#2449F0"/><stop offset="1" stop-color="#33C6F0"/></linearGradient></defs></svg><div class="v"><b id="hSpeed">0</b><small>KM/H</small></div></div>
@@ -608,7 +608,7 @@ html.embed,html.embed body{overflow:hidden}
       <svg class="bigcheck" viewBox="0 0 96 96" aria-hidden="true"><circle cx="48" cy="48" r="45" fill="#07080C"/><path id="ck" d="M30 49l12 12 24-26" fill="none" stroke="#33C6F0" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="60" stroke-dashoffset="60"/></svg>
       <h1 class="h1 mt16 ad-in" style="text-align:center">You've arrived at <span id="arrDest">RK Beach</span></h1>
       <p class="sub ad-in" style="text-align:center">21:56 · 2 minutes earlier than planned</p>
-      <div class="card pad mt16 ad-in" style="background:var(--green-t);box-shadow:none"><div class="between"><div><span class="lab" style="color:#0B4F33">CO₂ you saved</span><div style="font-size:36px;font-weight:800;color:var(--green)"><span class="roll" id="arrCo2">0.62</span> kg</div><div class="k">vs a petrol cab · +6 points</div></div><i data-lucide="sprout" style="width:54px;height:54px;color:var(--green)"></i></div></div>
+      <div class="card pad mt16 ad-in" style="background:var(--green-t);box-shadow:none"><div class="between"><div><span class="lab" style="color:#0B4F33">CO₂ you saved</span><div style="font-size:34px;font-weight:500;color:var(--green)"><span class="roll" id="arrCo2">0.62</span> kg</div><div class="k">vs a petrol cab · +6 points</div></div><i data-lucide="sprout" style="width:54px;height:54px;color:var(--green)"></i></div></div>
       <div class="receipt-slot"><div class="receipt" id="receipt">
         <div class="ln"><span>DISTANCE</span><span>8.6 KM</span></div>
         <div class="ln"><span>RATE</span><span>₹18 / KM</span></div>
@@ -616,8 +616,8 @@ html.embed,html.embed body{overflow:hidden}
         <div class="ln"><span>PAID BY</span><span>UPI</span></div>
         <div class="ln tot"><span>TOTAL</span><span>₹155</span></div>
       </div></div>
-      <div class="card mt12 ad-in" style="padding:16px;display:flex;gap:14px;align-items:center"><span style="width:58px;height:58px;border-radius:16px;background:var(--ink);color:#fff;display:grid;place-items:center;flex:none"><i data-lucide="coffee"></i></span><span style="flex:1"><span class="lab" style="font-size:10.5px">Partner offer</span><b style="display:block;font-weight:800">Sea View Café, 20% off</b><span class="k">2 minutes' walk from your drop</span></span></div>
-      <p class="ad-in" style="text-align:center;font-weight:800;margin:22px 0 10px">How was your ride with Ravi?</p>
+      <div class="card mt12 ad-in" style="padding:16px;display:flex;gap:14px;align-items:center"><span style="width:58px;height:58px;border-radius:16px;background:var(--ink);color:#fff;display:grid;place-items:center;flex:none"><i data-lucide="coffee"></i></span><span style="flex:1"><span class="lab" style="font-size:11px">Partner offer</span><b style="display:block;font-weight:500">Sea View Café, 20% off</b><span class="k">2 minutes' walk from your drop</span></span></div>
+      <p class="ad-in" style="text-align:center;font-weight:500;margin:22px 0 10px">How was your ride with Ravi?</p>
       <div class="stars ad-in" id="stars"></div>
       <button class="btn dark mt24 ad-in" data-go="home">Done</button>
     </section>
@@ -644,21 +644,21 @@ html.embed,html.embed body{overflow:hidden}
     </section>
     <section class="scr" id="s-fly-plan">
       <div class="topbar"><button class="icon-btn" data-back aria-label="Back"><i data-lucide="chevron-left"></i></button><span class="t">Your plan</span><span style="width:50px"></span></div>
-      <div class="card pad black"><div class="between"><span class="lab">6E 2147 · THU 12 NOV</span><span class="tchip"><i style="background:#5BE3A6;box-shadow:0 0 8px #5BE3A6"></i>ON TIME</span></div><div class="between mt12"><div><div class="mono" style="font-size:34px;font-weight:600">VTZ</div><div class="k">07:25</div></div><i data-lucide="plane" style="width:30px;height:30px;color:var(--cyan)"></i><div style="text-align:right"><div class="mono" style="font-size:34px;font-weight:600">BLR</div><div class="k">09:05</div></div></div></div>
+      <div class="card pad black"><div class="between"><span class="lab">6E 2147 · THU 12 NOV</span><span class="tchip"><i style="background:#5BE3A6;box-shadow:0 0 8px #5BE3A6"></i>ON TIME</span></div><div class="between mt12"><div><div class="mono" style="font-size:34px;font-weight:500">VTZ</div><div class="k">07:25</div></div><i data-lucide="plane" style="width:30px;height:30px;color:var(--cyan)"></i><div style="text-align:right"><div class="mono" style="font-size:34px;font-weight:500">BLR</div><div class="k">09:05</div></div></div></div>
       <div class="timeline mt16">
         <div class="tl key"><time>04:17</time><span class="rail"><i></i></span><div><b>We pick you up</b><span>MVP Colony · 41 km</span></div></div>
         <div class="tl"><time>05:09</time><span class="rail"><i></i></span><div><b>You reach the airport</b><span>Departures, Bhogapuram</span></div></div>
         <div class="tl"><time>07:25</time><span class="rail"><i></i></span><div><b>Your flight leaves</b><span>Plenty of time to spare</span></div></div>
       </div>
       <div class="card pad mt12"><div class="between"><div><b>If the flight is late</b><div class="k">We move your pickup for you</div></div><span class="mode">On</span></div></div>
-      <div class="between mt16"><span style="font-weight:800;font-size:22px">Fare ₹749</span><span class="mono" style="font-size:13px">41.6 KM × ₹18</span></div>
+      <div class="between mt16"><span style="font-weight:500;font-size:20px">Fare ₹749</span><span class="mono" style="font-size:13px">41.6 KM × ₹18</span></div>
       <div class="slide mt16" id="slide"><span class="fill"></span><span class="txt">Slide to book</span><span class="thumb" tabindex="0" role="button" aria-label="Book pickup"><i data-lucide="arrow-right"></i></span></div>
     </section>
     <section class="scr" id="s-fly-locked">
       <svg class="bigcheck" viewBox="0 0 96 96" aria-hidden="true" style="margin-top:20px"><circle cx="48" cy="48" r="45" fill="#092EC9"/><path d="M30 49l12 12 24-26" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>
       <h1 class="h1 mt16" style="text-align:center">Your airport ride is booked</h1>
       <p class="sub" style="text-align:center">Thursday at 04:17 from MVP Colony. We'll message you at 03:47 with your car and driver.</p>
-      <div class="card pad mt20 black"><div class="statgrid" style="gap:14px"><div><span class="lab">Flight</span><b class="mono" style="font-size:20px;font-weight:600">6E 2147</b></div><div><span class="lab">Ticket</span><b class="mono" style="font-size:20px;font-weight:600" id="pnrPass">K7QX2M</b></div><div><span class="lab">Fare</span><b style="font-size:22px">₹749</b></div><div><span class="lab">Points</span><b style="font-size:22px;color:#5BE3A6">+30</b></div></div></div>
+      <div class="card pad mt20 black"><div class="statgrid" style="gap:14px"><div><span class="lab">Flight</span><b class="mono" style="font-size:20px;font-weight:500">6E 2147</b></div><div><span class="lab">Ticket</span><b class="mono" style="font-size:20px;font-weight:500" id="pnrPass">K7QX2M</b></div><div><span class="lab">Fare</span><b style="font-size:20px">₹749</b></div><div><span class="lab">Points</span><b style="font-size:20px;color:#5BE3A6">+30</b></div></div></div>
       <button class="btn mt20" data-go="home">Done</button>
     </section>
 
@@ -666,10 +666,10 @@ html.embed,html.embed body{overflow:hidden}
     <section class="scr" id="s-loop">
       <div class="mod-hero" style="background:linear-gradient(165deg,#F4F6FF,#DCE4FF)"><img src="assets/m_loop.webp" alt=""><button class="icon-btn back" data-back aria-label="Back"><i data-lucide="chevron-left"></i></button><h1 class="h1">Daily rides, same driver</h1></div>
       <div class="row mt16" style="flex-wrap:wrap" id="presets"><button class="chip on" data-p="office"><i data-lucide="briefcase"></i>Office</button><button class="chip" data-p="school"><i data-lucide="school"></i>School</button><button class="chip" data-p="college"><i data-lucide="graduation-cap"></i>College</button></div>
-      <div class="card pad mt12"><span class="lab">From</span><div style="font-weight:700" id="lpFrom">Home · Seethammadhara</div><div class="divider" style="margin:10px 0"></div><span class="lab">To</span><div class="between"><span style="font-weight:700" id="lpTo">Office · Rushikonda IT Park</span><span class="mono" style="font-size:13px" id="lpKm">14.2 KM</span></div></div>
+      <div class="card pad mt12"><span class="lab">From</span><div style="font-weight:500" id="lpFrom">Home · Seethammadhara</div><div class="divider" style="margin:10px 0"></div><span class="lab">To</span><div class="between"><span style="font-weight:500" id="lpTo">Office · Rushikonda IT Park</span><span class="mono" style="font-size:13px" id="lpKm">14.2 KM</span></div></div>
       <div class="lab mt16">Which days?</div>
       <div class="mini-days mt8" id="days"></div>
-      <div class="card pad mt16 black"><span class="lab">You pay each month</span><div class="bigprice num" style="font-size:42px" id="lpTotal">₹9,897</div><div class="mono" style="font-size:12.5px;color:var(--kt)" id="lpMath">44 RIDES × 14.2 KM × ₹18 · −12%</div></div>
+      <div class="card pad mt16 black"><span class="lab">You pay each month</span><div class="bigprice num" style="font-size:44px" id="lpTotal">₹9,897</div><div class="mono" style="font-size:12px;color:var(--kt)" id="lpMath">44 RIDES × 14.2 KM × ₹18 · −12%</div></div>
       <button class="btn mt16" data-toast="Daily rides start Monday (demo)">Start on Monday</button>
     </section>
 
@@ -695,14 +695,14 @@ html.embed,html.embed body{overflow:hidden}
     <section class="scr" id="s-business">
       <div class="mod-hero" style="background:#fff"><img src="assets/m_business.webp" alt=""><button class="icon-btn back" data-back aria-label="Back"><i data-lucide="chevron-left"></i></button><h1 class="h1">Rides for your whole team</h1></div>
       <div class="card pad mt16"><div class="between"><div><span class="lab">Morning shift · Thu</span><b style="font-size:20px;display:block">Arrive by 08:30</b></div><span class="mode" style="background:var(--tint);color:var(--blue)" id="bzSel">8 of 10</span></div><div class="mt8" id="people"></div></div>
-      <div class="card pad mt12 black"><div class="between"><span class="lab">Grouped into</span><b id="bzCars">3 cars</b></div><div class="bigprice num mt4" style="font-size:38px" id="bzCost">₹2,592</div></div>
+      <div class="card pad mt12 black"><div class="between"><span class="lab">Grouped into</span><b id="bzCars">3 cars</b></div><div class="bigprice num mt4" style="font-size:34px" id="bzCost">₹2,592</div></div>
       <button class="btn mt16" id="dispatch">Book 8 rides</button>
     </section>
 
     <!-- AURA -->
     <section class="scr" id="s-aura">
       <div class="mod-hero" style="background:linear-gradient(165deg,#E3F6EC,#fff)"><img src="assets/m_aura.webp" alt=""><button class="icon-btn back" data-back aria-label="Back"><i data-lucide="chevron-left"></i></button><h1 class="h1">Your green points</h1></div>
-      <div class="card pad mt16" style="text-align:center"><div style="font-size:58px;font-weight:800;letter-spacing:-.04em;color:var(--green)" class="roll" id="auraN">128.4</div><div style="font-weight:700">kg of CO₂ saved by riding electric</div><div class="k mt4">About what 6 trees take in over a year</div></div>
+      <div class="card pad mt16" style="text-align:center"><div style="font-size:44px;font-weight:500;letter-spacing:-.02em;color:var(--green)" class="roll" id="auraN">128.4</div><div style="font-weight:500">kg of CO₂ saved by riding electric</div><div class="k mt4">About what 6 trees take in over a year</div></div>
       <div class="card pad mt12"><div class="between"><b>Each month</b><span class="lab">kg CO₂</span></div><div class="bars mt12" id="bars"></div></div>
       <div class="card pad mt12"><div class="between"><div><b>Free ride</b><div class="k">at 2,000 points</div></div><b class="mono" style="color:var(--blue)">1,284 / 2,000</b></div><div class="prog light mt12" style="background:var(--line)"><i style="width:64%"></i></div></div>
     </section>
@@ -1024,7 +1024,7 @@ applyP("office");
 /* business */
 const PPL = [["PS","Priya S.","Gajuwaka"],["KR","Karthik R.","Gajuwaka"],["DM","Divya M.","NAD Junction"],["ST","Sai Teja","NAD Junction"],["HP","Harika P.","Pendurthi"],["VK","Vamsi K.","Pendurthi"],["LN","Lakshmi N.","Simhachalam"],["AV","Arjun V.","Simhachalam"],["MT","Meghana T.","Kancharapalem"],["RB","Rohit B.","Kancharapalem"]];
 const sel = new Set([0,1,2,3,4,5,6,7]);
-$("#people").innerHTML = PPL.map((p, k) => `<button class="person" data-k="${k}" aria-pressed="${sel.has(k)}"><span class="av">${p[0]}</span><span class="info"><b style="font-weight:700">${p[1]}</b><span>${p[2]}</span></span><span class="check"><i data-lucide="check"></i></span></button>`).join("");
+$("#people").innerHTML = PPL.map((p, k) => `<button class="person" data-k="${k}" aria-pressed="${sel.has(k)}"><span class="av">${p[0]}</span><span class="info"><b style="font-weight:500">${p[1]}</b><span>${p[2]}</span></span><span class="check"><i data-lucide="check"></i></span></button>`).join("");
 icons();
 $("#people").addEventListener("click", e => { const b = e.target.closest(".person"); if (!b) return; const k = +b.dataset.k; sel.has(k) ? sel.delete(k) : sel.add(k); b.setAttribute("aria-pressed", String(sel.has(k))); calcBiz(); });
 function calcBiz() { const a = {}; [...sel].forEach(k => a[PPL[k][2]] = (a[PPL[k][2]] || 0) + 1); let c = 0; Object.values(a).forEach(n => c += Math.ceil(n / 3)); $("#bzSel").textContent = `${sel.size} of 10`; $("#bzCars").textContent = c + " cars"; roll($("#bzCost"), inr(c * 18 * 18)); $("#dispatch").textContent = `Book ${sel.size} rides`; }
@@ -1127,7 +1127,7 @@ function riderVoice(raw) {
   if (has(t, ["ride", "cab", "taxi", "book", "राइड", "टैक्सी", "बुक", "రైడ్", "క్యాబ్", "బుక్"])) return { reply: R("Where would you like to go?", "आप कहाँ जाना चाहेंगे?", "మీరు ఎక్కడికి వెళ్ళాలి?"), act: () => go("search") };
   return null;
 }
-if (window.SagaVoice) window.SagaVoice.mount({
+const SV = window.SagaVoice && window.SagaVoice.mount({
   root: $("#screen"), fabBottom: 84, title: "SAGA Saathi",
   examples: {
     en: ["Book a ride to RK Beach", "Confirm the booking", "Where is my car?", "Airport ride, my PNR is K7QX2M", "Daily rides to office", "Day trip to Araku", "How many green points do I have?", "Call my driver"],
@@ -1136,6 +1136,7 @@ if (window.SagaVoice) window.SagaVoice.mount({
   },
   handle: (text, lang) => { const r = riderVoice(text); post("voice", { text, ok: !!r }); return r; }
 });
+if (SV) $("#homeMic").addEventListener("click", () => { const f = document.querySelector(".sv-fab"); f && f.click(); });
 post("hello");
 const start = location.hash.slice(1); render(S[start] ? start : "splash");
 })();

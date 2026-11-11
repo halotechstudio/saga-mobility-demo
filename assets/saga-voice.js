@@ -14,12 +14,12 @@
 .sv-panel{margin:0 8px 8px;border-radius:30px;padding:16px 16px 18px;background:#07080C;color:#fff;transform:translateY(40px);transition:transform .45s cubic-bezier(.2,.8,.2,1);box-shadow:0 -10px 40px rgba(0,0,0,.35),inset 0 0 0 1px rgba(255,255,255,.08);font-family:"Inter Tight",system-ui,sans-serif}
 .sv-sheet.on .sv-panel{transform:none}
 .sv-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.sv-title{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px}
+.sv-title{display:flex;align-items:center;gap:10px;font-weight:600;font-size:16px}
 .sv-title i{width:30px;height:30px;border-radius:10px;background:linear-gradient(135deg,#2449F0,#33C6F0);display:grid;place-items:center}
-.sv-badge{font-family:"JetBrains Mono",monospace;font-size:10.5px;font-weight:600;letter-spacing:.06em;padding:4px 8px;border-radius:7px;background:#1A1E29;color:rgba(255,255,255,.7)}
+.sv-badge{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:500;letter-spacing:.06em;padding:4px 8px;border-radius:7px;background:#1A1E29;color:rgba(255,255,255,.7)}
 .sv-x{width:38px;height:38px;border-radius:50%;background:#1A1E29;color:#fff;display:grid;place-items:center}
 .sv-langs{display:flex;gap:6px;margin-top:12px}
-.sv-langs button{flex:1;height:38px;border-radius:12px;background:#1A1E29;color:rgba(255,255,255,.75);font-weight:700;font-size:14px;transition:all .2s}
+.sv-langs button{flex:1;height:38px;border-radius:12px;background:#1A1E29;color:rgba(255,255,255,.75);font-weight:600;font-size:14px;transition:all .2s}
 .sv-langs button[aria-pressed="true"]{background:#fff;color:#07080C}
 .sv-stage{display:flex;flex-direction:column;align-items:center;margin-top:14px;min-height:150px}
 .sv-orb{position:relative;width:96px;height:96px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,#5B7BFF,#092EC9 55%,#050610);box-shadow:0 0 40px rgba(36,73,240,.5)}
@@ -29,20 +29,20 @@
 @keyframes svt{to{filter:hue-rotate(60deg)}}
 .sv-bars{display:flex;gap:4px;align-items:center;height:34px}
 .sv-bars i{width:4px;height:8px;border-radius:4px;background:#fff;opacity:.9;transition:height .12s}
-.sv-said{margin-top:12px;min-height:26px;text-align:center;font-size:18px;font-weight:700;line-height:1.35}
+.sv-said{margin-top:12px;min-height:26px;text-align:center;font-size:18px;font-weight:600;line-height:1.35}
 .sv-said .p{color:rgba(255,255,255,.55)}
-.sv-reply{margin-top:8px;min-height:22px;text-align:center;font-size:15px;color:#9FE6FF;line-height:1.45}
+.sv-reply{margin-top:8px;min-height:22px;text-align:center;font-size:14px;color:#9FE6FF;line-height:1.45}
 .sv-status{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.08em;color:rgba(255,255,255,.5);margin-top:6px}
 .sv-ex{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:12px -16px 0;padding:0 16px}
 .sv-ex::-webkit-scrollbar{display:none}
-.sv-ex button{flex:none;height:36px;padding:0 12px;border-radius:999px;background:#1A1E29;color:#fff;font-size:13.5px;font-weight:600;white-space:nowrap}
+.sv-ex button{flex:none;height:36px;padding:0 12px;border-radius:999px;background:#1A1E29;color:#fff;font-size:13px;font-weight:500;white-space:nowrap}
 .sv-row{display:flex;gap:8px;margin-top:12px}
-.sv-row input{flex:1;min-width:0;height:48px;border-radius:15px;border:0;background:#1A1E29;color:#fff;padding:0 14px;font-size:15px;outline:none}
+.sv-row input{flex:1;min-width:0;height:48px;border-radius:15px;border:0;background:#1A1E29;color:#fff;padding:0 14px;font-size:14px;outline:none}
 .sv-row input:focus{box-shadow:inset 0 0 0 2px #33C6F0}
 .sv-mic{width:48px;height:48px;border-radius:15px;background:#2449F0;color:#fff;display:grid;place-items:center;flex:none}
 .sv-mic.rec{background:#C8243C}
 .sv-mic svg,.sv-x svg{width:20px;height:20px}
-.sv-note{margin-top:10px;text-align:center;font-size:11.5px;color:rgba(255,255,255,.45)}
+.sv-note{margin-top:10px;text-align:center;font-size:11px;color:rgba(255,255,255,.45)}
 @media (prefers-reduced-motion:reduce){.sv-fab::after,.sv-orb{animation:none!important}}`;
   const MIC = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 17v5"/></svg>';
   const X = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>';
