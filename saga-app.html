@@ -64,7 +64,7 @@ svg.lucide{width:20px;height:20px;stroke-width:2;flex:none}
 .h1{font-weight:500;font-size:28px;line-height:1.1;letter-spacing:-.02em;margin:0;text-wrap:balance}
 .h2{font-weight:500;font-size:18px;letter-spacing:-.02em;margin:0}
 .k{font-size:14px;color:var(--ink3);font-weight:400}
-.lab{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3)}
+.lab{font-family:var(--f);font-size:12px;font-weight:500;letter-spacing:0;text-transform:none;color:var(--ink3)}
 .sub{color:var(--ink2);line-height:1.5;margin:6px 0 0;font-size:14px}
 .card{background:var(--card);border-radius:26px;box-shadow:var(--sh)}
 .black{background:var(--ink);color:#fff}
@@ -98,7 +98,7 @@ svg.lucide{width:20px;height:20px;stroke-width:2;flex:none}
 @keyframes live{70%{box-shadow:0 0 0 10px rgba(14,143,91,0)}100%{box-shadow:0 0 0 0 rgba(14,143,91,0)}}
 .divider{height:1px;background:var(--line);margin:14px 0}
 .black .divider{background:var(--kl)}
-.tchip{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 10px;border-radius:8px;font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.04em;background:var(--k2);color:#fff}
+.tchip{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 10px;border-radius:8px;font-family:var(--f);font-size:13px;font-weight:500;letter-spacing:0;background:var(--k2);color:#fff}
 .tchip i{width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan)}
 .plate{display:inline-flex;align-items:center;padding:6px 12px;border-radius:10px;background:#FFFBEA;color:#111;box-shadow:inset 0 0 0 2px #111;font-family:var(--mono);font-weight:500;letter-spacing:.04em;font-size:16px;white-space:nowrap}
 /* odometer digits */
@@ -108,7 +108,21 @@ svg.lucide{width:20px;height:20px;stroke-width:2;flex:none}
 .roll .rs span,.roll .rc{display:block;height:1em;line-height:1}
 
 /* tab bar */
-.tabbar{position:absolute;left:10px;right:10px;bottom:12px;z-index:60;height:66px;padding:6px;border-radius:26px;background:var(--ink);box-shadow:0 14px 34px rgba(7,8,12,.3);display:grid;grid-template-columns:repeat(4,1fr);gap:4px;transition:transform .5s var(--ease),opacity .3s}
+.tabbar{position:absolute;left:10px;right:10px;bottom:12px;z-index:60;height:66px;padding:6px;border-radius:26px;background:var(--ink);box-shadow:0 14px 34px rgba(7,8,12,.3);display:grid;grid-template-columns:1fr 1fr 74px 1fr 1fr;gap:4px;transition:transform .5s var(--ease),opacity .3s}
+.tab-s{position:relative;isolation:isolate;align-self:center;justify-self:center;width:62px;height:62px;margin-top:-26px;border-radius:50%;display:grid;place-items:center;color:#fff;background:#07080C;box-shadow:0 0 0 5px var(--bg),0 10px 24px rgba(9,46,201,.35);transition:transform .25s cubic-bezier(.34,1.56,.64,1)}
+.tab-s svg{width:28px;height:28px;filter:drop-shadow(0 0 4px rgba(51,198,240,.7));transition:filter .3s}
+.tab-s .ring{position:absolute;inset:0;border-radius:50%;padding:2.5px;background:conic-gradient(from 0deg,#2449F0,#33C6F0,#7B8CFF,#2449F0) border-box;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:sRing 5s linear infinite;opacity:.9}
+.tab-s::after{content:"";position:absolute;inset:-8px;border-radius:50%;background:radial-gradient(circle,rgba(51,198,240,.45),transparent 68%);z-index:-1;animation:sBreathe 3s ease-in-out infinite}
+.tab-s:active{transform:scale(.92)}
+.tab-s.mini{position:absolute;z-index:61;top:54px;right:16px;width:46px;height:46px;margin:0;box-shadow:0 8px 20px rgba(9,46,201,.35);display:none}
+.tab-s.mini svg{width:21px;height:21px}
+.screen[data-scr=choose] .tab-s.mini,.screen[data-scr=arriving] .tab-s.mini,.screen[data-scr=fly-pnr] .tab-s.mini,.screen[data-scr=fly-plan] .tab-s.mini,.screen[data-scr=fly-locked] .tab-s.mini{display:grid}
+.screen[data-scr=arriving] .tab-s.mini{top:auto;bottom:24px}
+.tab-s.lit svg{filter:drop-shadow(0 0 10px #33C6F0) drop-shadow(0 0 18px #2449F0)}
+.tab-s.lit::after{animation:sFlash .7s ease-out}
+@keyframes sRing{to{transform:rotate(1turn)}}
+@keyframes sBreathe{50%{opacity:.35;transform:scale(.92)}}
+@keyframes sFlash{0%{transform:scale(.8);opacity:1}100%{transform:scale(1.9);opacity:0}}
 .tabbar.hide{transform:translateY(130px);opacity:0;pointer-events:none}
 .tab{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border-radius:20px;font-size:11px;font-weight:500;color:rgba(255,255,255,.6);transition:all .3s var(--ease)}
 .tab svg.lucide{width:21px;height:21px}
@@ -142,8 +156,8 @@ svg.lucide{width:20px;height:20px;stroke-width:2;flex:none}
 .home-top{position:absolute;top:58px;left:16px;right:16px;display:flex;justify-content:space-between;align-items:center;z-index:2}
 .hello{display:flex;align-items:center;gap:10px;padding:6px 16px 6px 6px;border-radius:999px;background:#fff;box-shadow:var(--sh);font-weight:500}
 .avatar{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-weight:500;background:var(--blue);color:#fff}
-.ticker{position:absolute;left:14px;right:14px;bottom:76px;z-index:2;height:34px;border-radius:12px;background:var(--ink);color:#fff;overflow:hidden;display:flex;align-items:center}
-.ticker .tl{display:flex;gap:28px;white-space:nowrap;font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.04em;animation:tick 22s linear infinite;padding-left:16px}
+.ticker{position:absolute;left:14px;right:auto;bottom:76px;z-index:2;height:34px;border-radius:12px;background:var(--ink);color:#fff;overflow:hidden;display:flex;align-items:center}
+.ticker .tl{display:flex;white-space:nowrap;font-size:13px;font-weight:500;padding:0 14px}
 .ticker .tl span{display:inline-flex;align-items:center;gap:8px}
 .ticker .tl i{width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan)}
 @keyframes tick{to{transform:translateX(-50%)}}
@@ -408,8 +422,6 @@ svg.lucide{width:20px;height:20px;stroke-width:2;flex:none}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 html.embed .side{display:none!important}
 html.embed,html.embed body{overflow:hidden}
-.screen[data-scr=home] .sv-fab,.screen[data-scr=splash] .sv-fab,.screen[data-scr=finding] .sv-fab,.screen[data-scr=ride] .sv-fab,.screen[data-scr=car3d] .sv-fab,.screen[data-scr=fly-scan] .sv-fab,.screen[data-scr=arrived] .sv-fab,.screen[data-scr=choose] .sv-fab,.screen[data-scr=fly-plan] .sv-fab{display:none}
-.screen[data-scr=arriving] .sv-fab,.screen[data-scr=fly-pnr] .sv-fab,.screen[data-scr=fly-locked] .sv-fab{bottom:24px}
 </style>
 
 <div class="stage">
@@ -436,8 +448,8 @@ html.embed,html.embed body{overflow:hidden}
     <!-- HOME -->
     <section class="scr" id="s-home">
       <div class="home-map"><div class="lmap" id="homeMap"></div>
-        <div class="home-top"><div class="hello"><span class="avatar">A</span>Hi, Ananya</div><span style="display:flex;gap:8px"><button class="icon-btn" id="homeMic" aria-label="Speak to SAGA Saathi" style="background:var(--blue);color:#fff"><i data-lucide="mic"></i></button><button class="icon-btn" aria-label="Notifications" data-toast="No new notifications"><i data-lucide="bell"></i></button></span></div>
-        <div class="ticker" aria-label="Live fleet status"><div class="tl"><span><i></i>06 CARS NEARBY</span><span><i></i>AVG PICKUP 3 MIN</span><span><i></i>FLEET 92% CHARGED</span><span><i></i>0 SURGE · ₹18/KM</span><span><i></i>06 CARS NEARBY</span><span><i></i>AVG PICKUP 3 MIN</span><span><i></i>FLEET 92% CHARGED</span><span><i></i>0 SURGE · ₹18/KM</span></div></div>
+        <div class="home-top"><div class="hello"><span class="avatar">A</span>Hi, Ananya</div><button class="icon-btn" aria-label="Notifications" data-toast="No new notifications"><i data-lucide="bell"></i></button></div>
+        <div class="ticker" aria-label="Live fleet status"><div class="tl"><span><i></i>6 cars nearby · pickup in 3 min</span></div></div>
       </div>
       <div class="sheet-home">
         <div class="grab"></div>
@@ -451,18 +463,17 @@ html.embed,html.embed body{overflow:hidden}
 
         <article class="fly-card mt20" id="flyCard">
           <canvas id="cFly" aria-label="3D jet. Drag to turn it."></canvas>
-          <span class="tag">SAGA FLY · AIRPORT</span>
+          <span class="tag">Airport rides</span>
           <h3>Flying soon? We'll book your cab.</h3>
-          <div class="w"><p style="margin:0 0 10px;font-size:16px;font-weight:500;color:rgba(255,255,255,.85)">Type the 6-letter PNR from your ticket</p>
+          <div class="w"><p style="margin:0 0 10px;font-size:16px;font-weight:500;color:rgba(255,255,255,.85)">Enter your ticket PNR</p>
             <div class="mini-pnr"><input id="miniPnr" maxlength="6" placeholder="e.g. K7QX2M" aria-label="PNR" autocomplete="off"><button id="miniPnrGo" aria-label="Find my flight"><i data-lucide="arrow-right"></i></button></div></div>
         </article>
 
         <h2 class="h2 mt28">More ways to ride</h2>
-        <p class="k mt4">Swipe. Drag the 3D objects. Try the controls.</p>
         <div class="svc-wrap" id="svcWrap">
           <article class="svc s-tint">
             <button class="open" data-go="loop" aria-label="Open daily rides"><i data-lucide="arrow-up-right"></i></button>
-            <span class="tag">SAGA LOOP</span><h3>Daily rides, same driver</h3>
+            <span class="tag">SAGA Loop</span><h3>Daily rides, same driver</h3>
             <canvas id="cLoop" aria-label="3D loop ring. Drag to turn it."></canvas>
             <div class="w"><span class="k" style="color:var(--ink2);font-weight:500;font-size:14px">Office, 14 km · tap your days</span>
               <div class="mini-days mt8" id="miniDays"></div>
@@ -470,7 +481,7 @@ html.embed,html.embed body{overflow:hidden}
           </article>
           <article class="svc s-ink">
             <button class="open" data-go="voyage" aria-label="Open outstation trips"><i data-lucide="arrow-up-right"></i></button>
-            <span class="tag">SAGA VOYAGE</span><h3>Outstation, charging planned</h3>
+            <span class="tag">SAGA Voyage</span><h3>Outstation, charging planned</h3>
             <canvas id="cVoyage" aria-label="3D terrain with the route. Drag to turn it."></canvas>
             <div class="w"><div class="between"><span style="font-weight:500;color:rgba(255,255,255,.85)">How far?</span><span class="mono" style="font-weight:500" id="miniKm">350 KM</span></div>
               <input type="range" class="range" id="miniRange" min="60" max="500" step="10" value="350" aria-label="Distance in km">
@@ -478,14 +489,14 @@ html.embed,html.embed body{overflow:hidden}
           </article>
           <article class="svc s-blue">
             <button class="open" data-go="tales" aria-label="Open day trips"><i data-lucide="arrow-up-right"></i></button>
-            <span class="tag">SAGA TALES</span><h3>Day trips, door to door</h3>
+            <span class="tag">SAGA Tales</span><h3>Day trips, door to door</h3>
             <canvas id="cTales" aria-label="3D hills with the sun. Drag to look around."></canvas>
             <div class="w"><div class="tabs3" id="miniTrips"><button aria-pressed="true" data-i="0">Araku</button><button aria-pressed="false" data-i="1">Lambasingi</button><button aria-pressed="false" data-i="2">Coast</button></div>
               <div class="between mt12"><span class="bigprice num" id="miniTripP">₹4,140</span><span style="color:rgba(255,255,255,.88);font-weight:500;font-size:14px" id="miniTripT">1 day · 230 km</span></div></div>
           </article>
           <article class="svc s-white">
             <button class="open" data-go="business" aria-label="Open business"><i data-lucide="arrow-up-right"></i></button>
-            <span class="tag">SAGA BUSINESS</span><h3>Rides for your whole team</h3>
+            <span class="tag">SAGA Business</span><h3>Rides for your whole team</h3>
             <canvas id="cBiz" aria-label="3D towers that light up per car. Drag to turn."></canvas>
             <div class="w"><span class="k" style="color:var(--ink2);font-weight:500;font-size:14px">How many people?</span>
               <div class="stepper mt8"><button id="bMinus" aria-label="Fewer people"><i data-lucide="minus"></i></button><b class="num" id="bCount">12</b><button id="bPlus" aria-label="More people"><i data-lucide="plus"></i></button></div>
@@ -520,11 +531,11 @@ html.embed,html.embed body{overflow:hidden}
         <div class="grab"></div>
         <div class="between"><h2 class="h2">Choose your ride</h2><span class="mono" style="font-size:13px;font-weight:500"><span id="destName">RK Beach</span> · 8.6 KM</span></div>
         <div class="stack mt12" id="opts">
-          <button class="opt" aria-pressed="true" data-name="SAGA Ride" data-price="155" data-batt="86"><img src="assets/car3_side.webp" alt=""><span><b>SAGA Ride</b><span class="k">4 seats · 2 min away</span></span><span class="p"><b class="num">₹155</b><span class="lab" style="display:block">₹18/KM</span></span></button>
-          <button class="opt" aria-pressed="false" data-name="SAGA Assist" data-price="185" data-batt="91"><img src="assets/car3_side.webp" alt=""><span><b>SAGA Assist</b><span class="k">Help with bags & boarding</span></span><span class="p"><b class="num">₹185</b><span class="lab" style="display:block">+₹30 CARE</span></span></button>
-          <button class="opt" aria-pressed="false" data-name="SAGA Comfort" data-price="189" data-batt="78"><img src="assets/car3_side.webp" alt=""><span><b>SAGA Comfort</b><span class="k">Quiet ride · 3 bags</span></span><span class="p"><b class="num">₹189</b><span class="lab" style="display:block">₹22/KM</span></span></button>
+          <button class="opt" aria-pressed="true" data-name="SAGA Ride" data-price="155" data-batt="86"><img src="assets/car3_side.webp" alt=""><span><b>SAGA Ride</b><span class="k">4 seats · 2 min away</span></span><span class="p"><b class="num">₹155</b><span class="lab" style="display:block">₹18/km</span></span></button>
+          <button class="opt" aria-pressed="false" data-name="SAGA Assist" data-price="185" data-batt="91"><img src="assets/car3_side.webp" alt=""><span><b>SAGA Assist</b><span class="k">Help with bags & boarding</span></span><span class="p"><b class="num">₹185</b><span class="lab" style="display:block">+₹30 care</span></span></button>
+          <button class="opt" aria-pressed="false" data-name="SAGA Comfort" data-price="189" data-batt="78"><img src="assets/car3_side.webp" alt=""><span><b>SAGA Comfort</b><span class="k">Quiet ride · 3 bags</span></span><span class="p"><b class="num">₹189</b><span class="lab" style="display:block">₹22/km</span></span></button>
         </div>
-        <div class="vpanel black"><div class="between"><span class="lab">Your car's status</span><span class="tchip"><i></i>LIVE</span></div>
+        <div class="vpanel black"><div class="between"><span class="lab">Your car's status</span><span class="tchip"><i></i>Live</span></div>
           <div class="vgrid"><div><b class="roll" id="vdBatt">86%</b><span>Battery</span></div><div><b class="roll" id="vdRange">268KM</b><span>Range left</span></div><div><b style="color:#5BE3A6">0.6KG</b><span>CO₂ you save</span></div></div></div>
         <div class="pay mt12"><button class="chip on" data-pay><i data-lucide="smartphone"></i>UPI</button><button class="chip" data-pay><i data-lucide="banknote"></i>Cash</button><button class="chip" data-pay><i data-lucide="credit-card"></i>Card</button></div>
         <button class="btn mt16" id="bookBtn" data-go="finding">Book SAGA Ride · ₹155</button>
@@ -537,7 +548,7 @@ html.embed,html.embed body{overflow:hidden}
       <div class="radar"><span class="rg"></span><span class="rg"></span><span class="rg"></span><span class="sweep"></span></div>
       <div id="blips"></div>
       <div class="lock" id="lock"></div>
-      <div class="find-panel"><span class="tchip"><i></i>MATCHING</span>
+      <div class="find-panel"><span class="tchip"><i></i>Matching</span>
         <h2 class="h2 mt12" style="font-size:24px" id="findT">Finding your SAGA car</h2>
         <div class="flog mt8" id="flog"></div>
         <button class="btn white mt12" data-back>Cancel</button></div>
@@ -547,7 +558,7 @@ html.embed,html.embed body{overflow:hidden}
     <section class="scr no-tab" id="s-arriving">
       <div class="started" id="started"><div><svg width="96" height="96" viewBox="0 0 96 96" aria-hidden="true"><circle cx="48" cy="48" r="44" fill="none" stroke="#33C6F0" stroke-width="4"/><path d="M30 49l12 12 24-26" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg><h2 class="h1 mt16" style="font-size:28px">Ravi entered your code</h2><p class="sub" style="color:rgba(255,255,255,.8)">Your ride has started. Sit back.</p></div></div>
       <div class="hero-blue">
-        <div class="between"><button class="icon-btn" data-go="home" aria-label="Close" style="background:rgba(255,255,255,.14);box-shadow:none;color:#fff"><i data-lucide="x"></i></button><span class="tchip" id="arrChip"><i></i>ON THE WAY</span></div>
+        <div class="between"><button class="icon-btn" data-go="home" aria-label="Close" style="background:rgba(255,255,255,.14);box-shadow:none;color:#fff"><i data-lucide="x"></i></button><span class="tchip" id="arrChip"><i></i>On the way</span></div>
         <p class="big" id="arrBig">Your SAGA ONE is arriving</p>
         <div class="etaring"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="7"/><circle id="etaArc" cx="50" cy="50" r="44" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-dasharray="276" stroke-dashoffset="0"/></svg><div class="v"><span><b id="etaMin">4</b><small id="etaUnit">MIN</small></span></div></div>
         <img class="car" src="assets/car3_front.webp" alt="SAGA ONE electric car">
@@ -581,7 +592,7 @@ html.embed,html.embed body{overflow:hidden}
       <canvas id="viewCanvas" aria-label="3D model of the SAGA ONE. Drag to rotate."></canvas>
       <div id="hotspots"></div>
       <div class="loading3d" id="viewLoad">LOADING 3D MODEL…</div>
-      <div style="position:absolute;top:58px;left:16px;right:16px;z-index:7" class="between"><button class="icon-btn" data-back aria-label="Back"><i data-lucide="chevron-left"></i></button><span class="tchip"><i></i>DRAG · TAP THE DOTS</span></div>
+      <div style="position:absolute;top:58px;left:16px;right:16px;z-index:7" class="between"><button class="icon-btn" data-back aria-label="Back"><i data-lucide="chevron-left"></i></button><span class="tchip"><i></i>Drag · tap the dots</span></div>
       <div style="position:absolute;top:124px;left:22px;z-index:5;pointer-events:none"><span class="lab">Your car</span><div style="font-size:34px;font-weight:500;letter-spacing:-.02em">SAGA ONE</div><span class="plate mt8">AP 39 EV 2147</span></div>
       <div style="position:absolute;left:14px;right:14px;bottom:18px;z-index:7" class="black" ><div class="hrow" style="grid-template-columns:repeat(3,1fr);background:var(--ink);padding:12px;border-radius:24px"><div><b>86%</b><span>Battery</span></div><div><b>268 KM</b><span>Range</span></div><div class="eco"><b>4.2 T</b><span>CO₂ saved</span></div></div><button class="btn mt12" data-back>Back to my ride</button></div>
     </section>
@@ -589,7 +600,7 @@ html.embed,html.embed body{overflow:hidden}
     <!-- RIDE -->
     <section class="scr no-tab" id="s-ride">
       <canvas id="rideCanvas" aria-label="Live 3D view of your car driving the route"></canvas>
-      <div class="loading3d" id="rideLoad">BUILDING 3D ROUTE…</div>
+      <div class="loading3d" id="rideLoad">Building 3D route…</div>
       <div class="hud-top"><div class="turn"><span class="ar" id="turnAr"><i data-lucide="corner-up-right"></i></span><span><b id="turnT">Head north on MVP Main Road</b><span id="turnD">STRAIGHT · 600 M</span></span></div><button class="camtog" id="camTog" aria-label="Change camera view"><i data-lucide="video"></i><span id="camLbl">Follow</span></button></div>
       <div class="hud-bot">
         <div class="between"><div><span class="lab">Arriving at <span id="rideDest">RK Beach</span></span><div style="font-size:28px;font-weight:500;letter-spacing:-.02em" class="num"><span class="mono" id="rideEta">21:56</span> · <span id="rideMin">14 min</span></div></div><button class="sos" data-toast="SOS: SAGA safety team alerted (demo)">SOS</button></div>
@@ -644,7 +655,7 @@ html.embed,html.embed body{overflow:hidden}
     </section>
     <section class="scr" id="s-fly-plan">
       <div class="topbar"><button class="icon-btn" data-back aria-label="Back"><i data-lucide="chevron-left"></i></button><span class="t">Your plan</span><span style="width:50px"></span></div>
-      <div class="card pad black"><div class="between"><span class="lab">6E 2147 · THU 12 NOV</span><span class="tchip"><i style="background:#5BE3A6;box-shadow:0 0 8px #5BE3A6"></i>ON TIME</span></div><div class="between mt12"><div><div class="mono" style="font-size:34px;font-weight:500">VTZ</div><div class="k">07:25</div></div><i data-lucide="plane" style="width:30px;height:30px;color:var(--cyan)"></i><div style="text-align:right"><div class="mono" style="font-size:34px;font-weight:500">BLR</div><div class="k">09:05</div></div></div></div>
+      <div class="card pad black"><div class="between"><span class="lab">6E 2147 · Thu 12 Nov</span><span class="tchip"><i style="background:#5BE3A6;box-shadow:0 0 8px #5BE3A6"></i>On time</span></div><div class="between mt12"><div><div class="mono" style="font-size:34px;font-weight:500">VTZ</div><div class="k">07:25</div></div><i data-lucide="plane" style="width:30px;height:30px;color:var(--cyan)"></i><div style="text-align:right"><div class="mono" style="font-size:34px;font-weight:500">BLR</div><div class="k">09:05</div></div></div></div>
       <div class="timeline mt16">
         <div class="tl key"><time>04:17</time><span class="rail"><i></i></span><div><b>We pick you up</b><span>MVP Colony · 41 km</span></div></div>
         <div class="tl"><time>05:09</time><span class="rail"><i></i></span><div><b>You reach the airport</b><span>Departures, Bhogapuram</span></div></div>
@@ -708,9 +719,11 @@ html.embed,html.embed body{overflow:hidden}
     </section>
 
     <div class="toast" id="toast"><span class="dot"></span><span id="toastT"></span></div>
+    <button class="tab-s mini" id="saathiMini" aria-label="Talk to Saathi"><span class="ring"></span><svg viewBox="0 0 100 100" aria-hidden="true"><path d="M86 14 H32 A18 18 0 0 0 32 50 H68 A18 18 0 0 1 68 86 H34" fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round"/><circle cx="19" cy="86" r="7" fill="#33C6F0"/></svg></button>
     <nav class="tabbar" id="tabbar" aria-label="App">
       <button class="tab" data-go="home" data-tab="0"><i data-lucide="home"></i>Home</button>
       <button class="tab" data-go="arriving" data-tab="1"><i data-lucide="car-front"></i>My rides</button>
+      <button class="tab-s" id="saathi" aria-label="Talk to Saathi, the SAGA voice assistant"><span class="ring"></span><svg viewBox="0 0 100 100" aria-hidden="true"><path d="M86 14 H32 A18 18 0 0 0 32 50 H68 A18 18 0 0 1 68 86 H34" fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round"/><circle cx="19" cy="86" r="7" fill="#33C6F0"/></svg></button>
       <button class="tab" data-go="aura" data-tab="2"><i data-lucide="leaf"></i>Points</button>
       <button class="tab" data-go="business" data-tab="3"><i data-lucide="user-round"></i>Account</button>
     </nav>
@@ -899,7 +912,7 @@ let arrPhase = 0;
 function setStep(n) { $$("#steps4 > div").forEach((d, i) => { d.classList.toggle("done", i <= n); $("i", d).style.setProperty("--p", i < n ? "100%" : i === n ? "100%" : "0%"); }); }
 function arriveNow() {
   if (arrPhase >= 2) return; arrPhase = 2; clearTimers();
-  $("#arrBig").textContent = "Ravi is here, at Gate 2"; $("#arrChip").innerHTML = '<i style="background:#5BE3A6;box-shadow:0 0 8px #5BE3A6"></i>AT PICKUP';
+  $("#arrBig").textContent = "Ravi is here, at Gate 2"; $("#arrChip").innerHTML = '<i style="background:#5BE3A6;box-shadow:0 0 8px #5BE3A6"></i>At pickup';
   $("#etaMin").textContent = "0"; $("#etaUnit").textContent = "HERE"; $("#etaArc").style.strokeDashoffset = 276;
   setStep(2); $("#codecard").classList.add("hot"); $("#codeT").textContent = "Tell Ravi your code"; $("#codeS").textContent = "He types it into his app to start the ride.";
   $("#waitRow").hidden = false; let w = 300; $("#waitT").textContent = "05:00";
@@ -953,7 +966,7 @@ const enter = {
   },
   arriving(el) {
     arrPhase = 1; setStep(1); $("#started").style.opacity = 0;
-    $("#arrBig").textContent = "Your SAGA ONE is arriving"; $("#arrChip").innerHTML = "<i></i>ON THE WAY"; $("#etaUnit").textContent = "MIN";
+    $("#arrBig").textContent = "Your SAGA ONE is arriving"; $("#arrChip").innerHTML = "<i></i>On the way"; $("#etaUnit").textContent = "MIN";
     $("#codecard").classList.remove("hot"); $("#codeT").textContent = "Your trip code"; $("#codeS").textContent = "When Ravi arrives, tell him this number. He starts the ride."; $("#waitRow").hidden = true;
     if (G) { G.from(".hero-blue .car", { x: 200, opacity: 0, duration: 1.6, ease: "power3.out", delay: .1 }); G.from(".hero-blue .big", { y: 20, opacity: 0, duration: .8, delay: .2 }); }
     stagger(".ar-in", el, { delay: .3 });
@@ -1128,7 +1141,9 @@ function riderVoice(raw) {
   return null;
 }
 const SV = window.SagaVoice && window.SagaVoice.mount({
-  root: $("#screen"), fabBottom: 84, title: "SAGA Saathi",
+  root: $("#screen"), trigger: $("#saathi"), user: "Ananya",
+  onOpen: () => { const b = $("#saathi"); b.classList.remove("lit"); void b.offsetWidth; b.classList.add("lit"); },
+  onClose: () => $("#saathi").classList.remove("lit"),
   examples: {
     en: ["Book a ride to RK Beach", "Confirm the booking", "Where is my car?", "Airport ride, my PNR is K7QX2M", "Daily rides to office", "Day trip to Araku", "How many green points do I have?", "Call my driver"],
     hi: ["आरके बीच के लिए राइड बुक करो", "बुकिंग पक्की करो", "मेरी गाड़ी कहाँ है?", "एयरपोर्ट जाना है, PNR K7QX2M", "ऑफिस के लिए रोज़ की राइड", "अराकू की डे ट्रिप", "मेरे ग्रीन पॉइंट्स कितने हैं?", "ड्राइवर को कॉल करो"],
@@ -1136,7 +1151,7 @@ const SV = window.SagaVoice && window.SagaVoice.mount({
   },
   handle: (text, lang) => { const r = riderVoice(text); post("voice", { text, ok: !!r }); return r; }
 });
-if (SV) $("#homeMic").addEventListener("click", () => { const f = document.querySelector(".sv-fab"); f && f.click(); });
+if (SV) $("#saathiMini").addEventListener("click", () => { SV.open(); setTimeout(() => SV.speak(current === "choose" ? "Confirm the booking" : current === "arriving" ? "Where is my car?" : "Airport ride, my PNR is K7QX2M"), 700); });
 post("hello");
 const start = location.hash.slice(1); render(S[start] ? start : "splash");
 })();

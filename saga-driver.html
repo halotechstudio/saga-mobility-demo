@@ -57,7 +57,7 @@ svg.lucide{width:20px;height:20px;stroke-width:2;flex:none}
 .h1{font-weight:500;font-size:28px;line-height:1.1;letter-spacing:-.02em;margin:0;text-wrap:balance}
 .h2{font-weight:500;font-size:18px;letter-spacing:-.02em;margin:0}
 .k{font-size:14px;color:var(--t2);font-weight:400}
-.lab{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--t3)}
+.lab{font-family:var(--f);font-size:12px;font-weight:500;letter-spacing:0;text-transform:none;color:var(--t3)}
 .card{background:var(--c1);border-radius:24px;box-shadow:inset 0 0 0 1px var(--line)}
 .pad{padding:18px}
 .row{display:flex;align-items:center;gap:10px}
@@ -74,7 +74,7 @@ svg.lucide{width:20px;height:20px;stroke-width:2;flex:none}
 @keyframes rip{to{transform:scale(1);opacity:0}}
 .icon-btn{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--c2);flex:none;transition:transform .2s var(--spring)}
 .icon-btn:active{transform:scale(.9)}
-.tchip{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 11px;border-radius:9px;font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.04em;background:var(--c2)}
+.tchip{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 11px;border-radius:9px;font-family:var(--f);font-size:13px;font-weight:500;letter-spacing:0;background:var(--c2)}
 .tchip i{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green)}
 .plate{display:inline-flex;align-items:center;padding:6px 12px;border-radius:10px;background:#FFFBEA;color:#111;font-family:var(--mono);font-weight:500;letter-spacing:.04em;font-size:16px;white-space:nowrap}
 .divider{height:1px;background:var(--line);margin:14px 0}
@@ -231,12 +231,12 @@ html.embed,html.embed body{overflow:hidden}
     <!-- 1 START SHIFT -->
     <section class="scr no-tab" id="s-start">
       <canvas id="heroCanvas" aria-label="Your SAGA ONE turning on a dark stage"></canvas>
-      <div style="position:absolute;top:60px;left:18px;right:18px;z-index:3" class="between"><span class="tchip"><i style="background:var(--amber);box-shadow:0 0 8px var(--amber)"></i>OFF DUTY</span><span class="lab">THU 12 NOV · 03:22</span></div>
+      <div style="position:absolute;top:60px;left:18px;right:18px;z-index:3" class="between"><span class="tchip"><i style="background:var(--amber);box-shadow:0 0 8px var(--amber)"></i>Off duty</span><span class="lab">Thu 12 Nov · 03:22</span></div>
       <div class="start-body">
         <h1 class="h1 in">Good morning, Ravi.</h1>
         <p class="k mt8 in">Shift 03:30 – 11:30 · Maddilapalem depot</p>
         <div class="card pad mt16 in">
-          <div class="between"><div><span class="lab">Your car · SAGA ONE</span><div class="mt8"><span class="plate">AP 39 EV 2147</span></div></div><div style="text-align:right"><span class="mono roll" style="font-size:34px;font-weight:500" id="sBatt">92%</span><div class="lab mt4">318 KM RANGE</div></div></div>
+          <div class="between"><div><span class="lab">Your car · SAGA ONE</span><div class="mt8"><span class="plate">AP 39 EV 2147</span></div></div><div style="text-align:right"><span class="mono roll" style="font-size:34px;font-weight:500" id="sBatt">92%</span><div class="lab mt4">318 km range</div></div></div>
           <div class="cells mt12" id="sCells"></div>
         </div>
         <div class="card mt12 in" style="padding:2px 18px" id="checks">
@@ -252,7 +252,7 @@ html.embed,html.embed body{overflow:hidden}
     <!-- 2 ONLINE -->
     <section class="scr" id="s-online">
       <div class="on-map"><div class="dmap" id="onMap"></div>
-        <div class="on-top"><div class="online-pill"><span class="sw"></span><span><b style="display:block;font-size:14px">Online</b><span class="lab">SHIFT <span id="shiftT">00:01</span></span></span></div><button class="icon-btn" aria-label="Messages from dispatch" data-toast="Dispatch: Have a safe shift, Ravi"><i data-lucide="radio"></i></button></div>
+        <div class="on-top"><div class="online-pill"><span class="sw"></span><span><b style="display:block;font-size:14px">Online</b><span class="lab">Shift <span id="shiftT">00:01</span></span></span></div><button class="icon-btn" aria-label="Messages from dispatch" data-toast="Dispatch: Have a safe shift, Ravi"><i data-lucide="radio"></i></button></div>
       </div>
       <div class="on-sheet">
         <div class="grab"></div>
@@ -260,9 +260,9 @@ html.embed,html.embed body{overflow:hidden}
         <div class="stat4 mt12"><div><b>92%</b><span>Battery</span></div><div><b>318</b><span>km range</span></div><div><b>0/6</b><span>Trips</span></div><div><b>100</b><span>Safety</span></div></div>
         <h2 class="h2 mt20">Today's plan</h2>
         <div class="stack mt12">
-          <div class="card job next"><time>04:12</time><div><b>Ananya R. → Airport</b><div class="k" style="font-size:14px">Flight 6E 2147 · 41.6 km</div></div><span class="tag">FLY</span></div>
-          <div class="card job"><time>06:20</time><div><b>Kiran M. ← Airport</b><div class="k" style="font-size:14px">Lands 06:10 · tracking</div></div><span class="tag">FLY</span></div>
-          <div class="card job"><time>08:30</time><div><b>Pharma Park pool · 3</b><div class="k" style="font-size:14px">Gajuwaka · 18 km</div></div><span class="tag">BIZ</span></div>
+          <div class="card job next"><time>04:12</time><div><b>Ananya R. → Airport</b><div class="k" style="font-size:14px">Flight 6E 2147 · 41.6 km</div></div><span class="tag">Fly</span></div>
+          <div class="card job"><time>06:20</time><div><b>Kiran M. ← Airport</b><div class="k" style="font-size:14px">Lands 06:10 · tracking</div></div><span class="tag">Fly</span></div>
+          <div class="card job"><time>08:30</time><div><b>Pharma Park pool · 3</b><div class="k" style="font-size:14px">Gajuwaka · 18 km</div></div><span class="tag">Biz</span></div>
           <div class="card job"><time>10:40</time><div><b>Charge · Bay 4</b><div class="k" style="font-size:14px">40 min · depot</div></div><span class="tag" style="color:var(--green)">EV</span></div>
         </div>
       </div>
@@ -270,7 +270,7 @@ html.embed,html.embed body{overflow:hidden}
 
     <!-- 3 JOB ASSIGNED -->
     <section class="scr no-tab" id="s-job">
-      <div class="between"><span class="tchip" style="background:rgba(255,255,255,.15)"><i style="background:#fff;box-shadow:0 0 8px #fff"></i>NEW RIDE ASSIGNED</span><span class="lab" style="color:rgba(255,255,255,.75)">FROM DISPATCH</span></div>
+      <div class="between"><span class="tchip" style="background:rgba(255,255,255,.15)"><i style="background:#fff;box-shadow:0 0 8px #fff"></i>New ride assigned</span><span class="lab" style="color:rgba(255,255,255,.75)">From dispatch</span></div>
       <h1 class="h1 mt16 jb">Airport pickup in 4 min</h1>
       <div class="ackring jb"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="7"/><circle id="ackArc" cx="50" cy="50" r="44" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-dasharray="276" stroke-dashoffset="0"/></svg><div class="v"><span><b id="ackN">10</b><small>SEC</small></span></div></div>
       <div class="jobcard mt16 jb">
@@ -287,7 +287,7 @@ html.embed,html.embed body{overflow:hidden}
     <!-- 4 NAVIGATE TO PICKUP -->
     <section class="scr no-tab s3d" id="s-nav">
       <canvas class="c3d" id="navCanvas" aria-label="3D navigation to the pickup point"></canvas>
-      <div class="loading3d" id="navLoad">BUILDING 3D ROUTE…</div>
+      <div class="loading3d" id="navLoad">Building 3D route…</div>
       <div class="hud-top"><div class="turn"><span class="ar" id="navAr"><i data-lucide="arrow-up"></i></span><span><b id="navT">Head north on MVP Main Road</b><span id="navD">STRAIGHT · 300 M</span></span></div></div>
       <div class="hud-bot">
         <div class="between"><div><span class="lab">To pickup · Ananya R.</span><div style="font-size:24px;font-weight:500" class="num"><span class="mono" id="navMin">4 min</span> · <span id="navKm">1.2 km</span></div></div><button class="icon-btn" aria-label="Call rider" data-toast="Calling Ananya (masked number)"><i data-lucide="phone"></i></button></div>
@@ -296,9 +296,9 @@ html.embed,html.embed body{overflow:hidden}
       </div>
     </section>
 
-    <!-- 5 AT PICKUP -->
+    <!-- 5 At pickup -->
     <section class="scr no-tab" id="s-pickup">
-      <div class="between"><span class="tchip"><i></i>AT PICKUP · GATE 2</span><span class="lab">FREE WAIT <span class="mono" style="color:#fff" id="pWait">05:00</span></span></div>
+      <div class="between"><span class="tchip"><i></i>At pickup · Gate 2</span><span class="lab">Free wait <span class="mono" style="color:#fff" id="pWait">05:00</span></span></div>
       <h1 class="h1 mt16 in">Ask Ananya for her trip code</h1>
       <div class="card pad mt12 in"><div class="row"><div style="width:52px;height:52px;border-radius:50%;background:var(--c2);display:grid;place-items:center;font-weight:500">AR</div><div style="flex:1"><b style="font-size:18px">Ananya R.</b><div class="k" style="font-size:14px">2 bags · Flight 6E 2147</div></div><button class="icon-btn" aria-label="Call rider" data-toast="Calling Ananya (masked number)"><i data-lucide="phone"></i></button></div></div>
       <div class="codebox mt16 in" id="codebox"><span></span><span></span><span></span><span></span></div>
@@ -311,7 +311,7 @@ html.embed,html.embed body{overflow:hidden}
     <!-- 6 TRIP -->
     <section class="scr no-tab s3d" id="s-trip">
       <canvas class="c3d" id="tripCanvas" aria-label="3D navigation to the airport"></canvas>
-      <div class="loading3d" id="tripLoad">BUILDING 3D ROUTE…</div>
+      <div class="loading3d" id="tripLoad">Building 3D route…</div>
       <div class="hud-top"><div class="turn"><span class="ar" id="tripAr"><i data-lucide="arrow-up"></i></span><span><b id="tripT">Join NH16 towards Bhogapuram</b><span id="tripD">IN 500 M</span></span></div>
         <div class="alertban" id="alertban"><i data-lucide="eye"></i><span>Secure 360: eyes on the road. Alert noted for review.</span></div></div>
       <div class="hud-bot">
@@ -333,15 +333,15 @@ html.embed,html.embed body{overflow:hidden}
       <div class="statgrid mt16 in"><div class="card"><span class="lab">Fare · UPI</span><b>₹749</b></div><div class="card"><span class="lab">CO₂ saved</span><b style="color:var(--green)">3.0 kg</b></div><div class="card"><span class="lab">Distance</span><b>41.6 km</b></div><div class="card"><span class="lab">Battery now</span><b>74%</b></div></div>
       <p class="in" style="text-align:center;font-weight:500;margin:20px 0 10px">Rate Ananya</p>
       <div class="stars in" id="stars"></div>
-      <div class="card pad mt16 in" style="box-shadow:inset 0 0 0 2px var(--blue)"><div class="between"><span class="lab">Next job · 06:20</span><span class="tchip"><i></i>FLIGHT 6 MIN EARLY</span></div><b class="mt8" style="display:block;font-size:18px">Kiran M. ← Arrivals bay 3</b><div class="k" style="font-size:14px">Wait at Arrivals, you're already here</div></div>
+      <div class="card pad mt16 in" style="box-shadow:inset 0 0 0 2px var(--blue)"><div class="between"><span class="lab">Next job · 06:20</span><span class="tchip"><i></i>Flight 6 min early</span></div><b class="mt8" style="display:block;font-size:18px">Kiran M. ← Arrivals bay 3</b><div class="k" style="font-size:14px">Wait at Arrivals, you're already here</div></div>
       <div class="row mt12 in"><button class="btn sec" data-go="charge"><i data-lucide="plug-zap"></i>Charging</button><button class="btn" data-go="summary">End shift</button></div>
     </section>
 
     <!-- 8 CHARGE -->
     <section class="scr" id="s-charge">
-      <div class="between"><span class="tchip"><i></i>CHARGE PLANNED</span><span class="lab">BAY 4 · MADDILAPALEM</span></div>
-      <div class="bigring in"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="none" stroke="#1A1E29" stroke-width="7"/><circle id="chArc" cx="50" cy="50" r="44" fill="none" stroke="url(#cg)" stroke-width="7" stroke-linecap="round" stroke-dasharray="276" stroke-dashoffset="72"/><defs><linearGradient id="cg"><stop offset="0" stop-color="#16A36A"/><stop offset="1" stop-color="#7BF0BF"/></linearGradient></defs></svg><div class="v"><span><b id="chPct">74%</b><small id="chSub">NEEDED FOR PLAN · 58%</small></span></div></div>
-      <div class="card pad mt16 in"><div class="between"><span class="lab">Battery through the shift</span><span class="lab" style="color:var(--green)">NEVER BELOW 30%</span></div>
+      <div class="between"><span class="tchip"><i></i>Charge planned</span><span class="lab">Bay 4 · Maddilapalem</span></div>
+      <div class="bigring in"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="none" stroke="#1A1E29" stroke-width="7"/><circle id="chArc" cx="50" cy="50" r="44" fill="none" stroke="url(#cg)" stroke-width="7" stroke-linecap="round" stroke-dasharray="276" stroke-dashoffset="72"/><defs><linearGradient id="cg"><stop offset="0" stop-color="#16A36A"/><stop offset="1" stop-color="#7BF0BF"/></linearGradient></defs></svg><div class="v"><span><b id="chPct">74%</b><small id="chSub">Needed for plan · 58%</small></span></div></div>
+      <div class="card pad mt16 in"><div class="between"><span class="lab">Battery through the shift</span><span class="lab" style="color:var(--green)">Never below 30%</span></div>
         <svg class="chart mt12" viewBox="0 0 320 120" role="img" aria-label="Battery from 92% at start to 74% after the airport run, charged to 92% at 11:20">
           <g stroke="rgba(255,255,255,.07)"><line x1="26" x2="314" y1="10" y2="10"/><line x1="26" x2="314" y1="55" y2="55"/><line x1="26" x2="314" y1="100" y2="100"/></g>
           <g font-family="JetBrains Mono,monospace" font-size="9" fill="rgba(255,255,255,.45)"><text x="0" y="13">100</text><text x="6" y="58">50</text><text x="12" y="103">0</text><text x="26" y="116">03:30</text><text x="150" y="116">08:30</text><text x="270" y="116">11:30</text></g>
@@ -355,7 +355,7 @@ html.embed,html.embed body{overflow:hidden}
 
     <!-- 9 SUMMARY -->
     <section class="scr" id="s-summary">
-      <div class="between"><span class="tchip"><i style="background:var(--t3);box-shadow:none"></i>SHIFT ENDED · 11:34</span><button class="icon-btn" aria-label="Start again" data-go="start"><i data-lucide="rotate-ccw"></i></button></div>
+      <div class="between"><span class="tchip"><i style="background:var(--t3);box-shadow:none"></i>Shift ended · 11:34</span><button class="icon-btn" aria-label="Start again" data-go="start"><i data-lucide="rotate-ccw"></i></button></div>
       <h1 class="h1 mt16 in">Great shift, Ravi.</h1>
       <div class="statgrid mt16 in"><div class="card"><span class="lab">Trips</span><b>6</b></div><div class="card"><span class="lab">On time</span><b>6 / 6</b></div><div class="card"><span class="lab">Rating</span><b>4.96</b></div><div class="card"><span class="lab">Safety score</span><b style="color:var(--green)">98</b></div></div>
       <div class="card pad mt12 in"><div class="between"><span class="lab">Safety bonus · November</span><b class="mono">₹1,400</b></div><div class="bar mt12"><i style="width:70%"></i></div><div class="k mt8" style="font-size:14px">14 of 20 shifts with zero alerts. Paid with your salary on the 1st.</div></div>
@@ -522,15 +522,15 @@ const enter = {
     }, () => current === "trip" && go("done"), 1.3);
   },
   done() { if (G) G.to("#dck", { strokeDashoffset: 0, duration: .6, delay: .2 }); else $("#dck").style.strokeDashoffset = 0; },
-  charge() { $("#chArc").style.strokeDashoffset = 276 * (1 - .74); $("#chPct").textContent = "74%"; $("#chKwh").textContent = "0.0"; $("#chSub").textContent = "NEEDED FOR PLAN · 58%"; }
+  charge() { $("#chArc").style.strokeDashoffset = 276 * (1 - .74); $("#chPct").textContent = "74%"; $("#chKwh").textContent = "0.0"; $("#chSub").textContent = "Needed for plan · 58%"; }
 };
 const leave = { start() { if (H3) { H3.stop(); H3 = null; } }, nav() { if (R3) { R3.stop(); R3 = null; } }, trip() { if (R3) { R3.stop(); R3 = null; } } };
 $("#ackBtn").addEventListener("click", () => go("nav"));
 $("#skipTrip").addEventListener("click", () => go("done"));
 $("#chStart").addEventListener("click", () => {
   const arc = $("#chArc"); arc.style.transition = "stroke-dashoffset 3s cubic-bezier(.2,.8,.2,1)"; arc.style.strokeDashoffset = 276 * (1 - .92);
-  $("#chSub").textContent = "CHARGING · 60 KW"; let p = 74, k = 0;
-  const tick = () => { if (current !== "charge") return; p = Math.min(92, p + 1); k += .8; $("#chPct").textContent = p + "%"; $("#chKwh").textContent = k.toFixed(1); if (p < 92) later(tick, 160); else { $("#chSub").textContent = "READY · 312 KM"; toast("Charged to 92%. Next job at 11:30"); } };
+  $("#chSub").textContent = "Charging · 60 kW"; let p = 74, k = 0;
+  const tick = () => { if (current !== "charge") return; p = Math.min(92, p + 1); k += .8; $("#chPct").textContent = p + "%"; $("#chKwh").textContent = k.toFixed(1); if (p < 92) later(tick, 160); else { $("#chSub").textContent = "Ready · 312 km"; toast("Charged to 92%. Next job at 11:30"); } };
   tick();
 });
 

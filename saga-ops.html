@@ -77,7 +77,7 @@ main{min-width:0;padding-block:20px 60px;padding-left:28px;padding-right:max(28p
 .tablewrap{overflow-x:auto}
 table{width:100%;border-collapse:collapse;font-size:13px}
 th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--hair);white-space:nowrap}
-th{font-family:var(--mono);font-weight:500;color:var(--t3);font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+th{font-family:var(--f);font-weight:500;color:var(--t3);font-size:12px}
 tr:last-child td{border-bottom:0}
 td.r,th.r{text-align:right}
 .st{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;padding:4px 10px;border-radius:99px;background:var(--s2);color:var(--t2)}
@@ -126,7 +126,7 @@ ul.rules li::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;
 .cc-hero{background:var(--ink);color:#fff;border-radius:24px;padding:22px;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:22px;position:relative;overflow:hidden}
 .cc-hero::before{content:"";position:absolute;inset:-40% -10% auto auto;width:520px;height:520px;background:radial-gradient(circle,rgba(36,73,240,.38),transparent 62%);pointer-events:none}
 .cc-hero>*{position:relative}
-.ai-tag{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.08em;color:#9FE6FF}
+.ai-tag{display:inline-flex;align-items:center;gap:8px;font-family:var(--f);font-size:13px;font-weight:500;letter-spacing:0;color:#9FE6FF}
 .ai-tag i{width:8px;height:8px;border-radius:50%;background:#33C6F0;box-shadow:0 0 10px #33C6F0;animation:blink 2s infinite}
 @keyframes blink{50%{opacity:.35}}
 .cc-hero h2{margin:10px 0 4px;font-size:24px;font-weight:500;letter-spacing:-.02em;line-height:1.15}
@@ -147,7 +147,7 @@ ul.rules li::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;
 .qchips button{height:32px;padding:0 12px;border-radius:99px;background:#1A1E29;color:rgba(255,255,255,.85);font-size:12px;font-weight:500;transition:background .2s}
 .qchips button:hover{background:#252A37}
 .answer{min-height:150px;font-size:14px;line-height:1.55;color:rgba(255,255,255,.9)}
-.answer .who{font-family:var(--mono);font-size:11px;color:#9FE6FF;letter-spacing:.06em;margin-bottom:6px}
+.answer .who{font-family:var(--f);font-size:13px;color:#9FE6FF;letter-spacing:0;margin-bottom:6px}
 .answer .src{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
 .answer .src span{font-family:var(--mono);font-size:11px;padding:3px 8px;border-radius:6px;background:#1A1E29;color:rgba(255,255,255,.6)}
 .answer .doit{margin-top:12px;height:38px;padding:0 14px;border-radius:99px;background:#fff;color:#07080C;font-weight:500;font-size:13px}
@@ -217,7 +217,7 @@ section.view.on{display:block;animation:in .4s var(--ease)}
       <a href="#pilots"><i data-lucide="users"></i><span class="lbl">Pilots</span></a>
       <a href="#business"><i data-lucide="building-2"></i><span class="lbl">Business</span></a>
       <a href="#ads"><i data-lucide="megaphone"></i><span class="lbl">Advertising</span></a>
-      <a href="#aura"><i data-lucide="leaf"></i><span class="lbl">AURA</span></a>
+      <a href="#aura"><i data-lucide="leaf"></i><span class="lbl">Green points</span></a>
       <a href="#safety"><i data-lucide="shield-check"></i><span class="lbl">Safety</span><span class="badge lbl">3</span></a>
     </nav>
     <div class="foot">All figures are sample data for the design review.</div>
@@ -230,13 +230,13 @@ section.view.on{display:block;animation:in .4s var(--ease)}
 
       <div class="cc-hero">
         <div>
-          <span class="ai-tag"><i></i>SAGA INTELLIGENCE · MORNING BRIEF</span>
-          <h2>Q3 lands at ₹6.62 Cr, 2% above target, if we act on 3 things this week.</h2>
-          <p class="sub">Read across rides, payments, fleet, reviews, Meta and Google at 05:00. Confidence 71% to hit target.</p>
+          <span class="ai-tag"><i></i>Morning brief</span>
+          <h2>Q3 is on track for ₹6.62 Cr.</h2>
+          <p class="sub">71% chance of beating target. Three things to do this week.</p>
           <ul class="brief" id="brief"></ul>
         </div>
         <div class="ask" aria-label="Ask SAGA Intelligence">
-          <span class="ai-tag"><i></i>ASK ANYTHING ABOUT THE BUSINESS</span>
+          <span class="ai-tag"><i></i>Ask anything</span>
           <div class="q"><input id="askIn" placeholder="e.g. Why did satisfaction dip last week?" aria-label="Ask a question" autocomplete="off"><button class="go" id="askGo" aria-label="Ask"><i data-lucide="arrow-up"></i></button></div>
           <div class="qchips" id="qchips"></div>
           <div class="answer" id="answer" aria-live="polite"></div>
@@ -487,10 +487,10 @@ const icon = (n, s = "") => `<i data-lucide="${n}" ${s}></i>`;
 
 /* brief */
 $("#brief").innerHTML = [
-  ["trending-up", "#3DDC97", "Meta Telugu reels and Google “airport cab” search bring riders at half the cost", "CAC ₹154 and ₹136 vs ₹483 on YouTube. Moving ₹1.2 L adds about ₹9.4 L this quarter."],
-  ["clock", "#FFB547", "Satisfaction dipped to 4.61 in Diwali week, now back to 4.70", "31% of the dip came from evening waits in Kancharapalem. Saturday and Thursday will be short by 120 rides."],
-  ["sparkles", "#9FE6FF", "Voice booking in Telugu is the fastest-growing praise theme", "Mentions up 240% in 30 days, mostly riders over 55. Worth featuring in the next Meta campaign."]
-].map(b => `<li><span class="ic" style="color:${b[1]}">${icon(b[0])}</span><div><b>${b[2]}</b><span>${b[3]}</span></div></li>`).join("");
+  ["trending-up", "#3DDC97", "Move ₹1.2 L of ads to Meta reels and Google search", "CAC ₹154 and ₹136 vs ₹483 on YouTube. Moving ₹1.2 L adds about ₹9.4 L this quarter."],
+  ["clock", "#FFB547", "Add 18 cars for Saturday and Thursday mornings", "31% of the dip came from evening waits in Kancharapalem. Saturday and Thursday will be short by 120 rides."],
+  ["sparkles", "#9FE6FF", "Feature Telugu voice booking in the next campaign", "Mentions up 240% in 30 days, mostly riders over 55. Worth featuring in the next Meta campaign."]
+].map(b => `<li><span class="ic" style="color:${b[1]}">${icon(b[0])}</span><div><b>${b[2]}</b></div></li>`).join("");
 
 /* KPIs with range switch */
 const KP = {
@@ -633,15 +633,15 @@ const QA = [
   [/demand|forecast|fleet|cars|capacity|weekend|saturday/i, "Demand peaks Saturday (1,520 rides) and Thursday (1,530), about 120 above fleet capacity each day. Most of it is early-morning airport runs. Moving charging to 01:00–04:00 frees 18 cars for 05:00–08:00 at Bhogapuram.", ["Airline feeds","Fleet","Bookings"], 1],
   [/week|next|do|action|priorit|focus|improve/i, "This week, in order: 1) move ₹1.2 L of ads into Meta reels and Google search, 2) pre-position 18 cars for Saturday and Thursday mornings, 3) win back 412 riders who went quiet after a late pickup, 4) fix the Paytm UPI failures. Together these add about ₹13 L and 0.05 satisfaction.", ["All 14 sources"], 0]
 ];
-$("#qchips").innerHTML = ["Will we hit the Q3 target?", "Which ads are working?", "Why did satisfaction dip?", "What should we do this week?", "Who is behind?", "Are we short on cars?"].map(q => `<button>${q}</button>`).join("");
+$("#qchips").innerHTML = ["Will we hit the Q3 target?", "Which ads are working?", "Why did satisfaction dip?"].map(q => `<button>${q}</button>`).join("");
 let typing = 0, wait = 0;
 function ask(q) {
   q = q.trim(); if (!q) return; clearInterval(typing); clearTimeout(wait);
   const hit = QA.find(a => a[0].test(q));
   const txt = hit ? hit[1] : "I can answer from the 14 connected sources: revenue, rides, ads on Meta and Google, reviews, pilots, fleet and safety. Try one of the questions above.";
-  const a = $("#answer"); a.innerHTML = `<div class="who">YOU ASKED · ${q.replace(/</g, "&lt;")}</div><div class="who" style="color:rgba(255,255,255,.5)">READING SOURCES…</div>`;
+  const a = $("#answer"); a.innerHTML = `<div class="who">You asked: ${q.replace(/</g, "&lt;")}</div><div class="who" style="color:rgba(255,255,255,.5)">Reading sources…</div>`;
   wait = setTimeout(() => {
-    a.innerHTML = `<div class="who">YOU ASKED · ${q.replace(/</g, "&lt;")}</div><div id="ansT"></div>`;
+    a.innerHTML = `<div class="who">You asked: ${q.replace(/</g, "&lt;")}</div><div id="ansT"></div>`;
     const words = txt.split(" "); let n = 0;
     typing = setInterval(() => { n += 2; $("#ansT").textContent = words.slice(0, n).join(" "); if (n >= words.length) { clearInterval(typing);
       if (hit) { a.insertAdjacentHTML("beforeend", `<div class="src">${hit[2].map(s => `<span>${s}</span>`).join("")}</div><button class="doit" data-act="${hit[3]}">Open the recommended action</button>`); }
