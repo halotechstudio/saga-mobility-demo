@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>SAGA Suite</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07080C;--panel:#10131B;--line:rgba(255,255,255,.09);--text:#fff;--t2:rgba(255,255,255,.66);--t3:rgba(255,255,255,.42);--blue:#2449F0;--cyan:#33C6F0;--green:#3DDC97;--bezel:#000}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#E9EDF4;--panel:#fff;--line:rgba(7,8,12,.1);--text:#07080C;--t2:rgba(7,8,12,.66);--t3:rgba(7,8,12,.45);--blue:#092EC9;--cyan:#0A86B0;--green:#0E8F5B;--bezel:#07080C}}
+:root[data-theme="light"]{--bg:#E9EDF4;--panel:#fff;--line:rgba(7,8,12,.1);--text:#07080C;--t2:rgba(7,8,12,.66);--t3:rgba(7,8,12,.45);--blue:#092EC9;--cyan:#0A86B0;--green:#0E8F5B;--bezel:#07080C}
+:root[data-theme="dark"]{--bg:#07080C;--panel:#10131B;--line:rgba(255,255,255,.09);--text:#fff;--t2:rgba(255,255,255,.66);--t3:rgba(255,255,255,.42);--blue:#2449F0;--cyan:#33C6F0;--green:#3DDC97;--bezel:#000}
+*{box-sizing:border-box;margin:0}
+html,body{min-height:100%}
+body{background:var(--bg);color:var(--text);font-family:"Inter Tight",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace}
+header{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:14px max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px))}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;letter-spacing:.02em}
+.brand i{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--blue),var(--cyan));display:block}
+.brand small{display:block;font-family:"JetBrains Mono",monospace;font-size:10.5px;font-weight:600;letter-spacing:.1em;color:var(--t3)}
+.flow{display:flex;gap:6px;flex-wrap:wrap;flex:1;min-width:0}
+.flow span{font-size:13px;color:var(--t2);background:var(--panel);box-shadow:inset 0 0 0 1px var(--line);border-radius:999px;padding:6px 11px;white-space:nowrap}
+.flow b{font-family:"JetBrains Mono",monospace;color:var(--cyan);margin-right:6px;font-weight:600}
+.link{display:flex;align-items:center;gap:8px;font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:600;letter-spacing:.08em;color:var(--t2)}
+.link::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--t3)}
+.link.on{color:var(--green)}.link.on::before{background:var(--green);box-shadow:0 0 10px var(--green)}
+.reset{height:38px;padding:0 14px;border-radius:12px;background:var(--panel);box-shadow:inset 0 0 0 1px var(--line);font-weight:700;font-size:14px}
+.reset:hover{box-shadow:inset 0 0 0 1px var(--cyan)}
+.stage{display:flex;justify-content:center;align-items:flex-start;gap:var(--gap,28px);padding:6px 16px 24px}
+.stage.col{flex-direction:column;align-items:center}
+.unit{flex:none;position:relative}
+.unit .lab{position:absolute;left:0;right:0;top:0;height:30px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:14px;font-weight:700;white-space:nowrap}
+.unit .lab em{font-style:normal;font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:600;letter-spacing:.08em;color:var(--t3)}
+.box{position:absolute;left:0;top:34px;transform-origin:0 0}
+.phone{width:414px;height:868px;padding:11px;border-radius:64px;background:var(--bezel);box-shadow:0 30px 70px rgba(0,0,0,.45),inset 0 0 0 2px #2a2e3a}
+.phone iframe{width:392px;height:846px;border:0;border-radius:53px;display:block;background:#000}
+.console{width:1120px;height:868px;border-radius:22px;overflow:hidden;background:var(--bezel);box-shadow:0 30px 70px rgba(0,0,0,.45),inset 0 0 0 2px #2a2e3a;display:flex;flex-direction:column}
+.bar{height:38px;flex:none;display:flex;align-items:center;gap:7px;padding:0 16px;background:#11141D}
+.bar i{width:11px;height:11px;border-radius:50%;background:#2A2F3D}
+.bar span{margin-left:14px;font-family:"JetBrains Mono",monospace;font-size:12px;color:rgba(255,255,255,.5)}
+.console iframe{flex:1;width:100%;border:0;background:#F2F4F9}
+@media (max-width:700px){.flow{display:none}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><i></i><div>SAGA<small>ONE SYSTEM · THREE APPS</small></div></div>
+  <div class="flow" aria-label="How to run the linked demo">
+    <span><b>1</b>Book on the rider phone, or tap its mic and speak</span>
+    <span><b>2</b>Ravi's phone gets the job</span>
+    <span><b>3</b>He types the code and starts the trip</span>
+    <span><b>4</b>Ops sees every step live</span>
+  </div>
+  <span class="link" id="link">CONNECTING</span>
+  <button class="reset" id="reset">Restart all</button>
+</header>
+<main class="stage" id="stage">
+  <div class="unit" data-w="414" data-h="868"><div class="lab">Rider app <em>ANANYA</em></div><div class="box phone"><iframe id="fRider" title="SAGA rider app" src="saga-app.html?embed=1#home"></iframe></div></div>
+  <div class="unit" data-w="414" data-h="868"><div class="lab">Driver app <em>RAVI · EV 2147</em></div><div class="box phone"><iframe id="fDriver" title="SAGA driver app" src="saga-driver.html?embed=1#start"></iframe></div></div>
+  <div class="unit" data-w="1120" data-h="868"><div class="lab">Ops console <em>DISPATCH · VIZAG</em></div><div class="box console"><div class="bar"><i></i><i></i><i></i><span>ops.sagamobility.com</span></div><iframe id="fOps" title="SAGA operations console" src="saga-ops.html#command"></iframe></div></div>
+</main>
+<script>
+(() => {
+  const stage = document.getElementById("stage"), units = [...stage.querySelectorAll(".unit")];
+  const LAB = 34, GAP = 28;
+  function fit() {
+    const W = document.documentElement.clientWidth, H = innerHeight - stage.getBoundingClientRect().top - 24;
+    const sumW = units.reduce((a, u) => a + +u.dataset.w, 0), maxH = 868;
+    let s = Math.min((W - 32 - GAP * 2) / sumW, (H - LAB) / maxH, 1);
+    const col = s < .42;
+    stage.classList.toggle("col", col);
+    units.forEach(u => {
+      const w = +u.dataset.w, h = +u.dataset.h;
+      const k = col ? Math.min(1, (W - 32) / w) : s;
+      const box = u.querySelector(".box");
+      box.style.transform = `scale(${k})`;
+      u.style.width = w * k + "px"; u.style.height = h * k + LAB + "px";
+    });
+  }
+  addEventListener("resize", fit); fit();
+  document.getElementById("reset").addEventListener("click", () => {
+    const t = Date.now();
+    document.getElementById("fRider").src = "saga-app.html?embed=1&r=" + t + "#home";
+    document.getElementById("fDriver").src = "saga-driver.html?embed=1&r=" + t + "#start";
+    document.getElementById("fOps").src = "saga-ops.html?r=" + t + "#command";
+  });
+  try {
+    const bc = new BroadcastChannel("saga-suite"), seen = new Set(), link = document.getElementById("link");
+    bc.onmessage = ({ data: m }) => { if (!m || !m.from) return; seen.add(m.from); if (seen.has("rider") && seen.has("driver")) { link.textContent = "APPS LINKED"; link.classList.add("on"); } };
+    const ping = () => { try { bc.postMessage({ from: "suite", t: "ping" }); } catch (e) {} };
+    document.querySelectorAll("iframe").forEach(f => f.addEventListener("load", () => setTimeout(ping, 400)));
+  } catch (e) {}
+})();
+</script>
+</body>
+</html>

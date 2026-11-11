@@ -1,0 +1,770 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>html,body{margin:0;height:100%}</style></head><body>
+<title>SAGA Ops Console</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<style>
+/* Layout: fixed left rail + scrolling workspace of views; dense, scannable. v3 tokens shared with the rider app: light, #092EC9, Plus Jakarta Sans. Single light world by choice. */
+:root{
+  --bg:#F2F4F9; --s1:#FFFFFF; --s2:#F2F4F9; --s3:#E8EBF2;
+  --hair:rgba(10,13,24,.07); --hair-2:rgba(10,13,24,.13);
+  --text:#0A0D18; --t2:#3F4659; --t3:#666D82;
+  --blue:#092EC9; --blue2:#2449F0; --blue-soft:#E8EDFF;
+  --ok:#0E8F5B; --warn:#B86E00; --bad:#C8243C;
+  --f:"Inter Tight",system-ui,-apple-system,"Segoe UI",sans-serif; --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+  --ease:cubic-bezier(.2,.8,.2,1); --spring:cubic-bezier(.34,1.56,.64,1);
+  --sh:0 1px 2px rgba(10,13,24,.05),0 8px 24px rgba(10,13,24,.06);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--f);font-size:14.5px;letter-spacing:-.005em;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button,input,select{font:inherit;color:inherit}
+button{background:none;border:0;cursor:pointer;padding:0}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:8px}
+.num{font-variant-numeric:tabular-nums}
+.mono{font-family:var(--mono);font-size:12.5px}
+
+.app{display:grid;grid-template-columns:232px minmax(0,1fr);min-height:100%}
+.rail{position:sticky;top:0;height:100vh;padding:22px 14px 22px max(14px,env(safe-area-inset-left,0px));border-right:1px solid var(--hair);display:flex;flex-direction:column;gap:22px;background:var(--s1)}
+.brand{display:flex;align-items:center;gap:10px;padding:0 8px;font-weight:800}
+.brand small{display:block;font-weight:400;font-size:11.5px;color:var(--t3)}
+.nav{display:flex;flex-direction:column;gap:2px}
+.nav a{display:flex;align-items:center;gap:10px;height:42px;padding:0 12px;border-radius:12px;color:var(--t2);font-weight:600;text-decoration:none;transition:background .2s,color .2s}
+.nav a svg{width:19px;height:19px;flex:none;stroke-width:2}
+.nav a:hover{background:var(--s2);color:var(--text)}
+.nav a[aria-current="page"]{background:var(--blue-soft);color:var(--blue)}
+.nav a .badge{margin-left:auto;font-size:11px;font-weight:800;padding:2px 8px;border-radius:99px;background:var(--blue);color:#fff}
+.rail .foot{margin-top:auto;padding:0 8px;font-size:11.5px;color:var(--t3);line-height:1.5}
+
+main{min-width:0;padding-block:20px 60px;padding-left:28px;padding-right:max(28px,env(safe-area-inset-right,0px))}
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.top h1{margin:0;font-weight:800;font-size:30px;letter-spacing:-.035em}
+.top .meta{display:flex;align-items:center;gap:10px;color:var(--t2);font-size:13px;flex-wrap:wrap}
+.pill{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 14px;border-radius:999px;background:var(--s1);box-shadow:inset 0 0 0 1.5px var(--hair-2);font-size:13px;font-weight:700;color:var(--t2);white-space:nowrap;transition:all .2s var(--ease)}
+.pill.on{background:var(--text);color:#fff;box-shadow:none}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--ok);flex:none}
+.sample{font-size:12px;font-weight:700;color:var(--t3);border:1.5px dashed var(--hair-2);border-radius:99px;padding:4px 12px}
+
+.card{background:var(--s1);border-radius:20px;box-shadow:var(--sh);min-width:0}
+.pad{padding:18px}
+.h{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.h h2{margin:0;font-weight:800;font-size:16px;letter-spacing:-.015em}
+.k{font-size:12.5px;color:var(--t3);font-weight:600}
+.grid{display:grid;gap:14px}
+.kpis{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+.kpi{padding:16px}
+.kpi b{display:block;font-family:var(--mono);font-weight:600;font-size:26px;letter-spacing:-.02em;margin-top:8px}
+.kpi .d{font-size:12.5px;font-weight:700;margin-top:4px}
+.up{color:var(--ok)}.down{color:var(--bad)}.flat{color:var(--t2)}
+.two{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:14px}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+
+.map{position:relative;border-radius:16px;overflow:hidden;background:#E9EDF4;aspect-ratio:16/10}
+.map svg{position:absolute;inset:0;width:100%;height:100%}
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px;font-size:12px;color:var(--t2)}
+.legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:middle}
+
+.chart{width:100%;height:auto;display:block}
+.alerts{display:flex;flex-direction:column}
+.alert{display:grid;grid-template-columns:4px minmax(0,1fr) auto;gap:12px;padding:12px 0;border-bottom:1px solid var(--hair)}
+.alert:last-child{border-bottom:0}
+.alert .sev{border-radius:4px}
+.alert b{font-weight:700;display:block}
+.alert span{color:var(--t2);font-size:12.5px}
+
+.tablewrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--hair);white-space:nowrap}
+th{font-family:var(--mono);font-weight:600;color:var(--t3);font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+tr:last-child td{border-bottom:0}
+td.r,th.r{text-align:right}
+.st{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:4px 10px;border-radius:99px;background:var(--s2);color:var(--t2)}
+.st i{width:6px;height:6px;border-radius:50%}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+
+.fleet{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
+.car{padding:14px}
+.car .plate{font-family:var(--mono);font-size:12.5px}
+.batt{height:6px;border-radius:9px;background:var(--s3);overflow:hidden;margin-top:10px}
+.batt i{display:block;height:100%;border-radius:inherit}
+.bar{height:6px;border-radius:9px;background:var(--s3);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--blue);border-radius:inherit}
+
+/* ads */
+.placements{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.place{padding:16px;display:flex;flex-direction:column;gap:6px}
+.place b{font-weight:800}
+.screen169{position:relative;aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:linear-gradient(140deg,#2449F0,#092EC9 70%);color:#fff}
+.screen169 .k{color:rgba(255,255,255,.85)}
+.screen169 .eta{position:absolute;left:14px;top:12px;font-size:12px;font-weight:700;color:rgba(255,255,255,.85)}
+.screen169 .adcopy{position:absolute;left:14px;bottom:14px;right:14px}
+.screen169 .adcopy b{display:block;font-weight:800;font-size:22px;letter-spacing:-.03em}
+.screen169 .tag{position:absolute;right:12px;top:10px;font-size:10.5px;font-weight:700;color:rgba(255,255,255,.75)}
+form .row{display:grid;grid-template-columns:120px minmax(0,1fr);gap:12px;align-items:center;padding:8px 0}
+form label{color:var(--t2);font-size:13.5px;font-weight:700}
+form input,form select{height:44px;border-radius:12px;border:1.5px solid var(--hair-2);background:var(--s1);padding:0 12px;width:100%;outline:none;font-weight:600}
+form input:focus,form select:focus{border-color:var(--blue)}
+.tgt button{height:34px;padding:0 14px;border-radius:99px;background:var(--s1);box-shadow:inset 0 0 0 1.5px var(--hair-2);font-size:13px;font-weight:700;color:var(--t2);transition:all .2s var(--spring)}
+.tgt button[aria-pressed="true"]{background:var(--blue);color:#fff;box-shadow:none}
+.tgt button[disabled]{opacity:.35;cursor:not-allowed}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:46px;padding:0 22px;border-radius:999px;background:var(--blue);color:#fff;font-weight:700;box-shadow:0 8px 20px rgba(9,46,201,.25);transition:transform .2s var(--spring),background .2s}
+.btn:hover{background:var(--blue2)}
+.btn:active{transform:scale(.97)}
+.est{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.est div{padding:12px;border-radius:12px;background:var(--s2)}
+.est b{display:block;font-weight:800;font-size:19px;letter-spacing:-.03em;margin-top:4px}
+ul.rules{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+ul.rules li{display:flex;gap:10px;color:var(--t2);font-size:13px;line-height:1.45}
+ul.rules li::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;background:var(--blue);margin-top:6px}
+.toast{position:fixed;right:max(24px,env(safe-area-inset-right,0px));bottom:calc(24px + env(safe-area-inset-bottom,0px));padding:14px 18px;border-radius:16px;background:var(--text);color:#fff;font-weight:600;display:flex;gap:10px;align-items:center;transform:translateY(16px);opacity:0;pointer-events:none;transition:all .4s var(--ease);z-index:20}
+.toast.show{transform:none;opacity:1}
+
+/* command centre */
+:root{--viz:#2F5BEA;--viz-soft:#DCE4FC;--neg:#EB6834;--ink:#07080C}
+.cc-hero{background:var(--ink);color:#fff;border-radius:24px;padding:22px;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:22px;position:relative;overflow:hidden}
+.cc-hero::before{content:"";position:absolute;inset:-40% -10% auto auto;width:520px;height:520px;background:radial-gradient(circle,rgba(36,73,240,.38),transparent 62%);pointer-events:none}
+.cc-hero>*{position:relative}
+.ai-tag{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;color:#9FE6FF}
+.ai-tag i{width:8px;height:8px;border-radius:50%;background:#33C6F0;box-shadow:0 0 10px #33C6F0;animation:blink 2s infinite}
+@keyframes blink{50%{opacity:.35}}
+.cc-hero h2{margin:10px 0 4px;font-size:25px;font-weight:800;letter-spacing:-.03em;line-height:1.15}
+.cc-hero .sub{color:rgba(255,255,255,.62);font-size:13px}
+.brief{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:10px}
+.brief li{display:grid;grid-template-columns:30px minmax(0,1fr);gap:12px;align-items:start;padding:12px;border-radius:14px;background:rgba(255,255,255,.05);box-shadow:inset 0 0 0 1px rgba(255,255,255,.07)}
+.brief li .ic{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:rgba(255,255,255,.08)}
+.brief li .ic svg{width:16px;height:16px}
+.brief b{display:block;font-weight:700;font-size:14px}
+.brief span{color:rgba(255,255,255,.66);font-size:12.5px;line-height:1.45}
+.ask{background:#11141D;border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:12px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.07)}
+.ask .q{display:flex;gap:8px}
+.ask input{flex:1;min-width:0;height:46px;border-radius:13px;border:0;background:#1A1E29;color:#fff;padding:0 14px;font-weight:600;outline:none}
+.ask input:focus{box-shadow:inset 0 0 0 2px #33C6F0}
+.ask .go{width:46px;height:46px;border-radius:13px;background:#2449F0;display:grid;place-items:center;color:#fff;flex:none}
+.ask .go svg{width:18px;height:18px}
+.qchips{display:flex;gap:6px;flex-wrap:wrap}
+.qchips button{height:32px;padding:0 12px;border-radius:99px;background:#1A1E29;color:rgba(255,255,255,.85);font-size:12.5px;font-weight:600;transition:background .2s}
+.qchips button:hover{background:#252A37}
+.answer{min-height:150px;font-size:14px;line-height:1.55;color:rgba(255,255,255,.9)}
+.answer .who{font-family:var(--mono);font-size:11px;color:#9FE6FF;letter-spacing:.06em;margin-bottom:6px}
+.answer .src{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.answer .src span{font-family:var(--mono);font-size:10.5px;padding:3px 8px;border-radius:6px;background:#1A1E29;color:rgba(255,255,255,.6)}
+.answer .doit{margin-top:12px;height:38px;padding:0 14px;border-radius:99px;background:#fff;color:#07080C;font-weight:700;font-size:13px}
+.kpis8{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.kpi .sp{display:block;width:100%;height:26px;margin-top:8px}
+.ranges{display:flex;gap:6px}
+.vchip{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;padding:4px 10px 4px 8px;border-radius:99px;background:var(--s2)}
+.vchip svg{width:13px;height:13px}
+.v-scale{color:var(--ok)}.v-fix{color:var(--warn)}.v-cut{color:var(--bad)}.v-hold{color:var(--t2)}
+.actions{display:grid;gap:10px}
+.act{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:14px;align-items:center;padding:14px;border-radius:16px;background:var(--s2);transition:background .3s}
+.act .rank{width:34px;height:34px;border-radius:10px;background:var(--ink);color:#fff;display:grid;place-items:center;font-family:var(--mono);font-weight:600}
+.act b{display:block;font-weight:700;font-size:14.5px}
+.act .why{color:var(--t2);font-size:12.5px;line-height:1.45;margin-top:2px}
+.act .meta2{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.act .meta2 span{font-family:var(--mono);font-size:11px;font-weight:600;padding:3px 8px;border-radius:6px;background:var(--s1);color:var(--t2)}
+.act .meta2 span.imp{color:var(--ok)}
+.act .btns{display:flex;gap:8px}
+.act .btns button{height:38px;padding:0 14px;border-radius:99px;font-weight:700;font-size:13px;box-shadow:inset 0 0 0 1.5px var(--hair-2);background:var(--s1)}
+.act .btns button.ap{background:var(--blue);color:#fff;box-shadow:none}
+.act.done{background:#E7F5EE}
+.act.done .rank{background:var(--ok)}
+.srcs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.srcs div{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;background:var(--s2);min-width:0}
+.srcs div b{font-weight:700;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.srcs div span{margin-left:auto;font-family:var(--mono);font-size:10.5px;color:var(--t3);white-space:nowrap}
+.srcs svg{width:16px;height:16px;flex:none;color:var(--t2)}
+.lg{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--t2)}
+.lg i{display:inline-block;width:12px;height:8px;border-radius:2px;margin-right:6px;vertical-align:middle}
+.tip{position:fixed;z-index:40;pointer-events:none;background:var(--ink);color:#fff;padding:8px 11px;border-radius:10px;font-size:12px;line-height:1.45;opacity:0;transition:opacity .12s;max-width:260px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.tip.on{opacity:1}
+.tip b{font-family:var(--mono);font-weight:600}
+[data-tip]{cursor:default}
+.hit{fill:transparent}
+.hit:hover+.hl,.bh:hover{opacity:.85}
+.tview{margin-top:10px;font-size:12.5px}
+.tview summary{cursor:pointer;color:var(--t3);font-weight:700}
+@media (max-width:1100px){.cc-hero{grid-template-columns:1fr}.kpis8{grid-template-columns:repeat(2,minmax(0,1fr))}.srcs{grid-template-columns:1fr}}
+@media (max-width:640px){.act{grid-template-columns:34px minmax(0,1fr)}.act .btns{grid-column:2}}
+
+section.view{display:none}
+section.view.on{display:block;animation:in .4s var(--ease)}
+@keyframes in{from{opacity:.4;transform:translateY(6px)}}
+
+@media (max-width:1280px){.kpis{grid-template-columns:repeat(3,minmax(0,1fr))}.placements{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:960px){
+  .app{grid-template-columns:1fr}
+  .rail{position:sticky;top:env(safe-area-inset-top,0px);height:auto;z-index:10;flex-direction:row;align-items:center;gap:12px;padding:10px max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px));border-right:0;border-bottom:1px solid var(--hair);overflow-x:auto}
+  .rail .foot,.brand small{display:none}
+  .nav{flex-direction:row}
+  .nav a span.lbl{display:none}
+  .two,.three{grid-template-columns:1fr}
+  main{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+}
+@media (max-width:560px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.placements{grid-template-columns:1fr}form .row{grid-template-columns:1fr;gap:6px}.est{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="app">
+  <aside class="rail">
+    <div class="brand"><svg width="32" height="32" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="26" fill="#092EC9"/><path d="M78 24 H38 A13 13 0 0 0 38 50 H62 A13 13 0 0 1 62 76 H40" fill="none" stroke="#fff" stroke-width="10"/><circle cx="27" cy="76" r="5.5" fill="#33C6F0"/></svg><div>Ops Console<small>Visakhapatnam region</small></div></div>
+    <nav class="nav" id="nav" aria-label="Sections">
+      <a href="#command"><i data-lucide="radar"></i><span class="lbl">Command centre</span><span class="badge lbl">AI</span></a>
+      <a href="#overview"><i data-lucide="layout-grid"></i><span class="lbl">Overview</span></a>
+      <a href="#dispatch"><i data-lucide="list-checks"></i><span class="lbl">Dispatch</span><span class="badge lbl">412</span></a>
+      <a href="#fleet"><i data-lucide="car-front"></i><span class="lbl">Fleet</span></a>
+      <a href="#pilots"><i data-lucide="users"></i><span class="lbl">Pilots</span></a>
+      <a href="#business"><i data-lucide="building-2"></i><span class="lbl">Business</span></a>
+      <a href="#ads"><i data-lucide="megaphone"></i><span class="lbl">Advertising</span></a>
+      <a href="#aura"><i data-lucide="leaf"></i><span class="lbl">AURA</span></a>
+      <a href="#safety"><i data-lucide="shield-check"></i><span class="lbl">Safety</span><span class="badge lbl">3</span></a>
+    </nav>
+    <div class="foot">All figures are sample data for the design review.</div>
+  </aside>
+
+  <main>
+    <!-- COMMAND CENTRE -->
+    <section class="view" id="v-command">
+      <div class="top"><h1>Command centre</h1><div class="meta"><div class="ranges" id="ranges"></div><span class="pill"><span class="dot"></span>14 of 14 sources synced · 05:12</span><span class="sample">Sample data</span></div></div>
+
+      <div class="cc-hero">
+        <div>
+          <span class="ai-tag"><i></i>SAGA INTELLIGENCE · MORNING BRIEF</span>
+          <h2>Q3 lands at ₹6.62 Cr, 2% above target, if we act on 3 things this week.</h2>
+          <p class="sub">Read across rides, payments, fleet, reviews, Meta and Google at 05:00. Confidence 71% to hit target.</p>
+          <ul class="brief" id="brief"></ul>
+        </div>
+        <div class="ask" aria-label="Ask SAGA Intelligence">
+          <span class="ai-tag"><i></i>ASK ANYTHING ABOUT THE BUSINESS</span>
+          <div class="q"><input id="askIn" placeholder="e.g. Why did satisfaction dip last week?" aria-label="Ask a question" autocomplete="off"><button class="go" id="askGo" aria-label="Ask"><i data-lucide="arrow-up"></i></button></div>
+          <div class="qchips" id="qchips"></div>
+          <div class="answer" id="answer" aria-live="polite"></div>
+        </div>
+      </div>
+
+      <div class="kpis8" id="ccK" style="margin-top:14px"></div>
+
+      <div class="two" style="margin-top:14px">
+        <div class="card pad">
+          <div class="h"><h2>Quarterly revenue · Q3 FY27</h2><div class="lg"><span><i style="background:var(--viz)"></i>Actual</span><span><i style="background:var(--viz-soft)"></i>AI forecast range</span><span><i style="background:var(--text);height:2px"></i>Target</span></div></div>
+          <svg class="chart" id="revChart" viewBox="0 0 640 270" role="img" aria-label="Cumulative revenue by week for Q3 against target, with forecast to quarter end"></svg>
+          <details class="tview"><summary>Show as table</summary><div class="tablewrap"><table id="revTable"></table></div></details>
+        </div>
+        <div class="card pad">
+          <div class="h"><h2>Revenue by business line</h2><span class="k">Quarter to date · vs last quarter</span></div>
+          <svg class="chart" id="mixChart" viewBox="0 0 420 290" role="img" aria-label="Revenue quarter to date for each business line"></svg>
+        </div>
+      </div>
+
+      <div class="card pad" style="margin-top:14px">
+        <div class="h"><h2>Next best actions</h2><span class="k" id="actK">Ranked by AI on expected impact · approve to send to the owner</span></div>
+        <div class="actions" id="actions"></div>
+      </div>
+
+      <div class="two" style="margin-top:14px">
+        <div class="card pad">
+          <div class="h"><h2>Marketing · Meta, Google and referrals</h2><span class="k">Quarter to date</span></div>
+          <div class="tablewrap"><table id="mkt"></table></div>
+          <p class="k" style="margin:10px 0 0">ROAS = 90-day ride revenue from riders a channel brought in, divided by its spend. Pulled from Meta Ads Manager, Google Ads and GA4, matched to rides by install ID.</p>
+        </div>
+        <div class="card pad">
+          <div class="h"><h2>What customers say</h2><div class="lg"><span><i style="background:var(--viz)"></i>Praise</span><span><i style="background:var(--neg)"></i>Complaints</span></div></div>
+          <svg class="chart" id="voice" viewBox="0 0 420 290" role="img" aria-label="Mentions of each theme in reviews and support chats over the last 30 days, praise versus complaints"></svg>
+          <p class="k" style="margin:6px 0 0">2,140 reviews and chats from Play Store, App Store, Google Business, WhatsApp support and in-app ratings, in English, Telugu and Hindi. Last 30 days.</p>
+        </div>
+      </div>
+
+      <div class="three" style="margin-top:14px">
+        <div class="card pad"><div class="h"><h2>Rider satisfaction</h2><span class="k">CSAT, last 12 weeks</span></div><svg class="chart" id="csat" viewBox="0 0 320 200" role="img" aria-label="Weekly average rating over 12 weeks"></svg></div>
+        <div class="card pad"><div class="h"><h2>What drives satisfaction</h2><span class="k">AI attribution</span></div><svg class="chart" id="drivers" viewBox="0 0 320 200" role="img" aria-label="Share of rating changes explained by each factor"></svg></div>
+        <div class="card pad"><div class="h"><h2>Demand, next 7 days</h2><span class="k">Rides per day</span></div><svg class="chart" id="d7" viewBox="0 0 320 200" role="img" aria-label="Forecast rides per day for the next 7 days against fleet capacity"></svg></div>
+      </div>
+
+      <div class="two" style="margin-top:14px">
+        <div class="card pad"><div class="h"><h2>Who is doing what</h2><span class="k">Team goals this quarter</span></div><div class="tablewrap"><table id="teams"></table></div></div>
+        <div class="card pad">
+          <div class="h"><h2>Connected sources</h2><span class="k">Read every 5 minutes</span></div>
+          <div class="srcs" id="srcs"></div>
+          <div class="h" style="margin:18px 0 6px"><h2>Spotted by AI</h2><span class="k">Last 24 hours</span></div>
+          <div class="alerts" id="anoms"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OVERVIEW -->
+    <section class="view" id="v-overview">
+      <div class="top"><h1>Overview</h1><div class="meta"><span class="pill"><span class="dot"></span>Live · Thu 12 Nov, 05:12</span><span class="sample">Sample data</span></div></div>
+      <div class="kpis">
+        <div class="card kpi"><div class="k">Rides today</div><b class="num">1,248</b><div class="d up">+9% vs last Thu</div></div>
+        <div class="card kpi"><div class="k">On-time pickups</div><b class="num">98.4%</b><div class="d up">+0.6 pt</div></div>
+        <div class="card kpi"><div class="k">Pre-booked share</div><b class="num">71%</b><div class="d flat">PNR, Loop, Business</div></div>
+        <div class="card kpi"><div class="k">Fleet in use</div><b class="num">82%</b><div class="d flat">164 of 200 cars</div></div>
+        <div class="card kpi"><div class="k">CO₂e avoided</div><b class="num">2.1 t</b><div class="d flat">Today so far</div></div>
+        <div class="card kpi"><div class="k">Revenue</div><b class="num">₹6.9 L</b><div class="d up">incl. ₹38 k ads</div></div>
+      </div>
+      <div class="two mt" style="margin-top:14px">
+        <div class="card pad">
+          <div class="h"><h2>Live fleet</h2><div class="chips" id="mapChips"></div></div>
+          <div class="map"><svg viewBox="0 0 160 100" preserveAspectRatio="none" aria-hidden="true"><rect width="160" height="100" fill="#E9EDF4"/><path d="M128 0 C 120 18, 136 34, 126 52 S 122 82, 134 100 L160 100 L160 0Z" fill="#CFE0FF"/><path d="M128 0 C 120 18, 136 34, 126 52 S 122 82, 134 100" fill="none" stroke="#B9D0F7" stroke-width=".8"/><rect x="30" y="18" width="16" height="14" rx="2" fill="#DCF1E4"/><rect x="84" y="62" width="14" height="12" rx="2" fill="#DCF1E4"/><g stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round"><path d="M0 40 L124 34"/><path d="M0 70 C 40 66, 80 72, 128 64"/><path d="M22 0 L26 100"/><path d="M62 0 C 60 30, 66 60, 60 100"/><path d="M100 0 L104 100"/><path d="M0 14 L126 12"/><path d="M0 88 L132 86"/></g><text x="141" y="40" font-size="3.4" font-weight="700" fill="#7D97C9" font-family="Inter Tight,sans-serif" transform="rotate(80 141 40)">Bay of Bengal</text></svg><svg id="mapDots" viewBox="0 0 160 100" preserveAspectRatio="none" aria-label="Car positions"></svg></div>
+          <div class="legend"><span><i style="background:#092EC9"></i>On trip</span><span><i style="background:#0A0D18"></i>Heading to pickup</span><span><i style="background:#0E8F5B"></i>Charging</span><span><i style="background:#9AA1B2"></i>Idle</span></div>
+        </div>
+        <div class="card pad">
+          <div class="h"><h2>Needs attention</h2><span class="k">3 open</span></div>
+          <div class="alerts">
+            <div class="alert"><span class="sev" style="background:var(--warn)"></span><div><b>6E 512 delayed 25 min</b><span>2 arrival pickups moved automatically. Riders and pilots told.</span></div><span class="k">05:04</span></div>
+            <div class="alert"><span class="sev" style="background:var(--bad)"></span><div><b>AP 39 EV 2093 at 14% battery</b><span>Next job reassigned to EV 2110. Car sent to Gajuwaka depot.</span></div><span class="k">04:58</span></div>
+            <div class="alert"><span class="sev" style="background:var(--warn)"></span><div><b>Attention alert, Pilot S. Naidu</b><span>Secure 360 flagged a 3 s glance away. Waiting for human review.</span></div><span class="k">04:41</span></div>
+            <div class="alert"><span class="sev" style="background:var(--ok)"></span><div><b>Depot load balanced</b><span>Maddilapalem 11 of 12 bays busy until 06:00.</span></div><span class="k">04:30</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="card pad" style="margin-top:14px">
+        <div class="h"><h2>Demand, next 24 hours</h2><div class="legend" style="margin:0"><span><i style="background:#092EC9"></i>Locked (PNR, Loop, Business)</span><span><i style="background:#C9D1E3"></i>Forecast on-demand</span><span><i style="background:#0A0D18;border-radius:1px;height:2px;width:12px"></i>Cars available</span></div></div>
+        <svg class="chart" id="demand" viewBox="0 0 960 220" role="img" aria-label="Hourly rides for the next 24 hours, split into locked and forecast, against available cars"></svg>
+        <p class="k" style="margin:8px 0 0">Locked rides are known hours ahead, so dispatch plans shifts and charging around them. That is the operational payoff of SAGA Fly and Loop.</p>
+      </div>
+    </section>
+
+    <!-- DISPATCH -->
+    <section class="view" id="v-dispatch">
+      <div class="top"><h1>Dispatch</h1><div class="meta"><div class="chips" id="dFilter"></div></div></div>
+      <div class="two">
+        <div class="card pad"><div class="h"><h2>Upcoming rides</h2><span class="k" id="dCount"></span></div><div class="tablewrap"><table id="dTable"></table></div></div>
+        <div class="card pad"><div class="h"><h2>Flight watch</h2><span class="k">Bhogapuram</span></div>
+          <div class="tablewrap"><table>
+            <thead><tr><th>Flight</th><th>Sched.</th><th>Status</th><th class="r">Pickups</th></tr></thead>
+            <tbody>
+              <tr><td class="mono">6E 2147</td><td class="num">07:25 dep</td><td><span class="st"><i style="background:var(--ok)"></i>On time</span></td><td class="r num">4</td></tr>
+              <tr><td class="mono">6E 512</td><td class="num">06:10 arr</td><td><span class="st"><i style="background:var(--warn)"></i>+25 min</span></td><td class="r num">2</td></tr>
+              <tr><td class="mono">AI 1813</td><td class="num">08:05 dep</td><td><span class="st"><i style="background:var(--ok)"></i>On time</span></td><td class="r num">6</td></tr>
+              <tr><td class="mono">QP 1402</td><td class="num">09:40 arr</td><td><span class="st"><i style="background:var(--ok)"></i>On time</span></td><td class="r num">3</td></tr>
+              <tr><td class="mono">6E 6631</td><td class="num">10:15 dep</td><td><span class="st"><i style="background:var(--bad)"></i>Cancelled</span></td><td class="r num">1</td></tr>
+            </tbody></table></div>
+          <p class="k" style="margin:12px 0 0">Cancellations notify the rider and free the car. Delays move the pickup and re-plan the pilot's day.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FLEET -->
+    <section class="view" id="v-fleet">
+      <div class="top"><h1>Fleet</h1><div class="meta"><span class="pill">200 cars</span><span class="pill">3 depots</span><span class="sample">Sample data</span></div></div>
+      <div class="three">
+        <div class="card pad"><div class="k">Maddilapalem depot</div><b style="font-weight:500;font-size:22px;display:block;margin:6px 0 10px" class="num">11 / 12 bays</b><div class="bar"><i style="width:92%"></i></div></div>
+        <div class="card pad"><div class="k">Gajuwaka depot</div><b style="font-weight:500;font-size:22px;display:block;margin:6px 0 10px" class="num">6 / 10 bays</b><div class="bar"><i style="width:60%"></i></div></div>
+        <div class="card pad"><div class="k">Bhogapuram airport hub</div><b style="font-weight:500;font-size:22px;display:block;margin:6px 0 10px" class="num">4 / 8 bays</b><div class="bar"><i style="width:50%"></i></div></div>
+      </div>
+      <div class="card pad" style="margin-top:14px"><div class="h"><h2>Cars</h2><span class="k">Sorted by battery</span></div><div class="fleet" id="fleet"></div></div>
+    </section>
+
+    <!-- PILOTS -->
+    <section class="view" id="v-pilots">
+      <div class="top"><h1>Pilots</h1><div class="meta"><span class="pill"><span class="dot"></span>168 on shift</span><span class="pill">212 employed</span><span class="sample">Sample data</span></div></div>
+      <div class="card pad"><div class="tablewrap"><table>
+        <thead><tr><th>Pilot</th><th>Shift</th><th>Status</th><th class="r">On time (30 d)</th><th class="r">Rating</th><th class="r">Attention alerts</th><th>Training</th></tr></thead>
+        <tbody id="pTable"></tbody></table></div></div>
+    </section>
+
+    <!-- BUSINESS -->
+    <section class="view" id="v-business">
+      <div class="top"><h1>Business &amp; Campus</h1><div class="meta"><span class="pill">38 accounts</span><span class="sample">Sample data</span></div></div>
+      <div class="card pad"><div class="tablewrap"><table>
+        <thead><tr><th>Account</th><th>Type</th><th class="r">Members</th><th class="r">Rides, Nov</th><th class="r">Spend, Nov</th><th class="r">CO₂e avoided</th><th>Invoice</th></tr></thead>
+        <tbody>
+          <tr><td>Vizag Pharma Park</td><td>Company</td><td class="r num">412</td><td class="r num">3,860</td><td class="r num">₹3.2 L</td><td class="r num">1.9 t</td><td><span class="st"><i style="background:var(--t3)"></i>Due 1 Dec</span></td></tr>
+          <tr><td>Rushikonda IT Cluster</td><td>Company</td><td class="r num">286</td><td class="r num">2,410</td><td class="r num">₹2.4 L</td><td class="r num">1.3 t</td><td><span class="st"><i style="background:var(--t3)"></i>Due 1 Dec</span></td></tr>
+          <tr><td>Coastal Public School</td><td>Campus</td><td class="r num">1,180</td><td class="r num">5,920</td><td class="r num">₹2.9 L</td><td class="r num">1.1 t</td><td><span class="st"><i style="background:var(--ok)"></i>Paid</span></td></tr>
+          <tr><td>Port Logistics Ltd</td><td>Company</td><td class="r num">94</td><td class="r num">640</td><td class="r num">₹0.8 L</td><td class="r num">0.4 t</td><td><span class="st"><i style="background:var(--bad)"></i>Overdue 6 d</span></td></tr>
+          <tr><td>Beachside Hotels Group</td><td>Partner</td><td class="r num">—</td><td class="r num">1,120</td><td class="r num">₹1.5 L</td><td class="r num">0.7 t</td><td><span class="st"><i style="background:var(--ok)"></i>Paid</span></td></tr>
+        </tbody></table></div></div>
+    </section>
+
+    <!-- ADVERTISING -->
+    <section class="view" id="v-ads">
+      <div class="top"><h1>Advertising</h1><div class="meta"><span class="pill">₹11.4 L booked, Nov</span><span class="sample">Sample data</span></div></div>
+      <div class="placements">
+        <div class="card place"><span class="k">In app</span><b>Home partner card</b><span class="k">1 per session · travel, food, stays</span><span class="num" style="margin-top:6px">₹180 CPM</span></div>
+        <div class="card place"><span class="k">In app</span><b>Arrival offer</b><span class="k">After drop at airport, malls, Tales stops</span><span class="num" style="margin-top:6px">₹420 CPM</span></div>
+        <div class="card place"><span class="k">In car</span><b>Rear-seat screen</b><span class="k">Loops with ride ETA, muted, 15 s</span><span class="num" style="margin-top:6px">₹260 CPM</span></div>
+        <div class="card place"><span class="k">Tales</span><b>Featured partner stop</b><span class="k">Homestays, cafés, guides on itineraries</span><span class="num" style="margin-top:6px">8% rev. share</span></div>
+      </div>
+      <div class="two" style="margin-top:14px">
+        <div class="card pad">
+          <div class="h"><h2>New campaign</h2><span class="k">Estimate updates as you change it</span></div>
+          <form id="adForm">
+            <div class="row"><label for="adv">Advertiser</label><input id="adv" value="Bhogapuram Lounge Co."></div>
+            <div class="row"><label for="plc">Placement</label><select id="plc"><option value="420">Arrival offer · ₹420 CPM</option><option value="180">Home partner card · ₹180 CPM</option><option value="260">Rear-seat screen · ₹260 CPM</option></select></div>
+            <div class="row"><label>Audience</label><div class="chips tgt" id="tgt">
+              <button type="button" aria-pressed="true" data-r="2400">Airport departures</button>
+              <button type="button" aria-pressed="false" data-r="1900">Airport arrivals</button>
+              <button type="button" aria-pressed="false" data-r="1300">Office Loops</button>
+              <button type="button" aria-pressed="false" data-r="600">Tales riders</button>
+              <button type="button" disabled title="Ads are never shown in student or Campus views">Campus students</button>
+            </div></div>
+            <div class="row"><label for="days">Duration</label><select id="days"><option value="7">7 days</option><option value="14" selected>14 days</option><option value="30">30 days</option></select></div>
+            <div class="row"><label for="cap">Frequency cap</label><select id="cap"><option value="1">1 per rider per day</option><option value="2" selected>2 per rider per day</option><option value="3">3 per rider per day</option></select></div>
+            <div class="est"><div><span class="k">Riders reached</span><b class="num" id="eReach">—</b></div><div><span class="k">Impressions</span><b class="num" id="eImp">—</b></div><div><span class="k">Cost</span><b class="num" id="eCost">—</b></div></div>
+            <div style="margin-top:14px;display:flex;justify-content:flex-end"><button class="btn" type="submit">Send for review</button></div>
+          </form>
+        </div>
+        <div class="grid">
+          <div class="card pad"><div class="h"><h2>Rear-seat screen preview</h2></div>
+            <div class="screen169"><span class="eta">Bhogapuram in 18 min</span><span class="tag">Ad</span><div class="adcopy"><span class="k">Bhogapuram Lounge Co.</span><b>Lounge access at ₹499</b><span class="k">Show your SAGA app at Departures.</span></div></div>
+          </div>
+          <div class="card pad"><div class="h"><h2>Ad rules</h2></div>
+            <ul class="rules">
+              <li>One ad per screen at most, always labelled.</li>
+              <li>No ads on live-ride, SOS, payment or trip-code screens.</li>
+              <li>No ads in Campus or any view a student sees.</li>
+              <li>Travel, food, stays, retail and services only. No betting, alcohol or political ads.</li>
+              <li>Riders on Plasma and Nova tiers can turn in-app ads off.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="card pad" style="margin-top:14px"><div class="h"><h2>Running campaigns</h2></div><div class="tablewrap"><table>
+        <thead><tr><th>Advertiser</th><th>Placement</th><th>Audience</th><th class="r">Impressions</th><th class="r">Tap rate</th><th class="r">Revenue</th><th>Status</th></tr></thead>
+        <tbody id="cTable">
+          <tr><td>Araku Valley Homestays</td><td>Home partner card</td><td>Tales riders</td><td class="r num">84,200</td><td class="r num">2.9%</td><td class="r num">₹15,156</td><td><span class="st"><i style="background:var(--ok)"></i>Live</span></td></tr>
+          <tr><td>Beachside Hotels Group</td><td>Arrival offer</td><td>Airport arrivals</td><td class="r num">41,600</td><td class="r num">4.1%</td><td class="r num">₹17,472</td><td><span class="st"><i style="background:var(--ok)"></i>Live</span></td></tr>
+          <tr><td>CMR Central Mall</td><td>Rear-seat screen</td><td>Office Loops</td><td class="r num">122,000</td><td class="r num">—</td><td class="r num">₹31,720</td><td><span class="st"><i style="background:var(--ok)"></i>Live</span></td></tr>
+          <tr><td>Coffee Board café, Araku</td><td>Featured partner stop</td><td>Tales riders</td><td class="r num">—</td><td class="r num">—</td><td class="r num">₹9,840</td><td><span class="st"><i style="background:var(--t3)"></i>Ends 30 Nov</span></td></tr>
+        </tbody></table></div></div>
+    </section>
+
+    <!-- AURA -->
+    <section class="view" id="v-aura">
+      <div class="top"><h1>AURA rewards</h1><div class="meta"><span class="sample">Sample data</span></div></div>
+      <div class="kpis" style="grid-template-columns:repeat(4,minmax(0,1fr))">
+        <div class="card kpi"><div class="k">Points issued, Nov</div><b class="num">612,400</b><div class="d flat">= 61.2 t CO₂e avoided</div></div>
+        <div class="card kpi"><div class="k">Points redeemed, Nov</div><b class="num">148,900</b><div class="d flat">24% of issued</div></div>
+        <div class="card kpi"><div class="k">Open liability</div><b class="num">₹4.1 L</b><div class="d flat">Capped at 1.5% of fare</div></div>
+        <div class="card kpi"><div class="k">Expiring in 30 days</div><b class="num">21,300</b><div class="d flat">Reminder sent</div></div>
+      </div>
+      <div class="two" style="margin-top:14px">
+        <div class="card pad"><div class="h"><h2>Top redemptions</h2></div><div class="tablewrap"><table>
+          <thead><tr><th>Reward</th><th class="r">Redeemed</th><th class="r">Points</th></tr></thead>
+          <tbody><tr><td>Upgrade to Premium</td><td class="r num">212</td><td class="r num">63,600</td></tr><tr><td>Free airport ride</td><td class="r num">24</td><td class="r num">48,000</td></tr><tr><td>Plant a mangrove</td><td class="r num">61</td><td class="r num">30,500</td></tr><tr><td>Partner café voucher</td><td class="r num">34</td><td class="r num">6,800</td></tr></tbody></table></div></div>
+        <div class="card pad"><div class="h"><h2>Method</h2></div><p style="margin:0;color:var(--t2);line-height:1.6">CO₂e avoided = km × (petrol-cab factor − EV grid factor). The prototype uses a net 72 g/km placeholder. Replace it with a verified factor and publish the method in the app before launch.</p></div>
+      </div>
+    </section>
+
+    <!-- SAFETY -->
+    <section class="view" id="v-safety">
+      <div class="top"><h1>Safety · Secure 360</h1><div class="meta"><span class="pill">Human review on every alert</span><span class="sample">Sample data</span></div></div>
+      <div class="card pad"><div class="tablewrap"><table>
+        <thead><tr><th>Time</th><th>Type</th><th>Car / Pilot</th><th>Detail</th><th>Review</th><th></th></tr></thead>
+        <tbody id="sTable"></tbody></table></div></div>
+      <p class="k" style="margin-top:12px">Footage is kept 7 days unless an incident is opened. Pilots can see their own alerts and add context before a decision.</p>
+    </section>
+  </main>
+</div>
+<div class="toast" id="toast"><span class="dot"></span><span id="toastT">Sent for review</span></div>
+
+<script src="https://unpkg.com/lucide@0.344.0/dist/umd/lucide.min.js"></script>
+<script>
+(() => {
+try { lucide.createIcons(); } catch (e) {}
+const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const inr = n => "₹" + Math.round(n).toLocaleString("en-IN");
+
+/* router */
+const views = ["command","overview","dispatch","fleet","pilots","business","ads","aura","safety"];
+function show() {
+  const v = views.includes(location.hash.slice(1)) ? location.hash.slice(1) : "command";
+  $$("section.view").forEach(s => s.classList.toggle("on", s.id === "v-" + v));
+  $$("#nav a").forEach(a => a.setAttribute("aria-current", a.getAttribute("href") === "#" + v ? "page" : "false"));
+  scrollTo(0, 0);
+}
+addEventListener("hashchange", show); show();
+
+/* ================= COMMAND CENTRE (sample data) ================= */
+const T3 = "#666D82", T2 = "#3F4659", GRID = "rgba(10,13,24,.08)", VIZ = "#2F5BEA", VIZS = "#DCE4FC", NEG = "#EB6834", INK = "#0A0D18";
+const tx = (x, y, t, o = {}) => `<text x="${x}" y="${y}" font-size="${o.s || 11}" font-weight="${o.w || 600}" fill="${o.c || T3}" text-anchor="${o.a || "start"}" font-family="${o.m ? "JetBrains Mono,monospace" : "Inter Tight,sans-serif"}">${t}</text>`;
+const tip = document.createElement("div"); tip.className = "tip"; document.body.append(tip);
+document.addEventListener("pointermove", e => { const t = e.target.closest && e.target.closest("[data-tip]"); if (!t) { tip.classList.remove("on"); return; } tip.innerHTML = t.getAttribute("data-tip"); tip.classList.add("on"); const w = tip.offsetWidth; tip.style.left = Math.min(innerWidth - w - 10, e.clientX + 14) + "px"; tip.style.top = (e.clientY + 16) + "px"; });
+const icon = (n, s = "") => `<i data-lucide="${n}" ${s}></i>`;
+
+/* brief */
+$("#brief").innerHTML = [
+  ["trending-up", "#3DDC97", "Meta Telugu reels and Google “airport cab” search bring riders at half the cost", "CAC ₹154 and ₹136 vs ₹483 on YouTube. Moving ₹1.2 L adds about ₹9.4 L this quarter."],
+  ["clock", "#FFB547", "Satisfaction dipped to 4.61 in Diwali week, now back to 4.70", "31% of the dip came from evening waits in Kancharapalem. Saturday and Thursday will be short by 120 rides."],
+  ["sparkles", "#9FE6FF", "Voice booking in Telugu is the fastest-growing praise theme", "Mentions up 240% in 30 days, mostly riders over 55. Worth featuring in the next Meta campaign."]
+].map(b => `<li><span class="ic" style="color:${b[1]}">${icon(b[0])}</span><div><b>${b[2]}</b><span>${b[3]}</span></div></li>`).join("");
+
+/* KPIs with range switch */
+const KP = {
+  today:   [["Revenue","₹6.9 L","+9% vs last Thu","up",[5,6,5.4,6.2,6.6,6.1,6.9]],["Rides","1,248","+9%","up",[1050,1120,1090,1180,1210,1160,1248]],["Rider satisfaction","4.71 ★","+0.02","up",[4.66,4.68,4.7,4.69,4.7,4.72,4.71]],["NPS","62","flat","flat",[61,62,62,61,62,63,62]],["On-time pickups","98.4%","+0.6 pt","up",[97.2,97.6,97.9,97.5,98.1,97.8,98.4]],["New riders","214","+18%","up",[150,162,170,181,176,190,214]],["Cost per new rider","₹171","−₹12","up",[198,190,186,183,180,183,171]],["Return on ad spend","3.6×","+0.3","up",[3.1,3.2,3.2,3.3,3.4,3.3,3.6]]],
+  week:    [["Revenue","₹46.8 L","+6% vs last week","up",[38,40,41,43,44,44.2,46.8]],["Rides","8,420","+5%","up",[7300,7600,7700,7900,8000,8020,8420]],["Rider satisfaction","4.70 ★","+0.09","up",[4.69,4.72,4.74,4.61,4.66,4.68,4.7]],["NPS","61","+4","up",[58,59,60,55,57,57,61]],["On-time pickups","97.9%","+1.4 pt","up",[97.8,98,98.1,96.5,97,97.4,97.9]],["New riders","1,380","+11%","up",[1100,1150,1210,1240,1260,1243,1380]],["Cost per new rider","₹176","−₹9","up",[196,192,190,189,185,185,176]],["Return on ad spend","3.5×","+0.2","up",[3.1,3.2,3.2,3.3,3.3,3.3,3.5]]],
+  quarter: [["Revenue · Q3 to date","₹2.94 Cr","96% of plan","down",[.4,.84,1.27,1.73,2.21,2.66,2.94]],["Rides","52,600","+21% vs Q2","up",[6900,7200,7300,7500,7800,8100,8420]],["Rider satisfaction","4.69 ★","+0.05 vs Q2","up",[4.62,4.64,4.66,4.63,4.68,4.7,4.71]],["NPS","60","+3 vs Q2","up",[57,58,58,59,60,59,61]],["On-time pickups","97.8%","+0.9 pt","up",[96.9,97.2,97.5,97.4,97.9,97.6,98.1]],["New riders","8,140","+27% vs Q2","up",[900,980,1050,1120,1260,1450,1380]],["Cost per new rider","₹182","−₹24 vs Q2","up",[210,204,199,192,186,180,176]],["Return on ad spend","3.4×","+0.5 vs Q2","up",[2.8,2.9,3,3.1,3.2,3.4,3.5]]]
+};
+function spark(v) { const mn = Math.min(...v), mx = Math.max(...v), w = 200, h = 26; const p = v.map((d, i) => `${(i / (v.length - 1) * (w - 4) + 2).toFixed(1)},${(h - 3 - (d - mn) / ((mx - mn) || 1) * (h - 6)).toFixed(1)}`); const last = p[p.length - 1].split(","); return `<svg class="sp" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="${VIZ}" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round" points="${p.join(" ")}"/></svg>`; }
+function drawK(r) { $("#ccK").innerHTML = KP[r].map(k => `<div class="card kpi"><div class="k">${k[0]}</div><b class="num">${k[1]}</b><div class="d ${k[3]}">${k[2]}</div>${spark(k[4])}</div>`).join(""); }
+const rg = $("#ranges"); [["today","Today"],["week","Week"],["quarter","Quarter"]].forEach(([k, l]) => { const b = document.createElement("button"); b.className = "pill" + (k === "quarter" ? " on" : ""); b.textContent = l; b.dataset.k = k; rg.append(b); });
+rg.addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; $$("button", rg).forEach(x => x.classList.toggle("on", x === b)); drawK(b.dataset.k); });
+drawK("quarter");
+
+/* quarterly revenue: cumulative actual, forecast band, target (one axis, ₹ Cr) */
+(function () {
+  const W = 640, H = 270, L = 44, R = 70, T = 14, B = 30, max = 7;
+  const act = [.40,.84,1.27,1.73,2.21,2.66,2.94], fc = [2.94,3.42,3.93,4.47,5.06,5.80,6.62], tgt = [.42,.86,1.30,1.76,2.24,2.72,3.05,3.50,3.98,4.50,5.10,5.78,6.50];
+  const x = i => L + i * (W - L - R) / 12, y = v => H - B - v / max * (H - B - T);
+  let s = "";
+  [0,2,4,6].forEach(v => s += `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="${GRID}"/>` + tx(L - 8, y(v) + 4, "₹" + v + " Cr", { a: "end" }));
+  for (let i = 0; i < 13; i += 2) s += tx(x(i), H - 9, "W" + (i + 1), { a: "middle" });
+  const lo = fc.map((v, k) => v - k * .048), hi = fc.map((v, k) => v + k * .044);
+  s += `<path d="M${fc.map((v, k) => `${x(k + 6)},${y(hi[k])}`).join(" L")} L${fc.map((v, k) => `${x(k + 6)},${y(lo[k])}`).reverse().join(" L")}Z" fill="${VIZS}"/>`;
+  s += `<polyline fill="none" stroke="${INK}" stroke-width="1.5" stroke-dasharray="4 4" points="${tgt.map((v, i) => `${x(i)},${y(v)}`).join(" ")}"/>`;
+  s += `<polyline fill="none" stroke="${VIZ}" stroke-width="2" stroke-dasharray="6 5" points="${fc.map((v, k) => `${x(k + 6)},${y(v)}`).join(" ")}"/>`;
+  s += `<polyline fill="none" stroke="${VIZ}" stroke-width="2.5" stroke-linejoin="round" points="${act.map((v, i) => `${x(i)},${y(v)}`).join(" ")}"/>`;
+  s += `<circle cx="${x(6)}" cy="${y(2.94)}" r="5" fill="${VIZ}" stroke="#fff" stroke-width="2"/>`;
+  s += `<line x1="${x(6)}" x2="${x(6)}" y1="${T}" y2="${H - B}" stroke="${GRID}" stroke-dasharray="2 3"/>` + tx(x(6) + 6, T + 10, "TODAY", { m: 1, s: 10 });
+  s += tx(W - R + 8, y(6.62) - 2, "₹6.62 Cr", { c: INK, w: 700, m: 1 }) + tx(W - R + 8, y(6.62) + 12, "forecast", { s: 10 });
+  s += tx(W - R + 8, y(6.50) + 24, "₹6.50 Cr", { c: T2, m: 1, s: 10.5 }) + tx(W - R + 8, y(6.50) + 37, "target", { s: 10 });
+  for (let i = 0; i < 13; i++) { const a = act[i], f = i >= 6 ? fc[i - 6] : null; const t = `<b>Week ${i + 1}</b><br>${a != null ? "Actual ₹" + a.toFixed(2) + " Cr<br>" : ""}${f != null && i > 6 ? `Forecast ₹${f.toFixed(2)} Cr (₹${lo[i - 6].toFixed(2)}–${hi[i - 6].toFixed(2)})<br>` : ""}Target ₹${tgt[i].toFixed(2)} Cr`; s += `<rect class="hit" x="${x(i) - (W - L - R) / 24}" y="${T}" width="${(W - L - R) / 12}" height="${H - B - T}" data-tip="${t.replace(/"/g, "&quot;")}"/>`; }
+  $("#revChart").innerHTML = s;
+  $("#revTable").innerHTML = `<thead><tr><th>Week</th><th class="r">Actual</th><th class="r">Forecast</th><th class="r">Target</th></tr></thead><tbody>${tgt.map((t, i) => `<tr><td>W${i + 1}</td><td class="r num">${act[i] != null ? "₹" + act[i].toFixed(2) + " Cr" : "–"}</td><td class="r num">${i >= 6 ? "₹" + fc[i - 6].toFixed(2) + " Cr" : "–"}</td><td class="r num">₹${t.toFixed(2)} Cr</td></tr>`).join("")}</tbody>`;
+})();
+
+/* revenue mix: one hue, sorted */
+(function () {
+  const D = [["City rides",118,"+14%"],["SAGA Fly · airport",74,"+38%"],["Business & campus",46,"+22%"],["Loop · daily",31,"+19%"],["Voyage · outstation",14,"+9%"],["Tales · day trips",6.4,"+61%"],["In-car & app ads",4.6,"new"]];
+  const W = 420, L = 136, R = 92, rh = 36, max = 120; let s = "";
+  D.forEach((d, i) => { const yy = 8 + i * rh, w = d[1] / max * (W - L - R);
+    s += tx(0, yy + 17, d[0], { c: T2, s: 12 }) + `<rect x="${L}" y="${yy + 5}" width="${Math.max(4, w)}" height="18" rx="4" fill="${VIZ}"/>` + tx(L + w + 8, yy + 18, "₹" + d[1] + " L", { c: INK, m: 1, w: 600 }) + tx(W, yy + 18, d[2], { a: "end", c: d[2] === "new" ? T3 : "#0E8F5B", w: 700 });
+    s += `<rect class="hit" x="0" y="${yy}" width="${W}" height="${rh}" data-tip="<b>${d[0]}</b><br>₹${d[1]} L quarter to date<br>${d[2]} vs last quarter"/>`; });
+  s += tx(0, 8 + D.length * rh + 12, "Total ₹2.94 Cr · pre-booked lines (Fly, Business, Loop) are 51% of revenue", { s: 11 });
+  $("#mixChart").innerHTML = s;
+})();
+
+/* actions */
+const ACTS = [
+  ["Move ₹1.2 L from YouTube and Performance Max to Meta Telugu reels and Google “airport cab” search","YouTube brings riders at ₹483 each and PMax at ₹361. Meta reels and airport search are at ₹154 and ₹136 with headroom left.","+₹9.4 L Q3 revenue","82% confident","Growth · Meera","Meta Ads, Google Ads, GA4"],
+  ["Pre-position 18 cars at Bhogapuram, 05:00–08:00 on Saturday and Thursday","Forecast is 120 rides over capacity on both days (weddings and 14 early departures). Charging moved to 01:00–04:00 to free them.","+₹2.1 L · +0.03 satisfaction","77% confident","City ops · Arun","Airline feeds, fleet, bookings"],
+  ["Win back 412 riders who went quiet after a late pickup","No ride in 21+ days after a pickup more than 6 minutes late. Offer a free Comfort upgrade with a short apology in their language.","~140 riders back · +₹1.6 L","69% confident","Customer care · Divya","Rides, ratings, CRM"],
+  ["Fix failed UPI payments on the Paytm intent","61 complaints in 30 days and a 2.3% failure rate, 4× other UPI apps. Riders blame SAGA, not the bank.","+0.02 satisfaction","91% confident","Product · Kiran","Razorpay, support chats"],
+  ["Pitch Loop daily rides to 3 IT parks in Rushikonda","“Office cab” searches from Rushikonda are up 64% and 38 riders already commute there by on-demand rides.","+₹4.8 L pipeline","64% confident","Business sales · Vikram","Google Search, rides, CRM"],
+  ["Coach 6 pilots whose courtesy score is under 4.6","A 12-minute module on greeting, bags and AC preference. Pilots who took it gained 0.15 on average.","+0.01 satisfaction","73% confident","Pilot excellence · Lakshmi","Ratings, Secure 360, training"]
+];
+const actState = ACTS.map(() => "open");
+function drawActs() {
+  $("#actions").innerHTML = ACTS.map((a, i) => `<div class="act${actState[i] !== "open" ? " done" : ""}"><span class="rank">${actState[i] !== "open" ? icon("check", 'style="width:16px;height:16px"') : i + 1}</span><div><b>${a[0]}</b><div class="why">${a[1]}</div><div class="meta2"><span class="imp">${a[2]}</span><span>${a[3]}</span><span>Owner: ${a[4]}</span><span>From: ${a[5]}</span></div></div><div class="btns">${actState[i] === "open" ? `<button data-a="${i}" data-do="assign">Discuss</button><button class="ap" data-a="${i}" data-do="ok">Approve</button>` : `<span class="vchip v-scale">${icon("check")}${actState[i]}</span>`}</div></div>`).join("");
+  try { lucide.createIcons(); } catch (e) {}
+  const n = actState.filter(s => s !== "open").length; $("#actK").textContent = n ? `${n} of ${ACTS.length} approved · the rest are ranked by expected impact` : "Ranked by AI on expected impact · approve to send to the owner";
+}
+$("#actions").addEventListener("click", e => { const b = e.target.closest("button[data-a]"); if (!b) return; const i = +b.dataset.a, own = ACTS[i][4].split(" · ")[1];
+  if (b.dataset.do === "ok") { actState[i] = "Approved · sent to " + own; toast(`Approved. ${own} has it in their queue with the data behind it.`); }
+  else { actState[i] = "Thread opened with " + own; toast(`Discussion opened with ${own}.`); }
+  drawActs(); });
+drawActs();
+
+/* marketing table */
+const VER = { Scale: ["v-scale","trending-up"], Fix: ["v-fix","wrench"], Cut: ["v-cut","scissors"], Hold: ["v-hold","minus"] };
+const MK = [["Meta · Telugu reels","₹4.8 L","3,120","₹154","3.9×","Scale"],["Google · search","₹3.6 L","2,640","₹136","4.6×","Scale"],["Referrals","₹1.1 L","1,480","₹74","6.8×","Scale"],["Google · Performance Max","₹2.2 L","610","₹361","1.4×","Fix"],["Meta · English carousel","₹1.3 L","520","₹250","2.2×","Hold"],["YouTube","₹1.4 L","290","₹483","0.9×","Cut"]];
+$("#mkt").innerHTML = `<thead><tr><th>Channel</th><th class="r">Spend</th><th class="r">New riders</th><th class="r">Cost each</th><th class="r">ROAS</th><th>AI verdict</th></tr></thead><tbody>${MK.map(m => `<tr><td><b style="font-weight:700">${m[0]}</b></td><td class="r num">${m[1]}</td><td class="r num">${m[2]}</td><td class="r num">${m[3]}</td><td class="r num"><b>${m[4]}</b></td><td><span class="vchip ${VER[m[5]][0]}">${icon(VER[m[5]][1])}${m[5]}</span></td></tr>`).join("")}</tbody>`;
+
+/* voice of customer: diverging bars around a neutral axis */
+(function () {
+  const D = [["Clean, quiet cars",412,18],["Pilot courtesy",356,41],["Airport on time",298,22],["Easy app & voice",181,37],["AC in Comfort",60,29],["Price vs autos",92,88],["Payment failures",5,61],["Wait at peak hours",40,164]];
+  const W = 420, C = 250, rh = 34, sc = (W - C - 36) / 412, scn = sc; let s = "";
+  D.forEach((d, i) => { const yy = 6 + i * rh, wp = d[1] * sc, wn = d[2] * scn;
+    s += tx(0, yy + 17, d[0], { c: T2, s: 12 });
+    s += `<rect x="${C - wn - 1}" y="${yy + 5}" width="${Math.max(3, wn)}" height="18" rx="4" fill="${NEG}"/><rect x="${C + 1}" y="${yy + 5}" width="${Math.max(3, wp)}" height="18" rx="4" fill="${VIZ}"/>`;
+    s += tx(C + wp + 6, yy + 18, d[1], { m: 1, c: INK, s: 10.5 }) + tx(C - wn - 6, yy + 18, d[2], { m: 1, c: INK, s: 10.5, a: "end" });
+    s += `<rect class="hit" x="0" y="${yy}" width="${W}" height="${rh}" data-tip="<b>${d[0]}</b><br>${d[1]} praise · ${d[2]} complaints"/>`; });
+  s += `<line x1="${C}" x2="${C}" y1="2" y2="${6 + D.length * rh}" stroke="#9AA1B2" stroke-width="1"/>`;
+  $("#voice").innerHTML = s;
+})();
+
+/* CSAT trend */
+(function () {
+  const v = [4.62,4.64,4.66,4.63,4.68,4.70,4.71,4.69,4.72,4.74,4.61,4.70], W = 320, H = 200, L = 34, R = 10, T = 14, B = 24, mn = 4.5, mx = 4.8;
+  const x = i => L + i * (W - L - R) / 11, y = d => H - B - (d - mn) / (mx - mn) * (H - B - T); let s = "";
+  [4.5,4.6,4.7,4.8].forEach(d => s += `<line x1="${L}" x2="${W - R}" y1="${y(d)}" y2="${y(d)}" stroke="${GRID}"/>` + tx(L - 6, y(d) + 4, d.toFixed(1), { a: "end", s: 10 }));
+  ["W1","W4","W8","W12"].forEach((l, k) => s += tx(x([0,3,7,11][k]), H - 6, l, { a: "middle", s: 10 }));
+  s += `<polyline fill="none" stroke="${VIZ}" stroke-width="2" stroke-linejoin="round" points="${v.map((d, i) => `${x(i)},${y(d)}`).join(" ")}"/>`;
+  s += `<circle cx="${x(10)}" cy="${y(4.61)}" r="4.5" fill="${VIZ}" stroke="#fff" stroke-width="2"/>` + tx(x(10) - 6, y(4.61) + 18, "Diwali week waits", { a: "end", s: 10.5, c: T2 });
+  s += `<circle cx="${x(11)}" cy="${y(4.70)}" r="4.5" fill="${VIZ}" stroke="#fff" stroke-width="2"/>` + tx(x(11), y(4.70) - 10, "4.70", { a: "end", m: 1, c: INK, s: 11 });
+  v.forEach((d, i) => s += `<rect class="hit" x="${x(i) - 12}" y="${T}" width="24" height="${H - B - T}" data-tip="<b>Week ${i + 1}</b><br>Average rating ${d.toFixed(2)} ★"/>`);
+  $("#csat").innerHTML = s;
+})();
+
+/* drivers */
+(function () {
+  const D = [["Pickup wait",31],["Pilot courtesy",22],["Car cleanliness",17],["Price clarity",12],["App & voice ease",10],["Payment success",8]];
+  const W = 320, L = 112, rh = 30; let s = "";
+  D.forEach((d, i) => { const yy = 4 + i * rh, w = d[1] / 35 * (W - L - 40);
+    s += tx(0, yy + 16, d[0], { c: T2, s: 12 }) + `<rect x="${L}" y="${yy + 5}" width="${w}" height="16" rx="4" fill="${VIZ}"/>` + tx(L + w + 6, yy + 17, d[1] + "%", { m: 1, c: INK, s: 11 });
+    s += `<rect class="hit" x="0" y="${yy}" width="${W}" height="${rh}" data-tip="<b>${d[0]}</b><br>Explains ${d[1]}% of rating changes this quarter"/>`; });
+  s += tx(0, 4 + D.length * rh + 12, "Fix pickup waits first: biggest lever.", { s: 11 });
+  $("#drivers").innerHTML = s;
+})();
+
+/* 7-day demand vs capacity */
+(function () {
+  const days = ["Fri","Sat","Sun","Mon","Tue","Wed","Thu"], f = [1310,1520,1180,1260,1290,1350,1530], cap = 1410, W = 320, H = 200, L = 38, R = 8, T = 22, B = 24, mx = 1700;
+  const bw = (W - L - R) / 7, y = v => H - B - v / mx * (H - B - T); let s = "";
+  [0,500,1000,1500].forEach(v => s += `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="${GRID}"/>` + tx(L - 6, y(v) + 4, v ? (v / 1000) + "k" : "0", { a: "end", s: 10 }));
+  f.forEach((v, i) => { const x0 = L + i * bw + 5, short = v > cap;
+    s += `<rect x="${x0}" y="${y(v)}" width="${bw - 10}" height="${y(0) - y(v)}" rx="4" fill="${VIZ}"/>` + `<line x1="${x0 + (bw - 10) / 2}" x2="${x0 + (bw - 10) / 2}" y1="${y(v * 1.06)}" y2="${y(v * .94)}" stroke="${INK}" stroke-width="1.2"/>`;
+    s += tx(x0 + (bw - 10) / 2, H - 7, days[i], { a: "middle", s: 10.5 });
+    if (short) s += tx(x0 + (bw - 10) / 2, y(v * 1.06) - 5, "▲" + (v - cap), { a: "middle", s: 10, c: "#B86E00", w: 800, m: 1 });
+    s += `<rect class="hit" x="${L + i * bw}" y="${T}" width="${bw}" height="${H - B - T}" data-tip="<b>${days[i]}</b><br>Forecast ${v.toLocaleString("en-IN")} rides (±6%)<br>Capacity ${cap.toLocaleString("en-IN")}${short ? "<br>Short by " + (v - cap) : ""}"/>`; });
+  s += `<line x1="${L}" x2="${W - R}" y1="${y(cap)}" y2="${y(cap)}" stroke="${INK}" stroke-width="2"/>` + tx(L + 2, y(cap) + 14, "Capacity 1,410", { s: 10, c: "#fff", w: 700 });
+  $("#d7").innerHTML = s;
+})();
+
+/* teams */
+const TS = { "On track": ["v-scale","check-circle"], "At risk": ["v-fix","alert-triangle"], "Behind": ["v-cut","x-circle"] };
+const TEAMS = [["Growth","Meera S.","8,000 new riders","8,140","On track"],["City ops","Arun P.","98% on-time","97.8%","At risk"],["SAGA Fly desk","Sana K.","₹70 L airport","₹74 L","On track"],["Business sales","Vikram R.","12 new accounts","7","Behind"],["Customer care","Divya M.","4.70 satisfaction","4.69","At risk"],["Pilot excellence","Lakshmi N.","Zero-alert shifts 85%","88%","On track"],["Fleet & energy","Rahul T.","92% charged at 05:00","93%","On track"]];
+$("#teams").innerHTML = `<thead><tr><th>Team</th><th>Lead</th><th>Goal</th><th class="r">Now</th><th>Status</th></tr></thead><tbody>${TEAMS.map(t => `<tr><td><b style="font-weight:700">${t[0]}</b></td><td>${t[1]}</td><td>${t[2]}</td><td class="r num"><b>${t[3]}</b></td><td><span class="vchip ${TS[t[4]][0]}">${icon(TS[t[4]][1])}${t[4]}</span></td></tr>`).join("")}</tbody>`;
+
+/* sources + anomalies */
+const SRC = [["smartphone","Rider app events","1 min"],["car-front","Driver app & telematics","1 min"],["credit-card","Razorpay payments","2 min"],["plane","Airline & PNR feeds","3 min"],["megaphone","Meta Ads Manager","4 min"],["search","Google Ads","4 min"],["bar-chart-3","Google Analytics 4","5 min"],["map-pin","Google Business reviews","12 min"],["star","Play Store reviews","20 min"],["apple","App Store reviews","3 h"],["message-circle","WhatsApp support","1 min"],["building-2","Business CRM","10 min"],["shield-check","Secure 360 safety","1 min"],["cloud-sun","Weather & city events","30 min"]];
+$("#srcs").innerHTML = SRC.map(s => `<div>${icon(s[0])}<b>${s[1]}</b><span>${s[2]}</span></div>`).join("");
+$("#anoms").innerHTML = [["var(--warn)","Performance Max cost per click up 38% since Sunday","Competitor bidding on “vizag airport taxi”. Suggest exact-match search instead."],["var(--bad)","Cancellations in Kancharapalem 3× normal, 18:00–20:00","Waits over 9 minutes. Two cars from MVP Colony would cover it."],["var(--ok)","Telugu voice bookings up 240% in 30 days","68% from riders over 55. Strong story for the next Meta campaign."]].map(a => `<div class="alert"><span class="sev" style="background:${a[0]}"></span><div><b>${a[1]}</b><span>${a[2]}</span></div><span></span></div>`).join("");
+
+/* Ask SAGA Intelligence (simulated: answers drawn from the sample data above) */
+const QA = [
+  [/satisf|csat|dip|unhappy|rating|complain/i, "Satisfaction fell from 4.74 to 4.61 in Diwali week and recovered to 4.70. 31% of the change came from pickup waits: evening waits in Kancharapalem passed 9 minutes, and cancellations there tripled. Payment failures on the Paytm UPI intent add a smaller, steady drag. Fixing both should add about 0.05.", ["Ratings","Rides","WhatsApp support","Razorpay"], 1],
+  [/ad|meta|google|budget|market|channel|roas|youtube|campaign/i, "Meta Telugu reels (₹154 per new rider, 3.9× return) and Google airport search (₹136, 4.6×) are working best. YouTube is losing money at 0.9×, and Performance Max costs went up 38% this week. Move ₹1.2 L from those two into reels and search: about ₹9.4 L more revenue this quarter.", ["Meta Ads","Google Ads","GA4","Rides"], 0],
+  [/quarter|revenue|target|q3|money|sales/i, "Q3 is at ₹2.94 Cr after 7 of 13 weeks, ₹11 L behind plan. December is already strong: airport and Araku bookings are locked in, so the forecast is ₹6.62 Cr against a ₹6.50 Cr target (range ₹6.33–6.91 Cr). There's a 71% chance of hitting target, rising to 84% if the ad budget move and Saturday fleet plan go ahead.", ["Payments","Bookings","Airline feeds"], 0],
+  [/pilot|driver|who|team|people|staff/i, "Growth, SAGA Fly and Pilot excellence are ahead of goal. City ops (97.8% on time against 98%) and Customer care are at risk for the same reason, peak-hour waits. Business sales is behind at 7 of 12 accounts; the Rushikonda IT parks are the best lead. Among pilots, Ravi Kumar (4.96 rating, 100% on time) is top; 6 pilots under 4.6 on courtesy should take the 12-minute module.", ["CRM","Ratings","Secure 360"], 5],
+  [/demand|forecast|fleet|cars|capacity|weekend|saturday/i, "Demand peaks Saturday (1,520 rides) and Thursday (1,530), about 120 above fleet capacity each day. Most of it is early-morning airport runs. Moving charging to 01:00–04:00 frees 18 cars for 05:00–08:00 at Bhogapuram.", ["Airline feeds","Fleet","Bookings"], 1],
+  [/week|next|do|action|priorit|focus|improve/i, "This week, in order: 1) move ₹1.2 L of ads into Meta reels and Google search, 2) pre-position 18 cars for Saturday and Thursday mornings, 3) win back 412 riders who went quiet after a late pickup, 4) fix the Paytm UPI failures. Together these add about ₹13 L and 0.05 satisfaction.", ["All 14 sources"], 0]
+];
+$("#qchips").innerHTML = ["Will we hit the Q3 target?", "Which ads are working?", "Why did satisfaction dip?", "What should we do this week?", "Who is behind?", "Are we short on cars?"].map(q => `<button>${q}</button>`).join("");
+let typing = 0, wait = 0;
+function ask(q) {
+  q = q.trim(); if (!q) return; clearInterval(typing); clearTimeout(wait);
+  const hit = QA.find(a => a[0].test(q));
+  const txt = hit ? hit[1] : "I can answer from the 14 connected sources: revenue, rides, ads on Meta and Google, reviews, pilots, fleet and safety. Try one of the questions above.";
+  const a = $("#answer"); a.innerHTML = `<div class="who">YOU ASKED · ${q.replace(/</g, "&lt;")}</div><div class="who" style="color:rgba(255,255,255,.5)">READING SOURCES…</div>`;
+  wait = setTimeout(() => {
+    a.innerHTML = `<div class="who">YOU ASKED · ${q.replace(/</g, "&lt;")}</div><div id="ansT"></div>`;
+    const words = txt.split(" "); let n = 0;
+    typing = setInterval(() => { n += 2; $("#ansT").textContent = words.slice(0, n).join(" "); if (n >= words.length) { clearInterval(typing);
+      if (hit) { a.insertAdjacentHTML("beforeend", `<div class="src">${hit[2].map(s => `<span>${s}</span>`).join("")}</div><button class="doit" data-act="${hit[3]}">Open the recommended action</button>`); }
+    } }, 45);
+  }, 650);
+}
+$("#qchips").addEventListener("click", e => { const b = e.target.closest("button"); if (b) ask(b.textContent); });
+$("#askGo").addEventListener("click", () => { ask($("#askIn").value); $("#askIn").value = ""; });
+$("#askIn").addEventListener("keydown", e => { if (e.key === "Enter") { ask(e.target.value); e.target.value = ""; } });
+$("#answer").addEventListener("click", e => { const b = e.target.closest(".doit"); if (!b) return; const el = $$("#actions .act")[+b.dataset.act]; el.scrollIntoView({ behavior: "smooth", block: "center" }); el.animate([{ boxShadow: "0 0 0 3px #2F5BEA" }, { boxShadow: "0 0 0 0 transparent" }], { duration: 1600 }); });
+ask("Will we hit the Q3 target?");
+try { lucide.createIcons(); } catch (e) {}
+
+/* map dots (seeded) */
+let seed = 3; const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
+const COLORS = { trip:"#092EC9", pickup:"#0A0D18", charge:"#0E8F5B", idle:"#9AA1B2" };
+const cars = Array.from({length: 64}, () => { const r = rnd(); return { x: 6 + rnd() * 112, y: 6 + rnd() * 88, s: r < .55 ? "trip" : r < .72 ? "pickup" : r < .86 ? "charge" : "idle" }; });
+let mapFilter = "all";
+function drawMap() {
+  $("#mapDots").innerHTML = cars.filter(c => mapFilter === "all" || c.s === mapFilter).map(c => `<circle cx="${c.x.toFixed(1)}" cy="${c.y.toFixed(1)}" r="1.25" fill="${COLORS[c.s]}" stroke="#fff" stroke-width=".35"/>`).join("");
+}
+const mc = $("#mapChips");
+[["all","All"],["trip","On trip"],["charge","Charging"],["idle","Idle"]].forEach(([k, l], i) => { const b = document.createElement("button"); b.className = "pill" + (i ? "" : " on"); b.textContent = l; b.dataset.k = k; mc.append(b); });
+mc.addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; mapFilter = b.dataset.k; $$("button", mc).forEach(x => x.classList.toggle("on", x === b)); drawMap(); });
+drawMap();
+
+/* demand chart */
+(function () {
+  const W = 960, H = 220, L = 34, B = 26, T = 10, max = 140;
+  const locked = [12,8,6,18,46,62,58,70,84,66,40,32,30,34,38,46,58,74,80,62,44,30,22,16];
+  const od     = [6,4,3,5,10,14,20,26,30,28,26,24,26,24,22,26,34,40,44,38,30,22,14,10];
+  const avail  = [70,60,60,110,120,124,124,124,128,124,104,100,100,104,108,112,124,128,128,120,104,90,80,74];
+  const x = i => L + i * ((W - L - 6) / 24), bw = (W - L - 6) / 24 - 6, y = v => H - B - (v / max) * (H - B - T);
+  let s = "";
+  [0,50,100].forEach(v => { s += `<line x1="${L}" x2="${W}" y1="${y(v)}" y2="${y(v)}" stroke="rgba(10,13,24,.08)"/><text x="${L - 8}" y="${y(v) + 4}" text-anchor="end" font-size="11" fill="#666D82" font-family="Inter Tight,sans-serif" font-weight="700">${v}</text>`; });
+  locked.forEach((v, i) => {
+    s += `<rect x="${x(i) + 3}" y="${y(v)}" width="${bw}" height="${y(0) - y(v)}" rx="3" fill="#092EC9"/>`;
+    s += `<rect x="${x(i) + 3}" y="${y(v + od[i])}" width="${bw}" height="${y(v) - y(v + od[i])}" rx="3" fill="#C9D1E3"/>`;
+    if (i % 3 === 0) s += `<text x="${x(i) + 3 + bw / 2}" y="${H - 8}" text-anchor="middle" font-size="11" fill="#666D82" font-family="Inter Tight,sans-serif" font-weight="700">${String((5 + i) % 24).padStart(2, "0")}:00</text>`;
+  });
+  s += `<polyline fill="none" stroke="#0A0D18" stroke-width="2" points="${avail.map((v, i) => `${x(i) + 3 + bw / 2},${y(v)}`).join(" ")}"/>`;
+  $("#demand").innerHTML = s;
+})();
+
+/* dispatch */
+const RIDES = [
+  ["04:17","Fly","Ananya R.","MVP Colony → Bhogapuram","R. Kumar","EV 2147","Assigned"],
+  ["04:40","Fly","Joseph P.","Siripuram → Bhogapuram","K. Varma","EV 2118","Assigned"],
+  ["05:05","Loop","Night shift pool (3)","Port gate → Gajuwaka","S. Naidu","EV 2093","Reassigned"],
+  ["06:35","Fly","Kiran M.","Bhogapuram → Rushikonda","R. Kumar","EV 2147","Moved +25 min"],
+  ["07:20","Loop","Aditi N.","MVP Colony → Madhurawada","P. Rao","EV 2131","Planned"],
+  ["08:30","Business","Vizag Pharma Park (24)","8 pools · Gajuwaka, NAD","8 pilots","8 cars","Planned"],
+  ["09:00","Tales","Sharma family","Dwaraka Nagar → Araku","M. Reddy","EV 2160","Planned"],
+  ["10:00","Voyage","Lakshmi N.","Vizag → Vijayawada","A. Khan","EV 2177","Planned"]
+];
+const ST = { "Assigned":"var(--ok)", "Planned":"var(--t3)", "Reassigned":"var(--warn)", "Moved +25 min":"var(--warn)" };
+let dF = "All";
+const df = $("#dFilter");
+["All","Fly","Loop","Business","Tales","Voyage"].forEach((k, i) => { const b = document.createElement("button"); b.className = "pill" + (i ? "" : " on"); b.textContent = k; df.append(b); });
+df.addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; dF = b.textContent; $$("button", df).forEach(x => x.classList.toggle("on", x === b)); drawRides(); });
+function drawRides() {
+  const rows = RIDES.filter(r => dF === "All" || r[1] === dF);
+  $("#dTable").innerHTML = `<thead><tr><th>Pickup</th><th>Type</th><th>Rider</th><th>Route</th><th>Pilot</th><th>Car</th><th>Status</th></tr></thead><tbody>` +
+    rows.map(r => `<tr><td class="num">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td class="mono">${r[5]}</td><td><span class="st"><i style="background:${ST[r[6]]}"></i>${r[6]}</span></td></tr>`).join("") + "</tbody>";
+  $("#dCount").textContent = `${rows.length} shown of 412 locked today`;
+}
+drawRides();
+
+/* fleet */
+const FLEET = Array.from({length: 16}, (_, i) => { const b = Math.round(14 + rnd() * 84); const s = b < 25 ? "Charging" : rnd() < .6 ? "On trip" : rnd() < .5 ? "Idle" : "To pickup"; return { p: "AP 39 EV " + (2090 + i * 7), b, s }; }).sort((a, b) => a.b - b.b);
+$("#fleet").innerHTML = FLEET.map(c => `<div class="card car"><div class="plate">${c.p}</div><div class="k" style="margin-top:4px">${c.s}</div><div class="batt"><i style="width:${c.b}%;background:${c.b < 25 ? "var(--bad)" : c.b < 50 ? "var(--warn)" : "var(--ok)"}"></i></div><div class="k num" style="margin-top:6px">${c.b}%</div></div>`).join("");
+
+/* pilots */
+const PILOTS = [["Ravi Kumar","03:30–11:30","On trip","100%","4.96","0","2 of 5"],["Sunita Naidu","22:00–06:00","On trip","98%","4.91","1 to review","5 of 5"],["Kiran Varma","03:30–11:30","To pickup","99%","4.94","0","3 of 5"],["Priya Rao","06:00–14:00","Starting 06:00","97%","4.89","0","1 of 5"],["Mohan Reddy","08:00–16:00","Off","100%","4.97","0","5 of 5"],["Aamir Khan","09:00–17:00","Off","96%","4.88","0","4 of 5"]];
+$("#pTable").innerHTML = PILOTS.map(p => `<tr><td>${p[0]}</td><td class="num">${p[1]}</td><td><span class="st"><i style="background:${p[2] === "Off" ? "var(--t3)" : "var(--ok)"}"></i>${p[2]}</span></td><td class="r num">${p[3]}</td><td class="r num">${p[4]}</td><td class="r">${p[5] === "0" ? "0" : `<span style="color:var(--warn)">${p[5]}</span>`}</td><td>${p[6]}</td></tr>`).join("");
+
+/* safety */
+const INC = [["04:41","Attention","EV 2093 · S. Naidu","Glance away 3 s at 62 km/h","Open"],["03:58","Harsh braking","EV 2118 · K. Varma","Animal on road, NH16","Open"],["Yesterday 22:14","SOS test","EV 2131 · P. Rao","Rider pressed SOS by mistake, called back in 40 s","Closed"],["Yesterday 19:02","Route deviation","EV 2160 · M. Reddy","Diversion around closed road, rider informed","Open"]];
+function drawInc() {
+  $("#sTable").innerHTML = INC.map((r, i) => `<tr><td class="num">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td style="white-space:normal;min-width:220px">${r[3]}</td><td><span class="st"><i style="background:${r[4] === "Open" ? "var(--warn)" : "var(--ok)"}"></i>${r[4]}</span></td><td class="r">${r[4] === "Open" ? `<button class="pill" data-i="${i}">Mark reviewed</button>` : ""}</td></tr>`).join("");
+}
+$("#sTable").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; INC[+b.dataset.i][4] = "Closed"; drawInc(); toast("Marked as reviewed"); });
+drawInc();
+
+/* ads estimate */
+function est() {
+  const reach = $$("#tgt button[aria-pressed='true']").reduce((a, b) => a + (+b.dataset.r || 0), 0);
+  const days = +$("#days").value, cap = +$("#cap").value, cpm = +$("#plc").value;
+  const imp = Math.round(reach * days * cap * 0.55);
+  $("#eReach").textContent = reach.toLocaleString("en-IN");
+  $("#eImp").textContent = imp.toLocaleString("en-IN");
+  $("#eCost").textContent = inr(imp / 1000 * cpm);
+}
+$("#tgt").addEventListener("click", e => { const b = e.target.closest("button"); if (!b || b.disabled) return; b.setAttribute("aria-pressed", String(b.getAttribute("aria-pressed") !== "true")); est(); });
+["plc","days","cap"].forEach(id => $("#" + id).addEventListener("change", est));
+est();
+$("#adForm").addEventListener("submit", e => {
+  e.preventDefault();
+  const plc = $("#plc").selectedOptions[0].textContent.split(" ·")[0];
+  const row = document.createElement("tr");
+  row.innerHTML = `<td>${$("#adv").value || "New advertiser"}</td><td>${plc}</td><td>${$$("#tgt button[aria-pressed='true']").map(b => b.textContent).join(", ") || "—"}</td><td class="r num">—</td><td class="r num">—</td><td class="r num">${$("#eCost").textContent}</td><td><span class="st"><i style="background:var(--warn)"></i>In review</span></td>`;
+  $("#cTable").prepend(row);
+  toast("Sent for review. It appears in Running campaigns.");
+});
+
+let tt;
+function toast(t, ms = 2400) { $("#toastT").textContent = t; $("#toast").classList.add("show"); clearTimeout(tt); tt = setTimeout(() => $("#toast").classList.remove("show"), ms); }
+
+/* live link with the rider and driver apps when they are open together */
+try {
+  const bc = new BroadcastChannel("saga-suite");
+  const MSG = {
+    booked: m => `New booking to ${m.dest || "RK Beach"}. Auto-assigned to Ravi Kumar, EV 2147 (86%).`,
+    ack: () => "Ravi acknowledged the job and is navigating to pickup.",
+    atPickup: () => "EV 2147 is at the pickup, Gate 2. Waiting for the trip code.",
+    started: () => "Trip code verified by the pilot. Trip started, Secure 360 recording.",
+    done: () => "Trip complete. Fare collected by UPI, 3.0 kg CO₂ saved.",
+    sos: m => `SOS from the ${m.from} app. Safety desk alerted, live location received.`,
+    voice: m => `Rider voice command: “${m.text}”${m.ok ? "" : " (not understood)"}`
+  };
+  bc.onmessage = ({ data: m }) => { if (m && MSG[m.t]) toast(MSG[m.t](m), 4200); };
+} catch (e) {}
+})();
+</script>
+
+</body></html>
